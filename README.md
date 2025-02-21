@@ -148,4 +148,4 @@
   - https://www.figma.com/proto/oCOgnShi7RnwKI5QWKWYUH/%EF%BC%88MVP%EF%BC%89UtaMemo?node-id=0-1&t=2y0Cj2CdV9fiddXL-1
 
 # ER図
-![ER図（MVP）](image.png)
+![ER図(MVP)](image-1.png)
