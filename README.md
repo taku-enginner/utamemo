@@ -146,3 +146,6 @@
   - https://www.figma.com/design/oCOgnShi7RnwKI5QWKWYUH/%EF%BC%88MVP%EF%BC%89UtaMemo?node-id=0-1&m=dev&t=2y0Cj2CdV9fiddXL-1
 - プロトタイプ
   - https://www.figma.com/proto/oCOgnShi7RnwKI5QWKWYUH/%EF%BC%88MVP%EF%BC%89UtaMemo?node-id=0-1&t=2y0Cj2CdV9fiddXL-1
+
+# ER図
+![ER図(MVP)](ER_diagram.png)
