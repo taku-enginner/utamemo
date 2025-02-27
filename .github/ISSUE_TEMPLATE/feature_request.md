@@ -10,6 +10,6 @@ assignees: taku-enginner
 # 目的
 
 # タスク
-- [ ] aaa
+- [ ] ステージング環境で動作確認
 
 # 参考資料
