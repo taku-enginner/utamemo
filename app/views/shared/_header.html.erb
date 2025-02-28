@@ -25,11 +25,14 @@
       class="menu absolute right-0 top-full mt-2 bg-blue-500 p-2 shadow-md rounded-lg w-48 z-50 text-white hidden transition-opacity duration-200"
       id="menu-content"
     >
-      <li><%= link_to "ログイン", new_user_session_path, class: "block px-4 py-2 hover:bg-blue-600" %></li>
-      <li><%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "block px-4 py-2 hover:bg-blue-600" %></li>
-      <li><%= link_to "新規会員登録", new_user_registration_path, class: "block px-4 py-2 hover:bg-blue-600" %></li>
+      <% if user_signed_in? %>
+        <li><%= button_to "ログアウト", destroy_user_session_path, method: :delete, class: "block px-4 py-2 hover:bg-blue-600" %></li>
+        <li><%= link_to "マイページ", "#", class: "block px-4 py-2 hover:bg-blue-600" %></li>
+      <% else %>
+        <li><%= link_to "ログイン", new_user_session_path, class: "block px-4 py-2 hover:bg-blue-600" %></li>
+        <li><%= link_to "新規会員登録", new_user_registration_path, class: "block px-4 py-2 hover:bg-blue-600" %></li>
+      <% end %>
       <li><%= link_to "新着メモ", "#", class: "block px-4 py-2 hover:bg-blue-600" %></li>
-      <li><%= link_to "マイページ", "#", class: "block px-4 py-2 hover:bg-blue-600" %></li>
       <li><%= link_to "お問い合わせ", "#", class: "block px-4 py-2 hover:bg-blue-600" %></li>
       <li><%= link_to "利用規約", "#", class: "block px-4 py-2 hover:bg-blue-600" %></li>
       <li><%= link_to "プライバシーポリシー", "#", class: "block px-4 py-2 hover:bg-blue-600" %></li>
