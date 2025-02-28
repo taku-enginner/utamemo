@@ -2,3 +2,4 @@
 import "@hotwired/turbo-rails"
 import "./controllers"
 import "./react/entrypoints/memo_app"
+import "./react/entrypoints/header"
