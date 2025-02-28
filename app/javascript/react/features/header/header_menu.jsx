@@ -41,7 +41,7 @@ export default function Header() {
           </button>
           {isMenuOpen && (
             <ul
-              className={`menu absolute right-0 mt-2 bg-blue-500 p-2 shadow-md rounded-lg w-48 z-50 text-white
+              className={`menu absolute right-0 top-full mt-2 bg-blue-500 p-2 shadow-md rounded-lg w-48 z-50 text-white
               transition-all duration-300 ease-in-out transform ${
                 isMenuOpen ? "opacity-100 scale-100" : "opacity-0 scale-95 pointer-events-none"
               }`}
