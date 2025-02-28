@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
     //  メニューの外をクリックしたら閉じる
     menuOverlay.addEventListener("click", () => {
       menuContent.classList.add("hidden");
-      menuOverlay.classList.add("opacity-0");
+      menuOverlay.classList.remove("opacity-30");
       menuOverlay.classList.add("pointer-events-none");
    });
   };
