@@ -253,6 +253,8 @@ GEM
       unicode-display_width (>= 2.4.0, < 4.0)
     rubocop-ast (1.38.1)
       parser (>= 3.3.1.0)
+    rubocop-capybara (2.21.0)
+      rubocop (~> 1.41)
     rubocop-performance (1.24.0)
       lint_roller (~> 1.1)
       rubocop (>= 1.72.1, < 2.0)
@@ -263,10 +265,6 @@ GEM
       rack (>= 1.1)
       rubocop (>= 1.72.1, < 2.0)
       rubocop-ast (>= 1.38.0, < 2.0)
-    rubocop-rails-omakase (1.1.0)
-      rubocop (>= 1.72)
-      rubocop-performance (>= 1.24)
-      rubocop-rails (>= 2.30)
     ruby-progressbar (1.13.0)
     rubyzip (2.4.1)
     securerandom (0.4.1)
@@ -334,7 +332,10 @@ DEPENDENCIES
   puma (>= 5.0)
   rails (~> 7.2.2, >= 7.2.2.1)
   rails_live_reload
-  rubocop-rails-omakase
+  rubocop
+  rubocop-capybara
+  rubocop-performance
+  rubocop-rails
   selenium-webdriver
   sprockets-rails
   stimulus-rails
