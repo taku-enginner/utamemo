@@ -1,4 +1,5 @@
-document.addEventListener("DOMContentLoaded", () => {
+// turbo:loadにするとturboで読み込まれた時にも実行されるようになる
+document.addEventListener("turbo:load", () => {
   const menuButton = document.getElementById("menu-button");
   const menuContent = document.getElementById("menu-content");
   const menuOverlay = document.getElementById("menu-overlay");
