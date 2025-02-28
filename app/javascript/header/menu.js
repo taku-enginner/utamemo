@@ -1,19 +1,20 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const menu = document.getElementById("menu");
-  const overlay = document.getElementById("overlay");
+  const menuButton = document.getElementById("menu-button");
+  const menuContent = document.getElementById("menu-content");
+  const menuOverlay = document.getElementById("menu-overlay");
 
-  if (menu && overlay) {
-    menu.addEventListener("toggle", () => {
-      if (menu.open) {
-        overlay.classList.remove("hidden");
-      }else{
-        overlay.classList.add("hidden");
-      }
+  if (menuButton && menuContent && menuOverlay) {
+    menuButton.addEventListener("click", () => {
+      menuContent.classList.toggle("hidden");
+      menuOverlay.classList.toggle("opacity-30");
+      menuOverlay.classList.toggle("pointer-events-none");
     });
-    // オーバーレイをクリックしたらメニューを閉じる
-    overlay.addEventListener("click", () => {
-      menu.open = false;
-      overlay.classList.add("hidden");
-    });
-  }
+
+    //  メニューの外をクリックしたら閉じる
+    menuOverlay.addEventListener("click", () => {
+      menuContent.classList.add("hidden");
+      menuOverlay.classList.add("opacity-0");
+      menuOverlay.classList.add("pointer-events-none");
+   });
+  };
 });
