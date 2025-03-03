@@ -24,3 +24,12 @@ Rails/ActionControllerFlashBeforeRender:
 # ドキュメントコメントが無くてもエラーが出ないようにする
 Style/Documentation:
   Enabled: false
+
+# 特定ファイルだけ長さ警告を無視
+Layout/LineLength:
+  Exclude:
+    - "config/initializers/devise.rb"
+
+# 長さ警告の上限を変更
+Metrics/MethodLength:
+  Max: 15  
