@@ -8,7 +8,9 @@
           <%= simple_format(truncate(@lyrics_result, length: 50, omission: "...")) %>
 
           <div class="mt-6">
-            <%= form_with model: @memo, local: true, method: :post do |f| %>
+            <%= form_with model: @memo do |f| %>
+              <%= f.hidden_field :song_title, value: @track_result["track_name"] %>
+              <%= f.hidden_field :artist_name, value: @track_result["artist_name"] %>
               <%= f.submit "この歌詞にメモする", class: "btn btn-primary btn-block" %>
             <% end %>
           </div>
