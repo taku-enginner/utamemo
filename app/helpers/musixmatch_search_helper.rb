@@ -1,0 +1,2 @@
+module MusixmatchSearchHelper
+end
