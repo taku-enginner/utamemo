@@ -21,8 +21,7 @@
     class="h-screen"
   >
     <%= render "shared/header" %>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert%></p>
+    <%= render "shared/flash" %>
     <div class="h-screen"><%= yield %></div>
     <%= render "shared/footer" %>
   </body>
