@@ -7,6 +7,15 @@
   <!--<div id="header-root"></div> -->
   <!-- メニューボタンと検索アイコン -->
   <div class="relative flex items-center space-x-4">
+    <!-- アカウント名 -->
+    <% if user_signed_in? %>
+      <div class="text-lg" %>
+        <%= current_user.nickname %>
+      </div>
+    <% else %>
+      <div class="text-lg">ゲスト</div>
+    <% end %>
+  
     <!-- 虫眼鏡アイコン -->
     <button class="text-black text-2xl">
       🔍
