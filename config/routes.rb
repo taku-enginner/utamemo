@@ -1,6 +1,11 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  get "memo/index"
+  get "memo/show"
+  get "memo/create"
+  get "memo/update"
+  get "memo/destroy"
   get 'musixmatch/search'
   devise_for :users
   get 'up' => 'rails/health#show', as: :rails_health_check
