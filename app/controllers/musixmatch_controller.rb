@@ -14,6 +14,9 @@ class MusixmatchController < ApplicationController
 
     # 歌詞取得
     @lyrics_result = fetch_lyrics(api_key, title, artist_name)
+
+    # メモ作成用インスタンス
+    @memo = Memo.new(song_title: title, artist_name: artist_name)
   end
 
   private

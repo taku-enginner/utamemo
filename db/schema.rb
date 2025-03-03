@@ -18,7 +18,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_03_03_115147) do
     t.string "song_title"
     t.string "artist_name"
     t.string "memo_title"
-    t.json "memo_components"
+    t.json "memo_components", default: [], null: false
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

@@ -8,7 +8,9 @@
           <%= simple_format(truncate(@lyrics_result, length: 50, omission: "...")) %>
 
           <div class="mt-6">
-            <button class="btn btn-primary btn-block">この歌詞にメモする</button>
+            <%= form_with model: @memo, local: true, method: :post do |f| %>
+              <%= f.submit "この歌詞にメモする", class: "btn btn-primary btn-block" %>
+            <% end %>
           </div>
         </div>
       </div>
