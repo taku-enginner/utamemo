@@ -17,12 +17,12 @@
     <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
   </head>
 
-  <body 
-    class="h-screen"
-  >
+  <body class="flex flex-col min-h-screen bg-black">
+    
     <%= render "shared/header" %>
     <%= render "shared/flash" %>
-    <div class="h-screen"><%= yield %></div>
+    <div class="flex-1"><%= yield %></div>
     <%= render "shared/footer" %>
+
   </body>
 </html>

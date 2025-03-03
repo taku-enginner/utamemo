@@ -1,0 +1,19 @@
+<% if @lyrics_result %>
+  <div class="min-h-[calc(100vh-4rem-3rem)] flex items-center justify-center bg-black">
+    <div class="w-[90%] max-w-md">
+      <div class="card bg-base-100 shadow-sm">
+        <div class="card-body text-center">
+          <h2 class="text-3xl font-bold"><%= @track_result["track_name"] %></h2>
+          <p class="text-gray-500"><%= @track_result["artist_name"] %></p>
+          <%= simple_format(truncate(@lyrics_result, length: 50, omission: "...")) %>
+
+          <div class="mt-6">
+            <button class="btn btn-primary btn-block">この歌詞にメモする</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<% else %>
+  <p class = "text-white">申し訳ありません。歌詞データが見つかりませんでした。<br>他の曲を検索してください。</p>
+<% end %>
