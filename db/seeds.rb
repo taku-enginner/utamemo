@@ -11,15 +11,15 @@
 #   end
 
 Rails.logger.debug 'seedファイルの実行がスタートしました'
-p "seedファイルの実行がスタートしました"
+Rails.logger.debug 'seedファイルの実行がスタートしました'
 3.times do |n|
-  email = "testuser#{n+1}@example.com"
-  user = User.find_or_create_by(email: email) do |u|
+  email = "testuser#{n + 1}@example.com"
+  User.find_or_create_by(email: email) do |u|
     u.email = email
-    u.nickname = "テストユーザー#{n+1}"
-    u.password = "hogehoge"
+    u.nickname = "テストユーザー#{n + 1}"
+    u.password = 'hogehoge'
   end
 end
 
 Rails.logger.debug 'seedファイルの実行が終了しました'
-p "seedファイルの実行が終了しました"
+Rails.logger.debug 'seedファイルの実行が終了しました'

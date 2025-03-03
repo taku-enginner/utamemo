@@ -29,3 +29,7 @@ Style/Documentation:
 Layout/LineLength:
   Exclude:
     - "config/initializers/devise.rb"
+
+# 長さ警告の上限を変更
+Metrics/MethodLength:
+  Max: 15  

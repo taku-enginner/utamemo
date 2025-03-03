@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
   # allow_browser versions: :modern
 
   def configure_permitted_parameters
-    #新規登録時のストロングパラメータにnicknameカラムを追加
+    # 新規登録時のストロングパラメータにnicknameカラムを追加
     devise_parameter_sanitizer.permit(:sign_up, keys: [:nickname])
   end
 end
