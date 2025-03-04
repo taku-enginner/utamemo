@@ -29,7 +29,16 @@ class MemosController < ApplicationController
     end
   end
 
-  def update; end
+  def update
+    Rails.logger.debug 'updateメソッドが呼ばれました'
+    @memo = Memo.find(params[:id])
+    Rails.logger.debug { "update_component_params: #{update_component_params}" }
+    if @memo.update(memo_components: update_component_params)
+      render json: { message: 'update successfully' }, status: :ok
+    else
+      render json: { message: 'update failed' }, status: :unprocessable_entity
+    end
+  end
 
   def destroy; end
 
@@ -37,6 +46,10 @@ class MemosController < ApplicationController
 
   def memo_params
     params.require(:memo).except(:lyrics).permit(:song_title, :artist_name)
+  end
+
+  def update_component_params
+    params.require(:memo_components)
   end
 
   def fetch_lyrics(api_key, q_track, q_artist)
