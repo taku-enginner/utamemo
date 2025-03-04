@@ -2,7 +2,7 @@
   <p>artist_name: <%= @memo[:artist_name] %></p>
   <p>titile: <%= @memo[:song_title] %></p>
 </div>
-<%= react_component("Memos", memo_components: @memo[:memo_components])%>
+<%= react_component("Memos", memo_components: @memo[:memo_components], data: { turbo: false })%>
 
 <% if @lyrics_result %>
   <div class="mx-5 mt-10 mb-10 pt-10"><%= @lyrics_result.gsub(/\n/, "<br><br><br><br>").html_safe %></div>
