@@ -12,12 +12,42 @@
 
 Rails.logger.debug 'seedファイルの実行がスタートしました'
 Rails.logger.debug 'seedファイルの実行がスタートしました'
+
+# ユーザーデータ
 3.times do |n|
   email = "testuser#{n + 1}@example.com"
   User.find_or_create_by(email: email) do |u|
     u.email = email
     u.nickname = "テストユーザー#{n + 1}"
     u.password = 'hogehoge'
+  end
+end
+
+# メモデータ
+User.find_each do |user|
+  3.times do |n|
+    Memo.find_or_create_by(
+      song_title: 'Boom Boom Back',
+      artist_name: 'BE:FIRST',
+      memo_title: "メモタイトル#{n + 1}",
+      memo_components: [
+        {
+          id: 1,
+          type: 'technique',
+          content: '1',
+          x: 300,
+          y: 500
+        },
+        {
+          id: 2,
+          type: 'comment',
+          content: '滑らかに',
+          x: 300,
+          y: 500
+        }
+      ],
+      user_id: user.id
+    )
   end
 end
 

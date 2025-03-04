@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  resources :memos, only: %i[index show create update destroy]
   get 'musixmatch/search'
   devise_for :users
   get 'up' => 'rails/health#show', as: :rails_health_check

@@ -14,12 +14,15 @@ class MusixmatchController < ApplicationController
 
     # 歌詞取得
     @lyrics_result = fetch_lyrics(api_key, title, artist_name)
+
+    # メモ作成用インスタンス
+    @memo = Memo.new
   end
 
   private
 
   def search_params
-    params.permit(:title, :artist_name)
+    params.except(:commit).permit(:title, :artist_name)
   end
 
   def fetch_track(api_key, q_track, q_artist)
