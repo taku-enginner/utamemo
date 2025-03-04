@@ -4,7 +4,7 @@ class CreateMemos < ActiveRecord::Migration[7.2]
       t.string :song_title
       t.string :artist_name
       t.string :memo_title
-      t.json :memo_components, null: false, default: []
+      t.jsonb :memo_components, array: true, default: []
       t.references :user, null: false, foreign_key: true
 
       t.timestamps
