@@ -27,8 +27,8 @@ end
 User.all.each do |user|
   3.times do |n|
     Memo.find_or_create_by(
-    song_title: "曲名#{n + 1}",
-    artist_name: "アーティスト名#{n + 1}",
+    song_title: "Boom Boom Back",
+    artist_name: "BE:FIRST",
     memo_title: "メモタイトル#{n + 1}",
     memo_components: [
       {
