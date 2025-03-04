@@ -22,7 +22,7 @@ class MemosController < ApplicationController
     @memo = Memo.new(memo_params)
     @memo.user_id = current_user.id
     if @memo.save
-      redirect_to memo_path(id: 1)
+      redirect_to memo_path(id: 1), data: { turbo: false }
       # redirect_to memo_path(@memo, title: @memo.song_title, artist_name: @memo.artist_name)
     else
       render 'musixmatch/search', alert: 'メモの開始に失敗しました。'
