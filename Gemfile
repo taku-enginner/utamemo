@@ -66,3 +66,7 @@ group :test do
 end
 
 gem 'devise', '~> 4.9'
+
+gem "shakapacker", "= 8.1"
+
+gem "react-rails", "= 3.2"
