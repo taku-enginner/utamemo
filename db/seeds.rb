@@ -11,7 +11,7 @@
 #   end
 
 Rails.logger.debug 'seedファイルの実行がスタートしました'
-p 'seedファイルの実行がスタートしました'
+Rails.logger.debug 'seedファイルの実行がスタートしました'
 
 # ユーザーデータ
 3.times do |n|
@@ -24,33 +24,32 @@ p 'seedファイルの実行がスタートしました'
 end
 
 # メモデータ
-User.all.each do |user|
+User.find_each do |user|
   3.times do |n|
     Memo.find_or_create_by(
-    song_title: "Boom Boom Back",
-    artist_name: "BE:FIRST",
-    memo_title: "メモタイトル#{n + 1}",
-    memo_components: [
-      {
-        "id": 1,
-        "type": "technique",
-        "content":"1",
-        "x": 300,
-        "y": 500,
-      },
-      {
-        "id": 2,
-        "type": "comment",
-        "content":"滑らかに",
-        "x": 300,
-        "y": 500,
-      },
-    ],
-    user_id: user.id,
+      song_title: 'Boom Boom Back',
+      artist_name: 'BE:FIRST',
+      memo_title: "メモタイトル#{n + 1}",
+      memo_components: [
+        {
+          id: 1,
+          type: 'technique',
+          content: '1',
+          x: 300,
+          y: 500
+        },
+        {
+          id: 2,
+          type: 'comment',
+          content: '滑らかに',
+          x: 300,
+          y: 500
+        }
+      ],
+      user_id: user.id
     )
   end
 end
 
-
 Rails.logger.debug 'seedファイルの実行が終了しました'
-p 'seedファイルの実行が終了しました'
+Rails.logger.debug 'seedファイルの実行が終了しました'

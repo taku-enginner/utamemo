@@ -16,7 +16,7 @@ class MusixmatchController < ApplicationController
     @lyrics_result = fetch_lyrics(api_key, title, artist_name)
 
     # メモ作成用インスタンス
-    @memo = Memo.new()
+    @memo = Memo.new
   end
 
   private
