@@ -5,7 +5,7 @@
 <%= react_component("Memos", memo_components: @memo[:memo_components], data: { turbo: false })%>
 
 <% if @lyrics_result %>
-  <div class="mx-5 mt-10 mb-10 pt-10"><%= @lyrics_result.gsub(/\n/, "<br><br><br><br>").html_safe %></div>
+  <div class="mx-5 mt-10 mb-10 pt-10"><%= simple_format(h(@lyrics_result)) %></div>
   <div class="text-white font-bold text-3xl py-10 m-10">
   ごめんねー！ライセンスの関係で歌詞ここまでしか取れないんだよね！！
   </div>
