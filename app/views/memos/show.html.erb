@@ -1,8 +1,6 @@
-<div class="bg-base-200" id="utamemo"></div>
-<div>
-  <%= @memo[:memo_components] %>
-</div>
+<%= react_component("Memos", memo_components: @memo[:memo_components])%>
 
+<div><%= @memo[:memo_components] %></div>
 <div>
   artist_name: <%= @memo[:artist_name] %>
 </div>
@@ -15,4 +13,3 @@
 <% else %>
   あれ、なんで取れないんだろうね。。。
 <% end %>
-
