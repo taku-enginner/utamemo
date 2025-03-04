@@ -6,6 +6,7 @@ class MemosController < ApplicationController
   def index; end
 
   def show
+    request.format = :html # turboを無効化
     # @memo = Memo.find(params[:id])
     @memo = Memo.first
 
