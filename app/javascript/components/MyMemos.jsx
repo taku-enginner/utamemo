@@ -2,18 +2,11 @@ import React, { useState, useEffect } from "react";
 import Draggable from "react-draggable";
 import axios from "axios";
 
-export default function Memos({ memo }) {
+export default function MyMemos({ memo }) {
   console.log("memo", memo);
   const [components, setComponents] = useState(memo.memo_components);
   const [selectedComponent, setSelectedComponent] = useState(null);
   const [inputType, setInputType] = useState("technique");
-
-  // 試しに消して、useStateの初期値に入れてみる。本番環境で問題なければそっちに変更。
-  // useEffect(() => {
-  //   setComponents(memo.memo_components);
-  // }, [memo]);
-
-
 
   useEffect(() => {
     console.log("components", components);
@@ -22,31 +15,46 @@ export default function Memos({ memo }) {
   // 入力モード変更
   useEffect(() => {
     console.log("inputType", inputType);
-    let target_button;
-    let no_target_button;
-    let target;
-    let no_target;
+    let technique_button = document.getElementById("technique_button");
+    let technique = document.getElementById("technique");
+    let comment_button =  document.getElementById("comment_button");
+    let comment = document.getElementById("comment");
+    let preview_button = document.getElementById("preview_button");
 
-    if (inputType === "technique"){
-      target_button = document.getElementById("technique_button")
-      no_target_button = document.getElementById("comment_button")
-      target = document.getElementById("technique")
-      no_target = document.getElementById("comment")
-    }else if (inputType === "comment"){
-      target_button = document.getElementById("comment_button")
-      no_target_button = document.getElementById("technique_button")
-      target = document.getElementById("comment")
-      no_target = document.getElementById("technique")
+    switch (inputType) {
+      case "technique":
+        technique_button.classList.remove("bg-gray-300")
+        technique_button.classList.add("bg-red-300")
+        technique.classList.remove("hidden")
+        comment_button.classList.remove("bg-red-300")
+        comment_button.classList.add("bg-gray-300")
+        comment.classList.add("hidden")
+        preview_button.classList.remove("bg-red-300")
+        preview_button.classList.add("bg-gray-300")
+        break;
+      case "comment":
+        comment_button.classList.remove("bg-gray-300")
+        comment_button.classList.add("bg-red-300")
+        comment.classList.remove("hidden")
+        technique_button.classList.remove("bg-red-300")
+        technique_button.classList.add("bg-gray-300")
+        technique.classList.add("hidden")
+        preview_button.classList.remove("bg-red-300")
+        preview_button.classList.add("bg-gray-300")
+        break;
+      case "preview":
+        preview_button.classList.remove("bg-gray-300")
+        preview_button.classList.add("bg-red-300")
+        technique_button.classList.remove("bg-red-300")
+        technique_button.classList.add("bg-gray-300")
+        technique.classList.add("hidden")
+        comment_button.classList.remove("bg-red-300")
+        comment_button.classList.add("bg-gray-300")
+        comment.classList.add("hidden")
+        break;
+      default:
+        console.log("inputTypeが見つかりません")
     }
-    // モード切り替え
-    target.classList.remove("hidden")
-    no_target.classList.add("hidden")
-    
-    // ボタン色切り替え
-    target_button.classList.remove("bg-gray-300")
-    target_button.classList.add("bg-red-300")
-    no_target_button.classList.remove("bg-red-300")
-    no_target_button.classList.add("bg-gray-300")
   },[inputType]);
 
   // テクニックコンポーネント追加
@@ -58,8 +66,9 @@ export default function Memos({ memo }) {
   // コメントコンポーネント追加
   const addCommentComponent = () => {
     const componentId = components.length + 1;
-    const comment = document.getElementById("comment_input").value
-    setComponents([...components, { x: 100, y: 100, id: componentId, type: "comment", content: comment}])
+    const comment = document.getElementById("comment_input")
+    setComponents([...components, { x: 100, y: 100, id: componentId, type: "comment", content: comment.value}])
+    comment.value = ""
   }
 
   // コンポーネント削除
@@ -127,6 +136,7 @@ export default function Memos({ memo }) {
 
   return (
     <>
+      <div>MyMemos.jsx</div>
       {/* ツールバー  */}
       <div className="p-5 flex flex-row between space-x-2">
         <button
@@ -141,6 +151,12 @@ export default function Memos({ memo }) {
           }
           id = "comment_button"
         >コメント</button>
+        <button 
+          className="btn bg-gray-300"
+          onClick={() => setInputType("preview")
+          }
+          id = "preview_button"
+        >プレビュー</button>
         <button onClick={saveComponents} className="btn">保存</button>
       </div>
 

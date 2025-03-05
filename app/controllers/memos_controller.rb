@@ -9,8 +9,7 @@ class MemosController < ApplicationController
 
   def show
     request.format = :html # turboを無効化
-    # @memo = Memo.find(params[:id])
-    @memo = Memo.first
+    @memo = Memo.find(params[:id])
 
     api_key = Rails.application.credentials[:musixmatch_api_key]
     title = @memo[:song_title]
@@ -24,8 +23,7 @@ class MemosController < ApplicationController
     @memo = Memo.new(memo_params)
     @memo.user_id = current_user.id
     if @memo.save
-      redirect_to memo_path(id: 1), data: { turbo: false }
-      # redirect_to memo_path(@memo, title: @memo.song_title, artist_name: @memo.artist_name)
+      redirect_to memo_path(id: @memo.id), data: { turbo: false }
     else
       render 'musixmatch/search', alert: 'メモの開始に失敗しました。'
     end
