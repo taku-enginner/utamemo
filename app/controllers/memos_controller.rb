@@ -3,7 +3,9 @@
 class MemosController < ApplicationController
   before_action :authenticate_user!, only: %i[create update destroy]
 
-  def index; end
+  def index
+    @memos = Memo.includes(:user).order(created_at: :desc)
+  end
 
   def show
     request.format = :html # turboを無効化
