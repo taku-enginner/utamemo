@@ -136,9 +136,8 @@ export default function MyMemos({ memo }) {
 
   return (
     <>
-      <div>MyMemos.jsx</div>
       {/* ツールバー  */}
-      <div className="p-5 flex flex-row between space-x-2">
+      <div className="p-5 flex flex-row between space-x-2 fixed bottom-0 left-0 w-full">
         <button
           className="btn bg-gray-300"
           onClick={() => setInputType("technique")

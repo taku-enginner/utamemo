@@ -1,19 +1,27 @@
-<div class="bg-red-200">
-  <p>artist_name: <%= @memo[:artist_name] %></p>
-  <p>titile: <%= @memo[:song_title] %></p>
-  <p>created_by: <%= @memo.user[:nickname] %></p>
-  <% if !!current_user && current_user.id == @memo.user_id %>
-    <%= react_component("MyMemos", {memo: @memo.as_json(only:[:id, :memo_components])}, data: { turbo: false })%>
-  <% else %>
-    <%= react_component("OtherMemos", {memo: @memo.as_json(only:[:id, :memo_components])}, data: { turbo: false })%>
-  <% end %>
-  <% if @lyrics_result %>
-    <div class="mx-5 mt-10 mb-10 pt-10"><%= simple_format(h(@lyrics_result)) %></div>
-    <div class="text-white font-bold text-3xl py-10 m-10">
-    ごめんねー！ライセンスの関係で歌詞ここまでしか取れないんだよね！！
+<div class="flex flex-col items-center text-white bg-purple-500 p-2 text-center rounded-full">
+  <div class="flex flex-row items-center font-bold space-x-2 text-lg">
+    <div>
+      <%= @memo[:artist_name] %>  /
     </div>
-  <% else %>
-    あれ、なんで取れないんだろうね。。。
-  <% end %>
+    <div>
+      <%= @memo[:song_title] %>
+    </div>
+  </div>
+  <div>
+    created_by: <%= @memo.user[:nickname] %>
+  </div>
 </div>
+<% if !!current_user && current_user.id == @memo.user_id %>
+  <%= react_component("MyMemos", {memo: @memo.as_json(only:[:id, :memo_components])}, data: { turbo: false })%>
+<% else %>
+  <%= react_component("OtherMemos", {memo: @memo.as_json(only:[:id, :memo_components])}, data: { turbo: false })%>
+<% end %>
+<% if @lyrics_result %>
+  <div class="mx-5 mt-10 mb-10 pt-10 text-white"><%= simple_format(h(@lyrics_result)) %></div>
+  <div class="text-white font-bold text-3xl py-10 m-10">
+  ごめんねー！ライセンスの関係で歌詞ここまでしか取れないんだよね！！
+  </div>
+<% else %>
+  あれ、なんで取れないんだろうね。。。
+<% end %>
 
