@@ -54,13 +54,37 @@ export default function Memos({ memo }) {
         },
       });
       console.log("Success:", response.data);
+      console.log("status:", response.status);
+
+      // 保存成功時フラッシュメッセージ
+      const flashmessage = document.getElementById("flash-message");
+      flashmessage.innerHTML = "保存しました";
+      flashmessage.classList.remove("hidden");
+      flashmessage.classList.add("bg-green-600");
+      setTimeout(() => {
+        flashmessage.classList.add("hidden");
+        flashmessage.classList.remove("bg-green-600");
+      }, 3000);
+
     } catch (error) {
       console.error("Error:", error);
+      console.log("status:", response.status);
+
+      // 保存失敗時フラッシュメッセージ
+      const flashmessage = document.getElementById("flash-message");
+      flashmessage.innerHTML = "保存に失敗しました";
+      flashmessage.classList.remove("hidden");
+      flashmessage.classList.add("bg-red-600");
+      setTimeout(() => {
+        flashmessage.classList.add("hidden");
+        flashmessage.classList.remove("bg-red-600");
+      }, 3000);
     }
   }
 
   return (
     <>
+      <div id="flash-message" className="hidden bg-white p-2 w-full">あいうえお</div>
       <div className="relative">
 
         <div className="absolute top-0 left-0 w-full">
