@@ -22,19 +22,31 @@ export default function Memos({ memo }) {
   // 入力モード変更
   useEffect(() => {
     console.log("inputType", inputType);
+    let target_button;
+    let no_target_button;
+    let target;
+    let no_target;
+
     if (inputType === "technique"){
-      // テクニックモードの場合
-      const target = document.getElementById("technique")
-      target.classList.remove("hidden")
-      const no_target = document.getElementById("comment")
-      no_target.classList.add("hidden")
-    }else{
-      // コメントモードの場合
-      const target = document.getElementById("comment")
-      target.classList.remove("hidden")
-      const no_target = document.getElementById("technique")
-      no_target.classList.add("hidden")
+      target_button = document.getElementById("technique_button")
+      no_target_button = document.getElementById("comment_button")
+      target = document.getElementById("technique")
+      no_target = document.getElementById("comment")
+    }else if (inputType === "comment"){
+      target_button = document.getElementById("comment_button")
+      no_target_button = document.getElementById("technique_button")
+      target = document.getElementById("comment")
+      no_target = document.getElementById("technique")
     }
+    // モード切り替え
+    target.classList.remove("hidden")
+    no_target.classList.add("hidden")
+    
+    // ボタン色切り替え
+    target_button.classList.remove("bg-gray-300")
+    target_button.classList.add("bg-red-300")
+    no_target_button.classList.remove("bg-red-300")
+    no_target_button.classList.add("bg-gray-300")
   },[inputType]);
 
   // テクニックコンポーネント追加
@@ -118,14 +130,16 @@ export default function Memos({ memo }) {
       {/* ツールバー  */}
       <div className="p-5 flex flex-row between space-x-2">
         <button
-          className="btn"
+          className="btn bg-gray-300"
           onClick={() => setInputType("technique")
           }
+          id = "technique_button"
         >テクニック</button>
         <button 
-          className="btn"
+          className="btn bg-gray-300"
           onClick={() => setInputType("comment")
           }
+          id = "comment_button"
         >コメント</button>
         <button onClick={saveComponents} className="btn">保存</button>
       </div>
@@ -138,7 +152,7 @@ export default function Memos({ memo }) {
         <div className="absolute top-0 left-0 w-full">
 
         {/* ツールバー（テクニック） */}
-        <div className="p-5 flex flex-row between space-x-2" id="technique">
+        <div className="p-5 flex flex-row between space-x-2 hidden" id="technique">
           <button onClick={addTechniqueComponent} className="btn">コンポ追加</button>
           <button onClick={addTechniqueComponent} className="btn">コンポ追加</button>
           <button onClick={addTechniqueComponent} className="btn">コンポ追加</button>
