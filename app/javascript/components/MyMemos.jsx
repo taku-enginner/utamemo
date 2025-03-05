@@ -136,29 +136,45 @@ export default function MyMemos({ memo }) {
 
   return (
     <>
-      {/* ツールバー  */}
-      <div className="p-5 flex flex-row between space-x-2 fixed bottom-0 left-0 w-full">
-        <button
-          className="btn bg-gray-300"
-          onClick={() => setInputType("technique")
-          }
-          id = "technique_button"
-        >テクニック</button>
-        <button 
-          className="btn bg-gray-300"
-          onClick={() => setInputType("comment")
-          }
-          id = "comment_button"
-        >コメント</button>
-        <button 
-          className="btn bg-gray-300"
-          onClick={() => setInputType("preview")
-          }
-          id = "preview_button"
-        >プレビュー</button>
-        <button onClick={saveComponents} className="btn">保存</button>
-      </div>
+      <div className="fixed w-full bottom-0 right-0">
+        <div>
+          {/* ツールバー（テクニック） */}
+          <div className="p-3 flex flex-row between space-x-2 hidden" id="technique">
+            <button onClick={addTechniqueComponent} className="btn">コンポ追加</button>
+            <button onClick={addTechniqueComponent} className="btn">コンポ追加</button>
+            <button onClick={addTechniqueComponent} className="btn">コンポ追加</button>
+          </div>
 
+          {/* ツールバー（コメント） */}
+          <div className="p-3 flex flex-row between space-x-2 hidden" id="comment">
+            <input className="" id="comment_input"></input>
+            <button onClick={addCommentComponent} className="btn">コメント追加</button>
+          </div>
+        </div>
+        {/* ツールバー  */}
+        <div className="p-3 flex flex-row between space-x-2">
+          <button
+            className="btn bg-gray-300"
+            onClick={() => setInputType("technique")
+            }
+            id = "technique_button"
+          >テクニック</button>
+          <button 
+            className="btn bg-gray-300"
+            onClick={() => setInputType("comment")
+            }
+            id = "comment_button"
+          >コメント</button>
+          <button 
+            className="btn bg-gray-300"
+            onClick={() => setInputType("preview")
+            }
+            id = "preview_button"
+          >プレビュー</button>
+          <button onClick={saveComponents} className="btn">保存</button>
+        </div>
+      
+      </div>
       {/* フラッシュメッセージ */}
       <div id="flash-message" className="hidden bg-white p-2 w-full"></div>
 
@@ -166,19 +182,6 @@ export default function MyMemos({ memo }) {
       <div className="relative">
         <div className="absolute top-0 left-0 w-full">
 
-        {/* ツールバー（テクニック） */}
-        <div className="p-5 flex flex-row between space-x-2 hidden" id="technique">
-          <button onClick={addTechniqueComponent} className="btn">コンポ追加</button>
-          <button onClick={addTechniqueComponent} className="btn">コンポ追加</button>
-          <button onClick={addTechniqueComponent} className="btn">コンポ追加</button>
-        </div>
-
-        {/* ツールバー（コメント） */}
-        <div className="p-5 flex flex-row between space-x-2 hidden" id="comment">
-          <input className="" id="comment_input"></input>
-          <button onClick={addCommentComponent} className="btn">コメント追加</button>
-
-        </div>
           {components?.map((component) => (
             <Draggable
               key={component.id}
