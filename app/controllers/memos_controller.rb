@@ -9,8 +9,7 @@ class MemosController < ApplicationController
 
   def show
     request.format = :html # turboを無効化
-    # @memo = Memo.find(params[:id])
-    @memo = Memo.first
+    @memo = Memo.find(params[:id])
 
     api_key = Rails.application.credentials[:musixmatch_api_key]
     title = @memo[:song_title]
