@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Draggable from "react-draggable";
 import axios from "axios";
 
-export default function Memos({ memo }) {
+export default function MyMemos({ memo }) {
   console.log("memo", memo);
   const [components, setComponents] = useState(memo.memo_components);
   const [selectedComponent, setSelectedComponent] = useState(null);
@@ -136,6 +136,7 @@ export default function Memos({ memo }) {
 
   return (
     <>
+      <div>MyMemos.jsx</div>
       {/* ツールバー  */}
       <div className="p-5 flex flex-row between space-x-2">
         <button
