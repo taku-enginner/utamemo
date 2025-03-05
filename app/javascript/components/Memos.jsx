@@ -4,28 +4,58 @@ import axios from "axios";
 
 export default function Memos({ memo }) {
   console.log("memo", memo);
-  const [components, setComponents] = useState([]);
+  const [components, setComponents] = useState(memo.memo_components);
   const [selectedComponent, setSelectedComponent] = useState(null);
-  const [componentGroups, setComponentGroups] = useState([]);
+  const [inputType, setInputType] = useState("technique");
 
-  
-  useEffect(() => {
-    setComponents(memo.memo_components);
-  }, [memo]);
+  // 試しに消して、useStateの初期値に入れてみる。本番環境で問題なければそっちに変更。
+  // useEffect(() => {
+  //   setComponents(memo.memo_components);
+  // }, [memo]);
+
+
 
   useEffect(() => {
     console.log("components", components);
   }, [components]);
   
-  const addComponent = () => {
+  // 入力モード変更
+  useEffect(() => {
+    console.log("inputType", inputType);
+    if (inputType === "technique"){
+      // テクニックモードの場合
+      const target = document.getElementById("technique")
+      target.classList.remove("hidden")
+      const no_target = document.getElementById("comment")
+      no_target.classList.add("hidden")
+    }else{
+      // コメントモードの場合
+      const target = document.getElementById("comment")
+      target.classList.remove("hidden")
+      const no_target = document.getElementById("technique")
+      no_target.classList.add("hidden")
+    }
+  },[inputType]);
+
+  // テクニックコンポーネント追加
+  const addTechniqueComponent = () => {
     const componentId = components.length + 1;
     setComponents([...components, { x: 100, y: 100, id: componentId, type: "technique", content: `New Component ${componentId}`}])
   }
 
+  // コメントコンポーネント追加
+  const addCommentComponent = () => {
+    const componentId = components.length + 1;
+    const comment = document.getElementById("comment_input").value
+    setComponents([...components, { x: 100, y: 100, id: componentId, type: "comment", content: comment}])
+  }
+
+  // コンポーネント削除
   const deleteComponent = (id) => {
     setComponents(components.filter(component => component.id !== id))
   }
 
+  // コンポーネントの位置更新
   const updatePosition = (id, data) => {
     const UpdateComponent = components.map((component)=>{
       if(component.id === id){
@@ -41,6 +71,7 @@ export default function Memos({ memo }) {
     setComponents(UpdateComponent);
   }
 
+  // コンポーネント保存
   const saveComponents = async() => {
     try {
       const csrfToken = document.querySelector('meta[name="csrf-token"]').content;
@@ -84,12 +115,41 @@ export default function Memos({ memo }) {
 
   return (
     <>
-      <div id="flash-message" className="hidden bg-white p-2 w-full">あいうえお</div>
-      <div className="relative">
+      {/* ツールバー  */}
+      <div className="p-5 flex flex-row between space-x-2">
+        <button
+          className="btn"
+          onClick={() => setInputType("technique")
+          }
+        >テクニック</button>
+        <button 
+          className="btn"
+          onClick={() => setInputType("comment")
+          }
+        >コメント</button>
+        <button onClick={saveComponents} className="btn">保存</button>
+      </div>
 
+      {/* フラッシュメッセージ */}
+      <div id="flash-message" className="hidden bg-white p-2 w-full"></div>
+
+      {/* コンポーネント配置 */}
+      <div className="relative">
         <div className="absolute top-0 left-0 w-full">
-          <button onClick={addComponent} className="btn">コンポーネントを追加</button>
-          <button onClick={saveComponents} className="btn">保存</button>
+
+        {/* ツールバー（テクニック） */}
+        <div className="p-5 flex flex-row between space-x-2" id="technique">
+          <button onClick={addTechniqueComponent} className="btn">コンポ追加</button>
+          <button onClick={addTechniqueComponent} className="btn">コンポ追加</button>
+          <button onClick={addTechniqueComponent} className="btn">コンポ追加</button>
+        </div>
+
+        {/* ツールバー（コメント） */}
+        <div className="p-5 flex flex-row between space-x-2 hidden" id="comment">
+          <input className="" id="comment_input"></input>
+          <button onClick={addCommentComponent} className="btn">コメント追加</button>
+
+        </div>
           {components?.map((component) => (
             <Draggable
               key={component.id}
