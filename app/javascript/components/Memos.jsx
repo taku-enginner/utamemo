@@ -22,6 +22,10 @@ export default function Memos({ memo }) {
     setComponents([...components, { x: 100, y: 100, id: componentId, type: "technique", content: `New Component ${componentId}`}])
   }
 
+  const deleteComponent = (id) => {
+    setComponents(components.filter(component => component.id !== id))
+  }
+
   const updatePosition = (id, data) => {
     const UpdateComponent = components.map((component)=>{
       if(component.id === id){
@@ -69,9 +73,39 @@ export default function Memos({ memo }) {
               onStop={(e, data) => updatePosition(component.id, data)}
               bouds="parent"
             >
-              <div className="component bg-white border border-gray-300 rounded-md shadow-md p-2 
-              max-w-xs w-fit whitespace-normal break-words flex items-center justify-center absolute">
-                {component.content}
+              <div>
+                <div className="component bg-white border border-gray-300 rounded-md shadow-md p-2 
+                max-w-xs w-fit whitespace-normal break-words flex items-center justify-center absolute flex flex-col"
+                     onClick={(e) => {
+                      e.stopPropagation();
+                      setSelectedComponent(component.id);
+                     }}
+                     onTouchStart={(e) => {
+                      e.stopPropagation();
+                      setSelectedComponent(component.id);
+                     }}
+                >
+                  <div>
+                    {selectedComponent === component.id && (
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          deleteComponent(component.id);
+                        }}
+                        onTouchStart={(e) => {
+                          e.stopPropagation();
+                          deleteComponent(component.id);
+                        }}
+                      >
+                        ✕
+                      </button>
+
+                    )}
+                  </div>
+                  <div>
+                    {component.content}                   
+                  </div>
+                </div>
               </div>
             </Draggable>
             ))}
