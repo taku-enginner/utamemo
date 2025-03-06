@@ -4,13 +4,11 @@
   <div class="inline-block text-3xl font-bold text-pink-500 ">
     <%= link_to "UTAMEMO", root_path , data: {turbo: false} %>
   </div>
-  <!--<div id="header-root"></div> -->
   <!-- メニューボタンと検索アイコン -->
   <div class="relative flex flex-col items-center">
     <div class="flex flex-row items-center space-x-2 mb-2">
       <!-- 虫眼鏡アイコン -->
       <!-- Open the modal using ID.showModal() method -->
-      <button class="text-2xl" onclick="my_modal_2.showModal()">🔍</button>
       <div class=" flex items-center justify-center">
         <dialog id="my_modal_2" class="modal">
           <div class="modal-box text-center bg-slate-950 border-2 border-pink-600">
@@ -64,6 +62,9 @@
         <li><%= link_to "ログイン", new_user_session_path, class: "block px-4 py-2 hover:bg-blue-600" %></li>
         <li><%= link_to "新規会員登録", new_user_registration_path, class: "block px-4 py-2 hover:bg-blue-600" %></li>
       <% end %>
+      <li>
+        <button class="text-white px-4 py-2 hover:bg-blue-600" onclick="my_modal_2.showModal()">新規メモ作成🔍</button>
+      </li>
       <li><%= link_to "新着メモ一覧", memos_path, class: "block px-4 py-2 hover:bg-blue-600" %></li>
       <!--
       <li><%= link_to "お問い合わせ", "#", class: "block px-4 py-2 hover:bg-blue-600" %></li>
