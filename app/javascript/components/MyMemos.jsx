@@ -199,7 +199,6 @@ export default function MyMemos({ memo }) {
               position={{ x: component.x, y: component.y}}
               onStop={(e, data) => updatePosition(component.id, data)}
               bouds="parent"
-              grid={[25,25]}
             >
               <div>
                 <div className="component bg-white border border-gray-300 rounded-md shadow-md p-2 
