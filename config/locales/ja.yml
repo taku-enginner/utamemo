@@ -1,0 +1,5 @@
+ja:
+  notices:
+    memo_deleted: "メモを削除しました。"
+  alerts:
+    memo_delete_failed: "メモの削除に失敗しました。"

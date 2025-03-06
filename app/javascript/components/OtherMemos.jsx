@@ -4,7 +4,6 @@ export default function OtherMemos({ memo }) {
 
   return (
     <>
-      <div>OtherMemos</div>
       {/* コンポーネント配置 */}
       <div className="relative">
         <div className="absolute top-0 left-0 w-full">

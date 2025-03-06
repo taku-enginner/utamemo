@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Draggable from "react-draggable";
 import axios from "axios";
 
@@ -7,10 +7,41 @@ export default function MyMemos({ memo }) {
   const [components, setComponents] = useState(memo.memo_components);
   const [selectedComponent, setSelectedComponent] = useState(null);
   const [inputType, setInputType] = useState("technique");
+  const componentRefs = useRef({}); // 各コンポーネントのrefを保持
 
+  // テクニックボタンの参照を作成
+  const techniqueButtonRef  = useRef(null);
+
+  // コメントボタンの参照を作成
+  const commentButtonRef  = useRef(null);
+
+  // エリア外のクリック・タップを監視
   useEffect(() => {
-    console.log("components", components);
-  }, [components]);
+    function handleClickOutside(event){
+      let isInside = false;
+
+      Object.values(componentRefs.current).forEach((ref) => {
+        if (ref && ref.contains(event.target)){
+          isInside = true;
+        }
+      });
+
+      if (!isInside){
+        setSelectedComponent(null);
+      }
+    }
+
+    // PC用のマウスクリックを監視
+    document.addEventListener("mousedown", handleClickOutside);
+    // スマホ用のタップを監視
+    document.addEventListener("touchstart", handleClickOutside);
+
+    return () => {
+      // メモリリーク対策
+      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("touchstart", handleClickOutside);
+    }
+  }, []);
   
   // 入力モード変更
   useEffect(() => {
@@ -59,15 +90,38 @@ export default function MyMemos({ memo }) {
 
   // テクニックコンポーネント追加
   const addTechniqueComponent = () => {
-    const componentId = components.length + 1;
-    setComponents([...components, { x: 100, y: 100, id: componentId, type: "technique", content: `New Component ${componentId}`}])
+    if (techniqueButtonRef.current){
+      const rect = techniqueButtonRef.current.getBoundingClientRect(); // ここで座標を取得
+      const componentId = components.length + 1;
+  
+      setComponents([
+        ...components, 
+        { 
+          x: rect.left + window.scrollX, 
+          y: rect.top + window.scrollY - rect.height - 250, 
+          id: componentId, 
+          type: "technique", 
+          content: `New Component ${componentId}`
+        }
+      ])
+    }
   }
 
   // コメントコンポーネント追加
   const addCommentComponent = () => {
+    const rect = commentButtonRef.current.getBoundingClientRect(); // ここで座標を取得
     const componentId = components.length + 1;
+
     const comment = document.getElementById("comment_input")
-    setComponents([...components, { x: 100, y: 100, id: componentId, type: "comment", content: comment.value}])
+    setComponents([
+      ...components,
+       { 
+          x: rect.left + window.scrollX, 
+          y: rect.top + window.scrollY - rect.height - 180,
+          id: componentId, 
+          type: "comment", 
+          content: comment.value
+       }])
     comment.value = ""
   }
 
@@ -111,8 +165,8 @@ export default function MyMemos({ memo }) {
       // 保存成功時フラッシュメッセージ
       const flashmessage = document.getElementById("flash-message");
       flashmessage.innerHTML = "保存しました";
-      flashmessage.classList.remove("hidden");
       flashmessage.classList.add("bg-green-600");
+      flashmessage.classList.remove("hidden");
       setTimeout(() => {
         flashmessage.classList.add("hidden");
         flashmessage.classList.remove("bg-green-600");
@@ -120,13 +174,12 @@ export default function MyMemos({ memo }) {
 
     } catch (error) {
       console.error("Error:", error);
-      console.log("status:", response.status);
 
       // 保存失敗時フラッシュメッセージ
       const flashmessage = document.getElementById("flash-message");
       flashmessage.innerHTML = "保存に失敗しました";
-      flashmessage.classList.remove("hidden");
       flashmessage.classList.add("bg-red-600");
+      flashmessage.classList.remove("hidden");
       setTimeout(() => {
         flashmessage.classList.add("hidden");
         flashmessage.classList.remove("bg-red-600");
@@ -135,51 +188,11 @@ export default function MyMemos({ memo }) {
   }
 
   return (
-    <>
-      <div>MyMemos.jsx</div>
-      {/* ツールバー  */}
-      <div className="p-5 flex flex-row between space-x-2">
-        <button
-          className="btn bg-gray-300"
-          onClick={() => setInputType("technique")
-          }
-          id = "technique_button"
-        >テクニック</button>
-        <button 
-          className="btn bg-gray-300"
-          onClick={() => setInputType("comment")
-          }
-          id = "comment_button"
-        >コメント</button>
-        <button 
-          className="btn bg-gray-300"
-          onClick={() => setInputType("preview")
-          }
-          id = "preview_button"
-        >プレビュー</button>
-        <button onClick={saveComponents} className="btn">保存</button>
-      </div>
-
-      {/* フラッシュメッセージ */}
-      <div id="flash-message" className="hidden bg-white p-2 w-full"></div>
-
+    <div className="relative">
       {/* コンポーネント配置 */}
       <div className="relative">
         <div className="absolute top-0 left-0 w-full">
 
-        {/* ツールバー（テクニック） */}
-        <div className="p-5 flex flex-row between space-x-2 hidden" id="technique">
-          <button onClick={addTechniqueComponent} className="btn">コンポ追加</button>
-          <button onClick={addTechniqueComponent} className="btn">コンポ追加</button>
-          <button onClick={addTechniqueComponent} className="btn">コンポ追加</button>
-        </div>
-
-        {/* ツールバー（コメント） */}
-        <div className="p-5 flex flex-row between space-x-2 hidden" id="comment">
-          <input className="" id="comment_input"></input>
-          <button onClick={addCommentComponent} className="btn">コメント追加</button>
-
-        </div>
           {components?.map((component) => (
             <Draggable
               key={component.id}
@@ -200,6 +213,9 @@ export default function MyMemos({ memo }) {
                      }}
                 >
                   <div>
+                    {component.content}                   
+                  </div>
+                  <div>
                     {selectedComponent === component.id && (
                       <button
                         onClick={(e) => {
@@ -213,18 +229,62 @@ export default function MyMemos({ memo }) {
                       >
                         ✕
                       </button>
-
                     )}
                   </div>
-                  <div>
-                    {component.content}                   
-                  </div>
+
                 </div>
               </div>
             </Draggable>
             ))}
         </div>
       </div>
-    </>
+      <div className="fixed w-full bottom-0 right-0 shadow-lg">
+        {/* フラッシュメッセージ */}
+        <div id="flash-message" className="hidden p-2 w-full text-white"></div>
+
+        <div>
+          {/* ツールバー（テクニック） */}
+          <div className="flex flex-row justify-center space-x-1 hidden" id="technique">
+            <button onClick={addTechniqueComponent} className="btn">追加</button>
+            <button onClick={addTechniqueComponent} className="btn">追加</button>
+            <button onClick={addTechniqueComponent} className="btn">追加</button>
+            <button onClick={addTechniqueComponent} className="btn">追加</button>
+            <button onClick={addTechniqueComponent} className="btn">追加</button>
+          </div>
+
+          {/* ツールバー（コメント） */}
+          <div className="flex flex-row justify-center space-x-2 hidden" id="comment">
+            <input 
+              className="w-[85%] border border-gray-400 rounded-lg p-1"
+              ref={commentButtonRef} 
+              id="comment_input"
+              placeholder="   コメントを入力"/>
+            <button onClick={addCommentComponent} className="btn">コメント<br/>追加</button>
+          </div>
+        </div>
+        {/* ツールバー  */}
+        <div className="pt-1 flex flex-row justify-center space-x-2" >
+          <button
+            className="btn bg-gray-300"
+            ref={techniqueButtonRef} 
+            onClick={() => setInputType("technique")}
+            id = "technique_button"
+          >テクニック</button>
+          <button 
+            className="btn bg-gray-300"
+            onClick={() => setInputType("comment")
+            }
+            id = "comment_button"
+          >コメント</button>
+          <button 
+            className="btn bg-gray-300"
+            onClick={() => setInputType("preview")
+            }
+            id = "preview_button"
+          >プレビュー</button>
+          <button onClick={saveComponents} className="btn">保存</button>
+        </div>
+      </div>
+    </div>
   );
 }

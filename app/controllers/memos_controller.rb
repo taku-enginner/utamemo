@@ -32,7 +32,14 @@ class MemosController < ApplicationController
   def update
     Rails.logger.debug 'updateメソッドが呼ばれました'
     @memo = Memo.find(params[:id])
-    Rails.logger.debug { "update_component_params: #{update_component_params}" }
+
+    # 空配列の場合は空配列で更新する
+    if params[:memo_components].empty?
+      @memo.update(memo_components: [])
+      render json: { message: 'update successfully' }, status: :ok
+      return
+    end
+
     if @memo.update(memo_components: update_component_params)
       render json: { message: 'update successfully' }, status: :ok
     else
@@ -40,7 +47,17 @@ class MemosController < ApplicationController
     end
   end
 
-  def destroy; end
+  def destroy
+    @memo = Memo.find(params[:id])
+    if @memo.destroy
+      flash[:notice] = t('notices.memo_deleted')
+      redirect_to mypage_index_path
+    else
+      flash.now[:alert] = t('alerts.memo_delete_failed')
+      # renderはビューを直接レンダリングするので、ビューのファイル名を使う
+      render 'mypage/index'
+    end
+  end
 
   private
 

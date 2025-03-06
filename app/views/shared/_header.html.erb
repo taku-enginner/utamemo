@@ -1,50 +1,54 @@
-<header class="p-4 bg-yellow-200 sticky top-0 z-50 flex justify-between items-center">
+<header class="p-4 bg-slate-950 sticky top-0 z-50 flex justify-between items-center pb-2">
   <!-- オーバーレイ --> 
   <div id="menu-overlay" class="fixed inset-0 bg-black opacity-0 pointer-events-none transition-opacity duration-200"></div>
-  <div class="inline-block text-3xl font-bold ">
-    <%= link_to "UtaMemo", root_path , data: {turbo: false} %>
+  <div class="inline-block text-3xl font-bold text-pink-500 ">
+    <%= link_to "UTAMEMO", root_path , data: {turbo: false} %>
   </div>
-  <!--<div id="header-root"></div> -->
   <!-- メニューボタンと検索アイコン -->
-  <div class="relative flex items-center space-x-4">
-    <!-- アカウント名 -->
-    <% if user_signed_in? %>
-      <div class="text-lg" %>
-        <%= current_user.nickname %>
-      </div>
-    <% else %>
-      <div class="text-lg">ゲスト</div>
-    <% end %>
-  
-    <!-- 虫眼鏡アイコン -->
-    <!-- Open the modal using ID.showModal() method -->
-    <button class="text-2xl" onclick="my_modal_2.showModal()">🔍</button>
-    <dialog id="my_modal_2" class="modal">
-      <div class="modal-box">
-        <h3 class="text-lg font-bold">歌詞を検索</h3>
-        <%= form_with url: musixmatch_search_path, method: :get do |form| %>
-          <div class="flex flex-col">
-            <%= form.label :title, "タイトル" %>
-            <%= form.text_field :title %>
-            
-            <%= form.label :artist_name, "アーティスト名" %>
-            <%= form.text_field :artist_name %>
-            
-            <%= form.submit "検索" %>
+  <div class="relative flex flex-col items-center">
+    <div class="flex flex-row items-center space-x-2 mb-2">
+      <!-- 虫眼鏡アイコン -->
+      <!-- Open the modal using ID.showModal() method -->
+      <div class=" flex items-center justify-center">
+        <dialog id="my_modal_2" class="modal">
+          <div class="modal-box text-center bg-slate-950 border-2 border-pink-600">
+            <h3 class="text-lg font-bold text-white">歌詞を検索</h3>
+            <%= form_with url: musixmatch_search_path, method: :get do |form| %>
+              <div class="flex flex-col space-y-4">
+                <div>
+                  <%= form.text_field :artist_name, required: true, placeholder: "アーティスト名", class: "text-lg p-2 mt-2 rounded-lg border-2 border-pink-600 bg-gray-300 text-purple-600 placeholder-purple-500 focus:outline-none focus:ring-2 focus:ring-purple-500" %>
+                </div>
+                <div>
+                  <%= form.text_field :title, required: true, placeholder: "曲名", class: "text-lg p-2 rounded-lg border-2 border-pink-600 bg-gray-300 text-purple-600 placeholder-purple-500 focus:outline-none focus:ring-2 focus:ring-purple-500" %>            
+                </div>
+                
+                <%= form.submit "検索", class: "bg-pink-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-pink-700 transition-shadow shadow-md hover:shadow-lg" %>
+              </div>
+            <% end %>
           </div>
-        <% end %>
+          <form method="dialog" class="modal-backdrop">
+            <button>close</button>
+          </form>
+        </dialog>
       </div>
-      <form method="dialog" class="modal-backdrop">
-        <button>close</button>
-      </form>
-    </dialog>
-    <!-- メニューアイコン -->
-    <button
-      class="btn bg-blue-500 text-white rounded-lg px-4 py-2 flex items-center justify-center"
-      id="menu-button"
-    >
-      ☰
-    </button>
+      <!-- メニューアイコン -->
+      <button
+        class="btn bg-blue-500 text-white rounded-lg px-4 py-2 flex items-center justify-center"
+        id="menu-button"
+      >
+        ☰
+      </button>
+    </div>
+    <!-- アカウント名 -->
+    <div>
+      <% if user_signed_in? %>
+        <div class="text-sm text-pink-500 font-bold" %>
+          <%= current_user.nickname %>
+        </div>
+      <% else %>
+        <div class="text-sm text-pink-500 font-bold">ゲスト</div>
+      <% end %>
+    </div>
 
     <!-- メニュー (デフォルトで非表示) -->
     <ul
@@ -58,7 +62,10 @@
         <li><%= link_to "ログイン", new_user_session_path, class: "block px-4 py-2 hover:bg-blue-600" %></li>
         <li><%= link_to "新規会員登録", new_user_registration_path, class: "block px-4 py-2 hover:bg-blue-600" %></li>
       <% end %>
-      <li><%= link_to "新着メモ", memos_path, class: "block px-4 py-2 hover:bg-blue-600" %></li>
+      <li>
+        <button class="text-white px-4 py-2 hover:bg-blue-600" onclick="my_modal_2.showModal()">新規メモ作成🔍</button>
+      </li>
+      <li><%= link_to "新着メモ一覧", memos_path, class: "block px-4 py-2 hover:bg-blue-600" %></li>
       <!--
       <li><%= link_to "お問い合わせ", "#", class: "block px-4 py-2 hover:bg-blue-600" %></li>
       <li><%= link_to "利用規約", "#", class: "block px-4 py-2 hover:bg-blue-600" %></li>
