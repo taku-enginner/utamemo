@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Draggable from "react-draggable";
 import axios from "axios";
 
@@ -7,6 +7,13 @@ export default function MyMemos({ memo }) {
   const [components, setComponents] = useState(memo.memo_components);
   const [selectedComponent, setSelectedComponent] = useState(null);
   const [inputType, setInputType] = useState("technique");
+
+  // テクニックボタンの参照を作成
+  const techniqueButtonRef  = useRef(null);
+
+  // コメントボタンの参照を作成
+  const commentButtonRef  = useRef(null);
+
 
   useEffect(() => {
     console.log("components", components);
@@ -59,15 +66,38 @@ export default function MyMemos({ memo }) {
 
   // テクニックコンポーネント追加
   const addTechniqueComponent = () => {
-    const componentId = components.length + 1;
-    setComponents([...components, { x: 100, y: 100, id: componentId, type: "technique", content: `New Component ${componentId}`}])
+    if (techniqueButtonRef.current){
+      const rect = techniqueButtonRef.current.getBoundingClientRect(); // ここで座標を取得
+      const componentId = components.length + 1;
+  
+      setComponents([
+        ...components, 
+        { 
+          x: rect.left + window.scrollX, 
+          y: rect.top + window.scrollY - rect.height - 232, 
+          id: componentId, 
+          type: "technique", 
+          content: `New Component ${componentId}`
+        }
+      ])
+    }
   }
 
   // コメントコンポーネント追加
   const addCommentComponent = () => {
     const componentId = components.length + 1;
+    const rect = commentButtonRef.current.getBoundingClientRect(); // ここで座標を取得
+
     const comment = document.getElementById("comment_input")
-    setComponents([...components, { x: 100, y: 100, id: componentId, type: "comment", content: comment.value}])
+    setComponents([
+      ...components,
+       { 
+          x: rect.left + window.scrollX, 
+          y: rect.top + window.scrollY - rect.height - 180,
+          id: componentId, 
+          type: "comment", 
+          content: comment.value
+       }])
     comment.value = ""
   }
 
@@ -206,17 +236,18 @@ export default function MyMemos({ memo }) {
           <div className="flex flex-row justify-center space-x-2 hidden" id="comment">
             <input 
               className="w-[85%] border border-gray-400 rounded-lg p-1"
+              ref={commentButtonRef} 
               id="comment_input"
               placeholder="   コメントを入力"/>
             <button onClick={addCommentComponent} className="btn">コメント<br/>追加</button>
           </div>
         </div>
         {/* ツールバー  */}
-        <div className="pt-1 flex flex-row justify-center space-x-2">
+        <div className="pt-1 flex flex-row justify-center space-x-2" >
           <button
             className="btn bg-gray-300"
-            onClick={() => setInputType("technique")
-            }
+            ref={techniqueButtonRef} 
+            onClick={() => setInputType("technique")}
             id = "technique_button"
           >テクニック</button>
           <button 
