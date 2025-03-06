@@ -188,13 +188,13 @@ export default function MyMemos({ memo }) {
             ))}
         </div>
       </div>
-      <div className="fixed w-full bottom-0 right-0">
+      <div className="fixed w-full bottom-0 right-0 shadow-lg">
         {/* フラッシュメッセージ */}
         <div id="flash-message" className="hidden bg-white p-2 w-full"></div>
 
         <div>
           {/* ツールバー（テクニック） */}
-          <div className="flex flex-row justify-center between space-x-1 hidden" id="technique">
+          <div className="flex flex-row justify-center space-x-1 hidden" id="technique">
             <button onClick={addTechniqueComponent} className="btn">追加</button>
             <button onClick={addTechniqueComponent} className="btn">追加</button>
             <button onClick={addTechniqueComponent} className="btn">追加</button>
@@ -203,13 +203,16 @@ export default function MyMemos({ memo }) {
           </div>
 
           {/* ツールバー（コメント） */}
-          <div className="flex flex-row justify-center between space-x-2 hidden" id="comment">
-            <input className="" id="comment_input"></input>
-            <button onClick={addCommentComponent} className="btn">コメント追加</button>
+          <div className="flex flex-row justify-center space-x-2 hidden" id="comment">
+            <input 
+              className="w-[85%] border border-gray-400 rounded-lg mx-2 p-1"
+              id="comment_input"
+              placeholder="   コメントを入力"/>
+            <button onClick={addCommentComponent} className="btn">コメント<br/>追加</button>
           </div>
         </div>
         {/* ツールバー  */}
-        <div className="pt-1 flex flex-row justify-center between space-x-2">
+        <div className="pt-1 flex flex-row justify-center space-x-2">
           <button
             className="btn bg-gray-300"
             onClick={() => setInputType("technique")
