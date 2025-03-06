@@ -34,9 +34,9 @@ class MemosController < ApplicationController
     @memo = Memo.find(params[:id])
 
     # 空配列の場合は空配列で更新する
-    if params[:memo_components].length == 0
+    if params[:memo_components].empty?
       @memo.update(memo_components: [])
-      render json: { message: "update successfully"}, status: :ok
+      render json: { message: 'update successfully' }, status: :ok
       return
     end
 
