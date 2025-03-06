@@ -1,16 +1,9 @@
 import React, { useState, useEffect } from "react";
-import Draggable from "react-draggable";
 import axios from "axios";
 
-export default function MyMemos({ memo }) {
-  console.log("memo", memo);
+export default function ToolBar({ memo }) {
   const [components, setComponents] = useState(memo.memo_components);
-  const [selectedComponent, setSelectedComponent] = useState(null);
   const [inputType, setInputType] = useState("technique");
-
-  useEffect(() => {
-    console.log("components", components);
-  }, [components]);
   
   // 入力モード変更
   useEffect(() => {
@@ -71,27 +64,6 @@ export default function MyMemos({ memo }) {
     comment.value = ""
   }
 
-  // コンポーネント削除
-  const deleteComponent = (id) => {
-    setComponents(components.filter(component => component.id !== id))
-  }
-
-  // コンポーネントの位置更新
-  const updatePosition = (id, data) => {
-    const UpdateComponent = components.map((component)=>{
-      if(component.id === id){
-        return {
-          ...component,
-            id: component.id,
-            x: data.x,
-            y: data.y
-        }
-      }
-      return component;
-    });
-    setComponents(UpdateComponent);
-  }
-
   // コンポーネント保存
   const saveComponents = async() => {
     try {
@@ -135,7 +107,7 @@ export default function MyMemos({ memo }) {
   }
 
   return (
-    <div class="relative">
+    <>
       <div className="fixed w-full bottom-0 right-0">
         <div>
           {/* ツールバー（テクニック） */}
@@ -173,60 +145,7 @@ export default function MyMemos({ memo }) {
           >プレビュー</button>
           <button onClick={saveComponents} className="btn">保存</button>
         </div>
-      
       </div>
-      {/* フラッシュメッセージ */}
-      <div id="flash-message" className="hidden bg-white p-2 w-full"></div>
-
-      {/* コンポーネント配置 */}
-      <div className="relative">
-        <div className="absolute top-0 left-0 w-full">
-
-          {components?.map((component) => (
-            <Draggable
-              key={component.id}
-              position={{ x: component.x, y: component.y}}
-              onStop={(e, data) => updatePosition(component.id, data)}
-              bouds="parent"
-            >
-              <div>
-                <div className="component bg-white border border-gray-300 rounded-md shadow-md p-2 
-                max-w-xs w-fit whitespace-normal break-words flex items-center justify-center absolute flex flex-col"
-                     onClick={(e) => {
-                      e.stopPropagation();
-                      setSelectedComponent(component.id);
-                     }}
-                     onTouchStart={(e) => {
-                      e.stopPropagation();
-                      setSelectedComponent(component.id);
-                     }}
-                >
-                  <div>
-                    {selectedComponent === component.id && (
-                      <button
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          deleteComponent(component.id);
-                        }}
-                        onTouchStart={(e) => {
-                          e.stopPropagation();
-                          deleteComponent(component.id);
-                        }}
-                      >
-                        ✕
-                      </button>
-
-                    )}
-                  </div>
-                  <div>
-                    {component.content}                   
-                  </div>
-                </div>
-              </div>
-            </Draggable>
-            ))}
-        </div>
-      </div>
-    </div>
+   </>
   );
 }

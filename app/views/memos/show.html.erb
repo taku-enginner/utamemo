@@ -11,17 +11,18 @@
     created_by: <%= @memo.user[:nickname] %>
   </div>
 </div>
-<% if !!current_user && current_user.id == @memo.user_id %>
-  <%= react_component("MyMemos", {memo: @memo.as_json(only:[:id, :memo_components])}, data: { turbo: false })%>
-<% else %>
-  <%= react_component("OtherMemos", {memo: @memo.as_json(only:[:id, :memo_components])}, data: { turbo: false })%>
-<% end %>
-<% if @lyrics_result %>
-  <div class="mx-5 mt-10 mb-10 pt-10 text-white"><%= simple_format(h(@lyrics_result)) %></div>
-  <div class="text-white font-bold text-3xl py-10 m-10">
-  ごめんねー！ライセンスの関係で歌詞ここまでしか取れないんだよね！！
-  </div>
-<% else %>
-  あれ、なんで取れないんだろうね。。。
-<% end %>
-
+<div class="flex-1 bg-gray-500 overflow-auto pb-20">
+  <% if !!current_user && current_user.id == @memo.user_id %>
+    <%= react_component("MyMemos", {memo: @memo.as_json(only:[:id, :memo_components])}, data: { turbo: false })%>
+  <% else %>
+    <%= react_component("OtherMemos", {memo: @memo.as_json(only:[:id, :memo_components])}, data: { turbo: false })%>
+  <% end %>
+  <% if @lyrics_result %>
+    <div class="mx-5 mt-10 mb-10 pt-10 text-white"><%= simple_format(h(@lyrics_result)) %></div>
+    <div class="text-white font-bold text-3xl py-10 m-10">
+    ごめんねー！ライセンスの関係で歌詞ここまでしか取れないんだよね！！
+    </div>
+  <% else %>
+    あれ、なんで取れないんだろうね。。。
+  <% end %>
+</div>
