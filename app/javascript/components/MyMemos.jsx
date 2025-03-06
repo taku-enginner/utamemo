@@ -4,9 +4,10 @@ import axios from "axios";
 
 export default function MyMemos({ memo }) {
   console.log("memo", memo);
-  const [components, setComponents] = useState([]);
+  const [components, setComponents] = useState(memo.memo_components);
   const [selectedComponent, setSelectedComponent] = useState(null);
   const [inputType, setInputType] = useState("technique");
+  const componentRefs = useRef({}); // 各コンポーネントのrefを保持
 
   // テクニックボタンの参照を作成
   const techniqueButtonRef  = useRef(null);
@@ -14,9 +15,32 @@ export default function MyMemos({ memo }) {
   // コメントボタンの参照を作成
   const commentButtonRef  = useRef(null);
 
-
+  // エリア外のクリック・タップを監視
   useEffect(() => {
-    setComponents(memo.memo_components);
+    function handleClickOutside(event){
+      let isInside = false;
+
+      Object.values(componentRefs.current).forEach((ref) => {
+        if (ref && ref.contains(event.target)){
+          isInside = true;
+        }
+      });
+
+      if (!isInside){
+        setSelectedComponent(null);
+      }
+    }
+
+    // PC用のマウスクリックを監視
+    document.addEventListener("mousedown", handleClickOutside);
+    // スマホ用のタップを監視
+    document.addEventListener("touchstart", handleClickOutside);
+
+    return () => {
+      // メモリリーク対策
+      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("touchstart", handleClickOutside);
+    }
   }, []);
   
   // 入力モード変更
@@ -85,8 +109,8 @@ export default function MyMemos({ memo }) {
 
   // コメントコンポーネント追加
   const addCommentComponent = () => {
-    const componentId = components.length + 1;
     const rect = commentButtonRef.current.getBoundingClientRect(); // ここで座標を取得
+    const componentId = components.length + 1;
 
     const comment = document.getElementById("comment_input")
     setComponents([
@@ -175,6 +199,7 @@ export default function MyMemos({ memo }) {
               position={{ x: component.x, y: component.y}}
               onStop={(e, data) => updatePosition(component.id, data)}
               bouds="parent"
+              grid={[25,25]}
             >
               <div>
                 <div className="component bg-white border border-gray-300 rounded-md shadow-md p-2 
@@ -189,6 +214,9 @@ export default function MyMemos({ memo }) {
                      }}
                 >
                   <div>
+                    {component.content}                   
+                  </div>
+                  <div>
                     {selectedComponent === component.id && (
                       <button
                         onClick={(e) => {
@@ -202,12 +230,9 @@ export default function MyMemos({ memo }) {
                       >
                         ✕
                       </button>
-
                     )}
                   </div>
-                  <div>
-                    {component.content}                   
-                  </div>
+
                 </div>
               </div>
             </Draggable>
