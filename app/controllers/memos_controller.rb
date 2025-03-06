@@ -50,9 +50,12 @@ class MemosController < ApplicationController
   def destroy
     @memo = Memo.find(params[:id])
     if @memo.destroy
-      redirect_to mypage_index_path, notice: t.call(notices.memo_deleted)
+      flash[:notice] = t('notices.memo_deleted')
+      redirect_to mypage_index_path
     else
-      redirect_to mypage_index_path, alert: t.call(alerts.memo_delete_failed)
+      flash.now[:alert] = t('alerts.memo_delete_failed')
+      # renderはビューを直接レンダリングするので、ビューのファイル名を使う
+      render 'mypage/index'
     end
   end
 
