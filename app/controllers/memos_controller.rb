@@ -40,7 +40,14 @@ class MemosController < ApplicationController
     end
   end
 
-  def destroy; end
+  def destroy
+    @memo = Memo.find(params[:id])
+    if @memo.destroy
+      redirect_to mypage_index_path, notice: 'メモを削除しました'
+    else
+      redirect_to mypage_index_path, alert: 'メモの削除に失敗しました'
+    end
+  end
 
   private
 

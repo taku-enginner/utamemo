@@ -1,22 +1,31 @@
 <% provide(:title, "マイページ | UTAMEMO")%>
-<div class="p-4 pb-2 text-3xl text-white font-bold tracking-wide text-center">マイメモ一覧</div>
-<div class="p-4 text-center">
+<div class="p-4 mb-2 text-3xl text-white font-bold tracking-wide text-center">マイメモ一覧</div>
+<div class="p-4 text-center flex flex-col items-center space-y-4">
   <% @my_memos.each do |my_memo| %>
-    <%= button_to memo_path(my_memo.id), { method: :get, class: "list w-full bg-base-100 rounded-box shadow-md p-4 mb-4" } do %>    
-        <div class="flex flex-row items-center justify-between">
-          <div>
-            <img class="size-10 rounded-box" src="https://img.daisyui.com/images/profile/demo/1@94.webp"/>
-          </div>
-          <div>
-            <div><%= my_memo.user.nickname %></div>
-            <div class="text-xs uppercase font-semibold opacity-60"><%= my_memo[:song_title] %> : <%= my_memo[:artist_name] %></div>
-          </div>
-          <div>
-            <div class="btn btn-square btn-ghost">
-              <svg class="size-[1.2em]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g stroke-linejoin="round" stroke-linecap="round" stroke-width="2" fill="none" stroke="currentColor"><path d="M6 3L20 12 6 21 6 3z"></path></g></svg>
+    <div class="flex flex-row items-center w-full space-x-2">
+      <div class="flex-grow">
+        <%= button_to memo_path(my_memo.id), { method: :get, class: "list w-full bg-base-100 rounded-box shadow-md p-4 my-2" } do %>    
+            <div class="flex flex-row items-center">
+              <div>
+                <img class="size-10 rounded-box" src="https://img.daisyui.com/images/profile/demo/1@94.webp"/>
+              </div>
+              <div>
+                <div><%= my_memo.user.nickname %></div>
+                <div class="text-xs uppercase font-semibold opacity-60"><%= my_memo[:song_title] %> : <%= my_memo[:artist_name] %></div>
+              </div>
             </div>
-          </div>
-        </div>
-    <% end %>
+        <% end %>
+      </div>
+      <div>
+        <%= button_to memo_path(my_memo.id),
+          method: :delete,
+          data: { turbo_confirm: "本当に削除しますか？", turbo_method: "delete" },
+          class: "w-10 h-10 bg-red-700 text-white rounded-full flex items-center justify-center shadow-md inline-block" do %>
+          <i class="fas fa-trash text-2xl p-3"></i>
+        <% end %>
+      </div>
+
+    
+    </div>           
   <% end %>
 </div>
