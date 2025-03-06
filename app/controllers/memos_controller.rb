@@ -32,7 +32,14 @@ class MemosController < ApplicationController
   def update
     Rails.logger.debug 'updateメソッドが呼ばれました'
     @memo = Memo.find(params[:id])
-    Rails.logger.debug { "update_component_params: #{update_component_params}" }
+
+    # 空配列の場合は空配列で更新する
+    if params[:memo_components].length == 0
+      @memo.update(memo_components: [])
+      render json: { message: "update successfully"}, status: :ok
+      return
+    end
+
     if @memo.update(memo_components: update_component_params)
       render json: { message: 'update successfully' }, status: :ok
     else
@@ -43,9 +50,9 @@ class MemosController < ApplicationController
   def destroy
     @memo = Memo.find(params[:id])
     if @memo.destroy
-      redirect_to mypage_index_path, notice: 'メモを削除しました'
+      redirect_to mypage_index_path, notice: t.call(notices.memo_deleted)
     else
-      redirect_to mypage_index_path, alert: 'メモの削除に失敗しました'
+      redirect_to mypage_index_path, alert: t.call(alerts.memo_delete_failed)
     end
   end
 

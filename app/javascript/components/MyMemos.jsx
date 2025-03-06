@@ -4,7 +4,7 @@ import axios from "axios";
 
 export default function MyMemos({ memo }) {
   console.log("memo", memo);
-  const [components, setComponents] = useState(memo.memo_components);
+  const [components, setComponents] = useState([]);
   const [selectedComponent, setSelectedComponent] = useState(null);
   const [inputType, setInputType] = useState("technique");
 
@@ -16,8 +16,8 @@ export default function MyMemos({ memo }) {
 
 
   useEffect(() => {
-    console.log("components", components);
-  }, [components]);
+    setComponents(memo.memo_components);
+  }, []);
   
   // 入力モード変更
   useEffect(() => {
@@ -74,7 +74,7 @@ export default function MyMemos({ memo }) {
         ...components, 
         { 
           x: rect.left + window.scrollX, 
-          y: rect.top + window.scrollY - rect.height - 232, 
+          y: rect.top + window.scrollY - rect.height - 250, 
           id: componentId, 
           type: "technique", 
           content: `New Component ${componentId}`
@@ -141,8 +141,8 @@ export default function MyMemos({ memo }) {
       // 保存成功時フラッシュメッセージ
       const flashmessage = document.getElementById("flash-message");
       flashmessage.innerHTML = "保存しました";
-      flashmessage.classList.remove("hidden");
       flashmessage.classList.add("bg-green-600");
+      flashmessage.classList.remove("hidden");
       setTimeout(() => {
         flashmessage.classList.add("hidden");
         flashmessage.classList.remove("bg-green-600");
@@ -150,13 +150,12 @@ export default function MyMemos({ memo }) {
 
     } catch (error) {
       console.error("Error:", error);
-      console.log("status:", response.status);
 
       // 保存失敗時フラッシュメッセージ
       const flashmessage = document.getElementById("flash-message");
       flashmessage.innerHTML = "保存に失敗しました";
-      flashmessage.classList.remove("hidden");
       flashmessage.classList.add("bg-red-600");
+      flashmessage.classList.remove("hidden");
       setTimeout(() => {
         flashmessage.classList.add("hidden");
         flashmessage.classList.remove("bg-red-600");
@@ -165,10 +164,7 @@ export default function MyMemos({ memo }) {
   }
 
   return (
-    <div class="relative">
-      
-
-
+    <div className="relative">
       {/* コンポーネント配置 */}
       <div className="relative">
         <div className="absolute top-0 left-0 w-full">
@@ -220,7 +216,7 @@ export default function MyMemos({ memo }) {
       </div>
       <div className="fixed w-full bottom-0 right-0 shadow-lg">
         {/* フラッシュメッセージ */}
-        <div id="flash-message" className="hidden bg-white p-2 w-full"></div>
+        <div id="flash-message" className="hidden p-2 w-full text-white"></div>
 
         <div>
           {/* ツールバー（テクニック） */}
