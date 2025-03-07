@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   get 'manifest' => 'rails/pwa#manifest', as: :pwa_manifest
   get 'musixmatch/search'
   resources :mypage, only: %i[index]
-
+  
   root 'top#index'
+  get 'help' => 'top#help'
 end
