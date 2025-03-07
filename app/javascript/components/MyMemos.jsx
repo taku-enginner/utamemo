@@ -276,23 +276,23 @@ export default function MyMemos({ memo }) {
         <div>
           {/* ツールバー（テクニック） */}
           <div className="flex flex-row justify-center space-x-2 hidden" id="technique">
-            <button onClick={() => addTechniqueComponent(1)} className="flex flex-col">
+            <button onClick={() => addTechniqueComponent(1)} className="flex flex-col justify-center">
               <img src="/technique/ビブラート.png" alt="ビブラート" style={{ width: "50px", height: "50px"}}/>
               <div className="text-white text-sm">ビブラート</div>
             </button>
-            <button onClick={() => addTechniqueComponent(2)} className="flex flex-col">
+            <button onClick={() => addTechniqueComponent(2)} className="flex flex-col justify-center">
               <img src="/technique/しゃくり.png" alt="しゃくり" style={{ width: "50px", height: "50px"}}/>
               <div className="text-white text-sm">しゃくり</div>
             </button>
-            <button onClick={() => addTechniqueComponent(3)} className="flex flex-col">
+            <button onClick={() => addTechniqueComponent(3)} className="flex flex-col justify-center">
               <img src="/technique/こぶし.png" alt="こぶし" style={{ width: "50px", height: "50px"}}/>
               <div className="text-white text-sm">こぶし</div>
             </button>
-            <button onClick={() => addTechniqueComponent(4)} className="flex flex-col">
+            <button onClick={() => addTechniqueComponent(4)} className="flex flex-col justify-center">
               <img src="/technique/フォール.png" alt="フォール" style={{ width: "50px", height: "50px"}}/>
               <div className="text-white text-sm">フォール</div>
             </button>
-            <button onClick={() => addTechniqueComponent(5)} className="flex flex-col">
+            <button onClick={() => addTechniqueComponent(5)} className="flex flex-col justify-center">
               <img src="/technique/ブレス.png" alt="ブレス" style={{ width: "50px", height: "50px"}}/>
               <div className="text-white text-sm">ブレス</div>
             </button>
