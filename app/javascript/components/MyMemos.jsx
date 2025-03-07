@@ -89,7 +89,7 @@ export default function MyMemos({ memo }) {
   },[inputType]);
 
   // テクニックコンポーネント追加
-  const addTechniqueComponent = () => {
+  const addTechniqueComponent = (tech_id) => {
     if (techniqueButtonRef.current){
       const rect = techniqueButtonRef.current.getBoundingClientRect(); // ここで座標を取得
       const componentId = components.length + 1;
@@ -97,11 +97,11 @@ export default function MyMemos({ memo }) {
       setComponents([
         ...components, 
         { 
-          x: rect.left + window.scrollX, 
-          y: rect.top + window.scrollY - rect.height - 250, 
+          x: rect.left + window.scrollX + 143, 
+          y: rect.top + window.scrollY - rect.height - 280, 
           id: componentId, 
           type: "technique", 
-          content: `New Component ${componentId}`
+          content: `${tech_id}`
         }
       ])
     }
@@ -201,7 +201,7 @@ export default function MyMemos({ memo }) {
               bouds="parent"
             >
               <div>
-                <div className="component bg-white border border-gray-300 rounded-md shadow-md p-2 
+                <div className="component
                 max-w-xs w-fit whitespace-normal break-words flex items-center justify-center absolute flex flex-col"
                      onClick={(e) => {
                       e.stopPropagation();
@@ -212,8 +212,32 @@ export default function MyMemos({ memo }) {
                       setSelectedComponent(component.id);
                      }}
                 >
-                  <div>
-                    {component.content}                   
+                  <div className="text-black text-2xl bg-white rounded-lg">
+                    {
+                      // コンポーネントの数字によって画像を変更。三項演算子を使用
+                      component.type==="technique" ? (() => {
+                        let techniqueImage;
+                        switch (component.content) {
+                          case "1":
+                            techniqueImage = <img src="/technique/ビブラート.png" alt="ビブラート" style={{ width: "50px", height: "50px"}}/>
+                            break;
+                          case "2":
+                            techniqueImage = <img src="/technique/しゃくり.png" alt="しゃくり" style={{ width: "50px", height: "50px"}}/>
+                            break;
+                          case "3":
+                            techniqueImage = <img src="/technique/こぶし.png" alt="こぶし" style={{ width: "50px", height: "50px"}}/>
+                            break;
+                          case "4":
+                            techniqueImage = <img src="/technique/フォール.png" alt="フォール" style={{ width: "50px", height: "50px"}}/>
+                            break;
+                          case "5":
+                            techniqueImage = <img src="/technique/ブレス.png" alt="ブレス" style={{ width: "50px", height: "50px"}}/>
+                            break;
+                          default:
+                            techniqueImage =  <div className="bg-red-500 text-white">表示エラーが起きました。</div>
+                          }
+                        return techniqueImage;
+                        })() : component.content}
                   </div>
                   <div>
                     {selectedComponent === component.id && (
@@ -226,10 +250,16 @@ export default function MyMemos({ memo }) {
                           e.stopPropagation();
                           deleteComponent(component.id);
                         }}
-                      >
+                        className="
+                        text-2xl font-bold text-white 
+                        bg-red-600 w-12 h-12 
+                        rounded-full border-2 border-white 
+                        shadow-lg hover:bg-red-700 
+                        hover:scale-110 transition-transform duration-200"
+                    >
                         ✕
                       </button>
-                    )}
+                  )}
                   </div>
 
                 </div>
@@ -242,14 +272,30 @@ export default function MyMemos({ memo }) {
         {/* フラッシュメッセージ */}
         <div id="flash-message" className="hidden p-2 w-full text-white"></div>
 
+        <div  className="bg-purple-500 p-2 mb-2 rounded-xl">
         <div>
           {/* ツールバー（テクニック） */}
-          <div className="flex flex-row justify-center space-x-1 hidden" id="technique">
-            <button onClick={addTechniqueComponent} className="btn">追加</button>
-            <button onClick={addTechniqueComponent} className="btn">追加</button>
-            <button onClick={addTechniqueComponent} className="btn">追加</button>
-            <button onClick={addTechniqueComponent} className="btn">追加</button>
-            <button onClick={addTechniqueComponent} className="btn">追加</button>
+          <div className="flex flex-row justify-center space-x-2 hidden" id="technique">
+            <button onClick={() => addTechniqueComponent(1)} className="flex flex-col">
+              <img src="/technique/ビブラート.png" alt="ビブラート" style={{ width: "50px", height: "50px"}}/>
+              <div className="text-white">ビブラート</div>
+            </button>
+            <button onClick={() => addTechniqueComponent(2)} className="flex flex-col">
+              <img src="/technique/しゃくり.png" alt="しゃくり" style={{ width: "50px", height: "50px"}}/>
+              <div className="text-white">しゃくり</div>
+            </button>
+            <button onClick={() => addTechniqueComponent(3)} className="flex flex-col">
+              <img src="/technique/こぶし.png" alt="こぶし" style={{ width: "50px", height: "50px"}}/>
+              <div className="text-white">こぶし</div>
+            </button>
+            <button onClick={() => addTechniqueComponent(4)} className="flex flex-col">
+              <img src="/technique/フォール.png" alt="フォール" style={{ width: "50px", height: "50px"}}/>
+              <div className="text-white">フォール</div>
+            </button>
+            <button onClick={() => addTechniqueComponent(5)} className="flex flex-col">
+              <img src="/technique/ブレス.png" alt="ブレス" style={{ width: "50px", height: "50px"}}/>
+              <div className="text-white">ブレス</div>
+            </button>
           </div>
 
           {/* ツールバー（コメント） */}
@@ -282,7 +328,8 @@ export default function MyMemos({ memo }) {
             }
             id = "preview_button"
           >プレビュー</button>
-          <button onClick={saveComponents} className="btn">保存</button>
+          <button onClick={saveComponents} className="btn">メモ<br/>保存</button>
+        </div>
         </div>
       </div>
     </div>
