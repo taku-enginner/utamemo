@@ -1,0 +1,90 @@
+<div class="mb-4">
+<div class="flex justify-center items-center pt-5">
+  <div class="card bg-slate-950 opacity-90 w-80 shadow-xl">
+    <div class="text-center text-3xl text-white font-bold p-4 m-4">メモを見てみよう！</div>
+    <figure class="px-10">
+      <img
+        src="/help/新着メモ一覧.png"
+        alt="新着メモ一覧"
+        class="rounded-xl" />
+    </figure>
+    <div class="card-body items-center text-center text-white">
+      <p>新着メモ一覧から他の人のメモを見ることができます！</p>
+    </div>
+    <div class="flex justify-center mb-4">
+      <%= link_to "新着メモ一覧へ", memos_path, class: "text-white text-sm rounded-full bg-purple-500 px-4 py-3 w-auto inline-block shadow-md hover:bg-purple-600 transition" %>
+    </div>
+  </div>
+</div>
+<div class="flex justify-center items-center pt-5">
+  <div class="card bg-slate-950 opacity-90 w-80 shadow-xl">
+    <div class="text-center text-3xl text-white font-bold p-4 m-4">曲を検索しよう！</div>
+    <figure class="px-10">
+      <img
+        src="/help/API歌詞検索.png"
+        alt="歌詞検索"
+        class="rounded-xl" />
+    </figure>
+    <div class="card-body items-center text-center text-white">
+      <p>好きな曲・アーティスト名で検索！</p>
+      <p>※歌詞データが無い曲もあります</p>
+    </div>
+    <div class="flex justify-center mb-4">
+      <button class="text-white text-sm rounded-full bg-purple-500 px-4 py-3 w-auto inline-block shadow-md hover:bg-purple-600 transition" onclick="my_modal_2.showModal()">曲を検索🔍</button>
+    </div>
+  </div>
+</div>
+<div class="flex justify-center items-center pt-5">
+  <div class="card bg-slate-950 opacity-90 w-80 shadow-xl">
+    <div class="text-center text-3xl text-white font-bold p-4 m-4">会員登録&ログイン！</div>
+    <figure class="px-10">
+      <img
+        src="/help/会員登録.png"
+        alt="会員登録"
+        class="rounded-xl" />
+    </figure>
+    <div class="card-body items-center text-center text-white">
+      <p>好きな曲が見つかったら、会員登録&<br>ログインをして準備完了！</p>
+    </div>
+    <div class="flex flex-row justify-center gap-4 mb-4">
+        <%= link_to "ログイン", new_user_session_path, class: "text-white text-sm rounded-full bg-purple-500 px-4 py-3 w-auto inline-block shadow-md hover:bg-purple-600 transition" %>
+        <%= link_to "会員登録", new_user_registration_path, class: "text-white text-sm rounded-full bg-purple-500 px-4 py-3 w-auto inline-block shadow-md hover:bg-purple-600 transition" %>
+    </div>
+  </div>
+</div>
+<div class="flex justify-center items-center pt-5">
+  <div class="card bg-slate-950 opacity-90 w-80 shadow-xl">
+    <div class="text-center text-3xl text-white font-bold p-4 m-4">メモをしよう！</div>
+    <figure class="px-10">
+      <img
+        src="/help/メモ作成.png"
+        alt="メモ作成"
+        class="rounded-xl" />
+    </figure>
+    <div class="card-body items-center text-center text-white">
+      <p>カラオケのテクニックや好きなコメントをメモすることができます！</p>
+      <p>こまめに保存ボタンで保存しよう！<br>※ログインが必要です</p>
+    </div>
+    <div class="flex justify-center mb-4">
+      <button class="text-white text-sm rounded-full bg-purple-500 px-4 py-3 w-auto inline-block shadow-md hover:bg-purple-600 transition" onclick="my_modal_2.showModal()">まずは歌詞検索から🔍</button>
+    </div>
+  </div>
+</div>
+<div class="flex justify-center items-center pt-5">
+  <div class="card bg-slate-950 opacity-90 w-80 shadow-xl">
+    <div class="text-center text-3xl text-white font-bold p-4 m-4">自分のメモを見よう！</div>
+    <figure class="px-10">
+      <img
+        src="/help/マイページ.png"
+        alt="マイページ"
+        class="rounded-xl" />
+    </figure>
+    <div class="card-body items-center text-center text-white">
+      <p>マイページから自分のメモリストを<br>確認できます！</p>
+    </div>
+    <div class="flex justify-center mb-4">
+      <%= link_to "マイページへ", mypage_index_path, class: "text-white text-sm rounded-full bg-purple-500 px-4 py-3 w-auto inline-block shadow-md hover:bg-purple-600 transition" %>
+    </div>
+  </div>
+</div>
+</div>

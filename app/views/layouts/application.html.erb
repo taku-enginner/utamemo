@@ -4,7 +4,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=M+PLUS+Rounded+1c&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 
-    <title><%= content_for(:title) || "Myapp" %></title>
+    <title><%= content_for(:title) || "UTAMEMO" %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <%= csrf_meta_tags %>
@@ -31,7 +31,7 @@
     
     <%= render "shared/header" %>
     <%= render "shared/flash" %>
-    <div class="flex-1 min-h-screen relative"><%= yield %></div>
+    <div class="flex-1 relative"><%= yield %></div>
     <%= render "shared/footer" %>
 
   </body>

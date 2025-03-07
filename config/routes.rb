@@ -11,4 +11,5 @@ Rails.application.routes.draw do
   resources :mypage, only: %i[index]
 
   root 'top#index'
+  get 'help' => 'top#help'
 end
