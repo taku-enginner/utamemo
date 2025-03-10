@@ -25,6 +25,18 @@
     <meta name="turbo-visit-control" content="reload">
 
     <title><%= yield(:title) %></title>
+
+    <!-- Google tag (gtag.js) -->
+    <% if Rails.env.production? %>
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-X3L4TZ1093"></script>
+      <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-X3L4TZ1093');
+      </script>
+    <% end %>
   </head>
 
   <body class="flex flex-col min-h-screen bg-zinc-700">
