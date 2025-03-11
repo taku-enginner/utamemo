@@ -1,0 +1,18 @@
+<% provide(:title, "トップページ | UTAMEMO")%>
+<div class="flex justify-center items-center pt-5">
+  <div class="card bg-slate-950 opacity-90 w-80 shadow-xl">
+    <figure class="px-10 pt-10">
+      <img
+        src="music_note.png"
+        alt="music_note"
+        class="rounded-xl" />
+    </figure>
+    <div class="card-body items-center text-center text-white">
+      <h2 class="card-title">自分だけの歌い方を楽しもう！</h2>
+      <p>このアプリでは歌詞にメモを残せます！<br>早速使い方を見てみましょう！</p>
+      <div class="card-actions">
+        <%= link_to "使い方を見る", help_path, class: "btn btn-primary"%>
+      </div>
+    </div>
+  </div>
+</div>

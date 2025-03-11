@@ -1,0 +1,21 @@
+<% provide(:title, "新着メモ一覧 | UTAMEMO")%>
+<div class="p-4 pb-2 text-3xl text-white font-bold tracking-wide text-center">新着メモ一覧</div>
+<div class="p-4 text-center flex flex-col items-center space-y-4">
+  <% @memos.each do |memos| %>
+    <div class="flex flex-row w-full space-x-2">
+      <div class="w-full">
+        <%= button_to memo_path(memos.id), { method: :get, class: "list block w-full bg-base-100 rounded-box shadow-md p-4 my-2" } do %>    
+            <div class="flex flex-row items-center">
+              <div class="mx-4">
+                <img class="size-10 rounded-box" src="/アイコン_デフォルト.png"/>
+              </div>
+              <div class="w-full">
+                <div><%= memos.user.nickname %></div>
+                <div class="text-xs uppercase font-semibold opacity-60"><%= memos[:artist_name] %> : <%= memos[:song_title] %></div>
+              </div>
+            </div>
+        <% end %>
+      </div>   
+    </div>           
+  <% end %>
+</div>

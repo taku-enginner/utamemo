@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=M+PLUS+Rounded+1c&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+    <title><%= content_for(:title) || "UTAMEMO" %></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= yield :head %>
+
+    <link rel="manifest" href="/manifest.json">
+    <link rel="icon" href="/icon.png" type="image/png">
+    <link rel="icon" href="/icon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/icon.png">
+
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
+    <%= javascript_pack_tag "application" %>
+
+    <!-- 本番環境でReactコンポーネントがうまく初期描画されないので、ページ全体でturboを無効化してみる -->
+    <meta name="turbo-visit-control" content="reload">
+
+    <title><%= yield(:title) %></title>
+
+    <!-- Google tag (gtag.js) -->
+    <% if Rails.env.production? %>
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-X3L4TZ1093"></script>
+      <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-X3L4TZ1093');
+      </script>
+    <% end %>
+  </head>
+
+  <body class="flex flex-col min-h-screen bg-zinc-700">
+    
+    <%= render "shared/header" %>
+    <%= render "shared/flash" %>
+    <div class="flex-1 relative"><%= yield %></div>
+    <%= render "shared/footer" %>
+
+  </body>
+</html>
