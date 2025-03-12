@@ -19,14 +19,15 @@
     <% provide(:title, "新着メモプレビュー | UTAMEMO")%>
     <%= react_component("OtherMemos", {memo: @memo.as_json(only:[:id, :memo_components])}, data: { turbo: false })%>
   <% end %>
-  <% if @lyrics_result %>
-        <% @lyrics_result = (@lyrics_result.split(/\*{7,}/).first.strip) %>
+  <% if @lyrics_result && !!@lyrics_result.split(/\*{7,}/).first %>
+      <% @lyrics_result = (@lyrics_result.split(/\*{7,}/).first.strip) %>
     <div class="mx-5 mt-10 mb-10 pt-10 text-white text-2xl"><%= simple_format(h(@lyrics_result.gsub(/\n/,'<br><br><br><br><br>').html_safe)) %></div>
     <div class="text-white font-bold text-3xl py-10 m-10 text-center border-2 border-white">
       申し訳ありません。<br>
       ライセンスの関係で、歌詞の取得がここまでしかできません。
     </div>
   <% else %>
-    あれ、なんで取れないんだろうね。。。
+    歌詞取得エラーが発生しました。
+    管理者までお問い合わせをお願いします。
   <% end %>
 </div>
