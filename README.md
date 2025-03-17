@@ -140,9 +140,9 @@
 # 画面遷移図
 - 画面遷移図
   - https://www.figma.com/design/oCOgnShi7RnwKI5QWKWYUH/%EF%BC%88MVP%EF%BC%89UtaMemo?node-id=0-1&m=dev&t=2y0Cj2CdV9fiddXL-1
-- プロトタイプ
-  - https://www.figma.com/proto/oCOgnShi7RnwKI5QWKWYUH/%EF%BC%88MVP%EF%BC%89UtaMemo?node-id=0-1&t=2y0Cj2CdV9fiddXL-1
 
 # ER図
-![image](https://github.com/user-attachments/assets/dea02001-83f3-431f-9bfe-36b88a2229cd)
+![image](https://github.com/user-attachments/assets/9f0ab27f-3008-4774-ae54-b9c8c993fe86)
+
+
 
