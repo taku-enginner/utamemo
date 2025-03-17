@@ -142,6 +142,7 @@
   - https://www.figma.com/design/oCOgnShi7RnwKI5QWKWYUH/%EF%BC%88MVP%EF%BC%89UtaMemo?node-id=0-1&m=dev&t=2y0Cj2CdV9fiddXL-1
 
 # ER図
-![image](https://github.com/user-attachments/assets/74440264-3483-404d-b9e3-472dad2f2cbb)
+![image](https://github.com/user-attachments/assets/9f0ab27f-3008-4774-ae54-b9c8c993fe86)
+
 
 
