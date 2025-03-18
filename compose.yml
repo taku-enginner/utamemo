@@ -18,7 +18,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.dev
-    command: bash -c "rm -f tmp/pids/server.pid && bundle && yarn && rails db:prepare && ./bin/dev"
+    command: bash -c "rm -f tmp/pids/server.pid && bundle && yarn && rails db:prepare && bundle exec rails server -b 0.0.0.0"
     tty: true
     stdin_open: true
     volumes:
@@ -27,11 +27,19 @@ services:
       - node_modules:/myapp/node_modules
     environment:
       TZ: Asia/Tokyo
+      SELENIUM_REMOTE_URL: "http://chrome:4444/wd/hub"
+      RAILS_ENV: test
     ports:
       - "3000:3000"
     depends_on:
       db:
         condition: service_healthy
+      chrome:
+        condition: service_started
+  chrome:
+    image: seleniarm/standalone-chromium:latest
+    ports:
+      - 4444:4444
 volumes:
   bundle_data:
   postgresql_data:
