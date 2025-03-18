@@ -1,6 +1,68 @@
 {
   "RSpec": {
     "coverage": {
+      "/myapp/app/models/user.rb": {
+        "lines": [
+          null,
+          null,
+          1,
+          null,
+          null,
+          1,
+          null,
+          1,
+          null
+        ]
+      },
+      "/myapp/app/models/application_record.rb": {
+        "lines": [
+          null,
+          null,
+          1,
+          1,
+          null
+        ]
+      },
+      "/myapp/app/helpers/application_helper.rb": {
+        "lines": [
+          null,
+          null,
+          1,
+          null
+        ]
+      },
+      "/myapp/app/helpers/memo_helper.rb": {
+        "lines": [
+          null,
+          null,
+          1,
+          null
+        ]
+      },
+      "/myapp/app/helpers/musixmatch_search_helper.rb": {
+        "lines": [
+          null,
+          null,
+          1,
+          null
+        ]
+      },
+      "/myapp/app/helpers/mypage_helper.rb": {
+        "lines": [
+          null,
+          null,
+          1,
+          null
+        ]
+      },
+      "/myapp/app/helpers/top_helper.rb": {
+        "lines": [
+          null,
+          null,
+          1,
+          null
+        ]
+      },
       "/myapp/app/channels/application_cable/channel.rb": {
         "lines": [
           null,
@@ -208,51 +270,6 @@
         ],
         "branches": {}
       },
-      "/myapp/app/helpers/application_helper.rb": {
-        "lines": [
-          null,
-          null,
-          0,
-          0
-        ],
-        "branches": {}
-      },
-      "/myapp/app/helpers/memo_helper.rb": {
-        "lines": [
-          null,
-          null,
-          0,
-          0
-        ],
-        "branches": {}
-      },
-      "/myapp/app/helpers/musixmatch_search_helper.rb": {
-        "lines": [
-          null,
-          null,
-          0,
-          0
-        ],
-        "branches": {}
-      },
-      "/myapp/app/helpers/mypage_helper.rb": {
-        "lines": [
-          null,
-          null,
-          0,
-          0
-        ],
-        "branches": {}
-      },
-      "/myapp/app/helpers/top_helper.rb": {
-        "lines": [
-          null,
-          null,
-          0,
-          0
-        ],
-        "branches": {}
-      },
       "/myapp/app/jobs/application_job.rb": {
         "lines": [
           null,
@@ -278,16 +295,6 @@
         ],
         "branches": {}
       },
-      "/myapp/app/models/application_record.rb": {
-        "lines": [
-          null,
-          null,
-          0,
-          0,
-          0
-        ],
-        "branches": {}
-      },
       "/myapp/app/models/memo.rb": {
         "lines": [
           null,
@@ -299,22 +306,8 @@
           0
         ],
         "branches": {}
-      },
-      "/myapp/app/models/user.rb": {
-        "lines": [
-          null,
-          null,
-          0,
-          null,
-          null,
-          0,
-          0,
-          0,
-          0
-        ],
-        "branches": {}
       }
     },
-    "timestamp": 1742280445
+    "timestamp": 1742284657
   }
 }
