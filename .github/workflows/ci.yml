@@ -36,7 +36,6 @@ jobs:
       - name: Lint code for consistent style
         run: bin/rubocop -f github
 
-jobs:
   rspec:
     runs-on: ubuntu-latest
     timeout-minutes: 10
