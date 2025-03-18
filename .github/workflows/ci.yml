@@ -36,7 +36,7 @@ jobs:
       - name: Lint code for consistent style
         run: bin/rubocop -f github
 
-  rspec:
+  RSpec:
     runs-on: ubuntu-latest
     timeout-minutes: 10
 
@@ -62,7 +62,7 @@ jobs:
       - name: Setup Ruby Env
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: '3.1.2'
+          ruby-version: '3.3.6'
           bundler-cache: true
 
       - name: Install dependencies
