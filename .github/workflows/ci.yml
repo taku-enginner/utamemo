@@ -39,6 +39,9 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
 
+    env:
+      DATABASE_HOST: loalhost # github actionsではhostをlocalhostに設定する
+
     services:
       postgres:
         image: postgres:15
