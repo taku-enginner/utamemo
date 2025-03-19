@@ -1,9 +1,7 @@
 name: CI
 
 on:
-  pull_request:
   push:
-    branches: [ main ]
 
 jobs:
   scan_ruby:
@@ -22,7 +20,7 @@ jobs:
       - name: Scan for common Rails security vulnerabilities using static analysis
         run: bin/brakeman --no-pager
 
-  lint:
+  Lint:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -37,49 +35,56 @@ jobs:
       - name: Lint code for consistent style
         run: bin/rubocop -f github
 
-  # test:
-  #   runs-on: ubuntu-latest
+  RSpec:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
 
-  #   services:
-  #     postgres:
-  #       image: postgres
-  #       env:
-  #         POSTGRES_USER: postgres
-  #         POSTGRES_PASSWORD: postgres
-  #       ports:
-  #         - 5432:5432
-  #       options: --health-cmd="pg_isready" --health-interval=10s --health-timeout=5s --health-retries=3
+    env:
+      DATABASE_HOST: localhost # github actionsではhostをlocalhostに設定する
 
-  #     # redis:
-  #     #   image: redis
-  #     #   ports:
-  #     #     - 6379:6379
-  #     #   options: --health-cmd "redis-cli ping" --health-interval 10s --health-timeout 5s --health-retries 5
+    services:
+      postgres:
+        image: postgres:15
+        ports:
+          - 5432:5432
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: password
+          POSTGRES_DB: myapp_test
+        options: >-
+          --health-cmd "pg_isready -U postgres"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 10
 
-  #   steps:
-  #     - name: Install packages
-  #       run: sudo apt-get update && sudo apt-get install --no-install-recommends -y google-chrome-stable curl libjemalloc2 libvips postgresql-client
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-  #     - name: Checkout code
-  #       uses: actions/checkout@v4
+      - name: Setup Ruby Env
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.3.6'
+          bundler-cache: true
 
-  #     - name: Set up Ruby
-  #       uses: ruby/setup-ruby@v1
-  #       with:
-  #         ruby-version: .ruby-version
-  #         bundler-cache: true
+      - name: Install dependencies
+        run: bundle install
 
-  #     - name: Run tests
-  #       env:
-  #         RAILS_ENV: test
-  #         DATABASE_URL: postgres://postgres:postgres@localhost:5432
-  #         # REDIS_URL: redis://localhost:6379/0
-  #       run: bin/rails db:test:prepare test test:system
+      - name: Setup Database
+        env:
+          RAILS_ENV: test
+          PGUSER: postgres
+          PGPASSWORD: password
+          PGHOST: localhost
+          PGPORT: 5432
+        run: |
+          bundle exec rails db:create RAILS_ENV=test
+          bundle exec rails db:migrate RAILS_ENV=test
 
-  #     - name: Keep screenshots from failed system tests
-  #       uses: actions/upload-artifact@v4
-  #       if: failure()
-  #       with:
-  #         name: screenshots
-  #         path: ${{ github.workspace }}/tmp/screenshots
-  #         if-no-files-found: ignore
+      - name: Precompile assets
+        run: bundle exec rails assets:precompile
+        
+      - name: Run tests
+        env:
+          RAILS_ENV: test
+        run: bundle exec rspec
