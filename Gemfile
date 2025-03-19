@@ -47,6 +47,9 @@ group :development, :test do
   # Static analysis for security vulnerabilities [https://brakemanscanner.org/]
   gem 'brakeman', require: false
 
+  gem 'factory_bot_rails'
+  gem 'faker'
+  gem 'rspec-rails'
   gem 'rubocop'
   gem 'rubocop-capybara'
   gem 'rubocop-performance'
@@ -63,6 +66,7 @@ group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem 'capybara'
   gem 'selenium-webdriver'
+  gem 'simplecov', require: false
 end
 
 gem 'devise', '~> 4.9'

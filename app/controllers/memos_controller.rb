@@ -18,8 +18,6 @@ class MemosController < ApplicationController
   end
 
   def create
-    Rails.logger.debug 'createメソッドが呼ばれました'
-    Rails.logger.debug { "memo_params: #{memo_params}" }
     @memo = Memo.new(memo_params)
     @memo.user_id = current_user.id
     if @memo.save
@@ -30,7 +28,6 @@ class MemosController < ApplicationController
   end
 
   def update
-    Rails.logger.debug 'updateメソッドが呼ばれました'
     @memo = Memo.find(params[:id])
 
     # 空配列の場合は空配列で更新する
