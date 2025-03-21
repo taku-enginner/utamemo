@@ -15,7 +15,7 @@ class MemosController < ApplicationController
     # turbo framesからのリクエストだったらパーシャルを返す
     # パーシャルはid=lyricsのturbo-framesタグに入る
     if turbo_frame_request?
-      render partial: "memos/lyrics", locals: { 
+      render partial: 'memos/lyrics', locals: {
         lyrics_result: fetch_lyrics(api_key, @memo[:song_title], @memo[:artist_name])
       }
     else
