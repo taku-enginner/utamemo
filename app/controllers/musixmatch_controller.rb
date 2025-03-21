@@ -5,14 +5,23 @@ require 'json'
 class MusixmatchController < ApplicationController
   def search
     api_key = Rails.application.credentials[:musixmatch_api_key]
-    title = search_params[:title]
-    artist_name = search_params[:artist_name]
-    # トラックデータ取得
-    @track_result = fetch_track(api_key, title, artist_name)
-    # 歌詞取得
-    @lyrics_result = fetch_lyrics(api_key, title, artist_name)
+    p "params: #{params}"
+    @title = search_params[:title]
+    @artist_name = search_params[:artist_name]
+
     # メモ作成用インスタンス
     @memo = Memo.new
+    
+    # トラック情報と歌詞をturbo_framesで遅延読み込み
+    if turbo_frame_request?
+      sleep 2
+      render partial: "musixmatch/search", locals: {
+        lyrics_result: fetch_lyrics(api_key, @title, @artist_name), 
+        track_result: fetch_track(api_key, @title, @artist_name)
+      }
+    else
+      render :search
+    end
   end
 
   private

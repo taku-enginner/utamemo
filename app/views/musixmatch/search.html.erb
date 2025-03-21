@@ -1,29 +1,6 @@
 <% provide(:title, "曲を探す | UTAMEMO")%>
-
-<!-- turbo_frameで部分更新 -->
-<%= turbo_frame_tag "track_search" do %>
-  <% if @lyrics_result %>
-    <div class="min-h-[calc(100vh-4rem-3rem)] flex items-center justify-center">
-      <div class="w-[90%] max-w-md">
-        <div class="card bg-base-100 shadow-sm">
-          <div class="card-body text-center text-black bg-slate-950 rounded-lg text-white border-2 border-pink-600">
-            <h2 class="text-3xl font-bold"><%= @track_result["track_name"] %></h2>
-            <p><%= @track_result["artist_name"] %></p>
-            <%= simple_format(truncate(@lyrics_result, length: 50, omission: "...")) %>
-
-            <div class="mt-6">
-              <%= form_with model: @memo do |f| %>
-                <%= f.hidden_field :song_title, value: @track_result["track_name"] %>
-                <%= f.hidden_field :artist_name, value: @track_result["artist_name"] %>
-                <%= f.hidden_field :lyrics, value: @lyrics_result %>
-                <%= f.submit "この曲にメモする", class: "btn btn-primary btn-block" %>
-              <% end %>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  <% else %>
-    <p class = "text-white">申し訳ありません。歌詞データが見つかりませんでした。<br>他の曲を検索してください。</p>
-  <% end %>
+<%= turbo_frame_tag "track_search", src: musixmatch_search_path(artist_name: @artist_name, title: @title) do %>
+  <div class="text-center text-3xl text-white">
+    読み込み中...
+  </div>
 <% end %>

@@ -30,7 +30,12 @@
     <% provide(:title, "新着メモプレビュー | UTAMEMO")%>
     <%= react_component("OtherMemos", {memo: @memo.as_json(only:[:id, :memo_components])}, data: { turbo: false })%>
   <% end %>
+  
 
   <!-- 歌詞の取得と整形 -->
-  <%= turbo_frame_tag "lyrics", src: memo_path(@memo.id) do %>インジケーター<% end %>
+  <%= turbo_frame_tag "lyrics", src: memo_path(@memo.id) do %>
+    <div class="text-center text-3xl text-white">
+      読み込み中...
+    </div>
+  <% end %>
 </div>

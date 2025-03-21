@@ -15,7 +15,9 @@ class MemosController < ApplicationController
     # turbo framesからのリクエストだったらパーシャルを返す
     # パーシャルはid=lyricsのturbo-framesタグに入る
     if turbo_frame_request?
-      render partial: "memos/lyrics", locals: { lyrics_result: fetch_lyrics(api_key, @memo[:song_title], @memo[:artist_name])}
+      render partial: "memos/lyrics", locals: { 
+        lyrics_result: fetch_lyrics(api_key, @memo[:song_title], @memo[:artist_name])
+      }
     else
       # turbo frames空のリクエストでなければ、通常のshowテンプレートを返す
       render :show
@@ -26,7 +28,8 @@ class MemosController < ApplicationController
     @memo = Memo.new(memo_params)
     @memo.user_id = current_user.id
     if @memo.save
-      redirect_to memo_path(id: @memo.id), data: { turbo: false }
+      # redirect_to memo_path(id: @memo.id), data: { turbo: false }
+      redirect_to memo_path(id: @memo.id)
     else
       render 'musixmatch/search', alert: 'メモの開始に失敗しました。'
     end
