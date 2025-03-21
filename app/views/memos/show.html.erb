@@ -16,10 +16,13 @@
       <%= link_to twitter_share_url, target: "_blank", data: {toggle: "tooltip", placement: "bottom"}, title: "Xでシェア" do %>
         <i class="fa-brands fa-square-x-twitter fa-2xl"></i>
       <% end %>
+      
     </div>
   </div>
 </div>
+
 <div class="flex-1 overflow-auto pb-20">
+  <!-- 表示ユーザーによってツールバーの表示・非表示を分岐 -->
   <% if !!current_user && current_user.id == @memo.user_id %>
     <% provide(:title, "メモ作成 | UTAMEMO")%>
     <%= react_component("MyMemos", {memo: @memo.as_json(only:[:id, :memo_components])}, data: { turbo: false })%>
@@ -27,17 +30,12 @@
     <% provide(:title, "新着メモプレビュー | UTAMEMO")%>
     <%= react_component("OtherMemos", {memo: @memo.as_json(only:[:id, :memo_components])}, data: { turbo: false })%>
   <% end %>
-  <% if @lyrics_result && !!@lyrics_result.split(/\*{7,}/).first %>
-      <% @lyrics_result = (@lyrics_result.split(/\*{7,}/).first.strip) %>
-    <div class="mx-5 mt-10 mb-10 pt-10 text-white text-2xl"><%= simple_format(h(@lyrics_result.gsub(/\n/,'<br><br><br><br><br>').html_safe)) %></div>
-    <div class="text-white font-bold text-3xl py-10 m-10 text-center border-2 border-white">
-      申し訳ありません。<br>
-      ライセンスの関係で、歌詞の取得がここまでしかできません。
-    </div>
-  <% else %>
-    <div class="p-4 text-white">
-      歌詞取得エラーが発生しました。
-      管理者までお問い合わせをお願いします。
+  
+
+  <!-- 歌詞の取得と整形 -->
+  <%= turbo_frame_tag "lyrics", src: memo_path(@memo.id) do %>
+    <div class="text-center text-3xl text-white">
+      読み込み中...
     </div>
   <% end %>
 </div>
