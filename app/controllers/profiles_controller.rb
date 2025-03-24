@@ -3,29 +3,42 @@
 class ProfilesController < ApplicationController
   before_action :authenticate_user!, only: %i[show edit update]
   before_action :set_user
+  before_action :set_profile
   before_action :set_user_profile_form, only: %i[edit update]
   
   def show
     @profile = Profile.find_by(user_id: current_user.id)
-    @my_memos = current_user.memos.order(created_at: :desc)
+    
+    if @profile
+      render :show
+    else
+      @profile = Profile.create!(user_id: current_user.id)
+    end
+    
   end
-
+  
   def edit
     if current_user.profile.nil?
-      @profile = Profile.new(user_id: current_user.id)
+      @profile = Profile.create!(user_id: current_user.id)
     else
       @profile = current_user.profile
     end
     render :edit
   end
-
+  
   def update
     if @user_profile_form.save(user_profile_form_params)
-      redirect_to user_profile_path(current_user.id), flash: { notice: "プロフィールを更新しました" }
+      redirect_to edit_user_profile_path(current_user.id), flash: { notice: "プロフィールを更新しました" }
     else
       flash[:alert] = "更新に失敗しました"
       render :edit, status: :unprocessable_entity
     end
+  end
+  
+  def my_memos
+    @profile = Profile.find_by(user_id: current_user.id)
+    @my_memos = current_user.memos.order(created_at: :desc)
+    render :my_memos
   end
 
   private
@@ -35,11 +48,14 @@ class ProfilesController < ApplicationController
   end
 
   def set_user_profile_form
-    @profile = @user.profile
     @user_profile_form = UserProfileForm.new(@user, @profile)
   end
 
   def set_user
     @user = User.find(current_user.id)
+  end
+
+  def set_profile
+    @profile = @user.profile
   end
 end

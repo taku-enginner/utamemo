@@ -9,10 +9,12 @@ Rails.application.routes.draw do
   get 'manifest' => 'rails/pwa#manifest', as: :pwa_manifest
   get 'musixmatch/search'
   resources :users do
-    resource :profile, only: %i[show edit update]
+    resource :profile, only: %i[show edit update] do
+      member do
+        get "my_memos"
+      end
+    end
   end
-  # resources :mypage, only: %i[index] do
-  # end
 
   root 'top#index'
   get 'help' => 'top#help'
