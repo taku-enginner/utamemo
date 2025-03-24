@@ -1,0 +1,31 @@
+<div class="text-center text-3xl p-4 text-white">プロフィール編集</div>
+<%= form_with model: @user_profile_form,
+             url: user_profile_path,
+             local: true,
+             data: {turbo: false},
+             method: :patch,
+             multipart: true do |f| %>
+
+  <!-- エラー表示 -->
+  <% if @user_profile_form.errors.any? %>
+    <ul>
+      <% @user_profile_form.errors.full_messages.each do |error| %>
+        <li><%= error %></li>
+      <% end %>
+    </ul>
+  <% end %>
+  <div class="flex flex-col items-center justify-center border border-white p-4 m-4">
+    <%= f.label("ニックネーム", class: "text-white") %>
+    <%= f.text_field :nickname %>
+    <% if @profile.image.attached? %>
+      <%= image_tag(@profile.image) %>
+    <% end %>
+    <%= f.file_field :image, class: "text-white" %>
+    <%= f.submit "送信" ,class: "btn" %>
+  </div>
+
+<% end %>
+  <div class="text-white">
+    <%= "@profileはnilだよ" if @profile.nil? %>
+    <%= @user.nickname %>
+  </div>

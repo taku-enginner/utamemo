@@ -28,7 +28,6 @@ class MemosController < ApplicationController
     @memo = Memo.new(memo_params)
     @memo.user_id = current_user.id
     if @memo.save
-      # redirect_to memo_path(id: @memo.id), data: { turbo: false }
       redirect_to memo_path(id: @memo.id)
     else
       render 'musixmatch/search', alert: 'メモの開始に失敗しました。'
@@ -56,11 +55,11 @@ class MemosController < ApplicationController
     @memo = Memo.find(params[:id])
     if @memo.destroy
       flash[:notice] = t('notices.memo_deleted')
-      redirect_to mypage_index_path
+      redirect_to user_profile_path(current_user.id)
     else
       flash.now[:alert] = t('alerts.memo_delete_failed')
       # renderはビューを直接レンダリングするので、ビューのファイル名を使う
-      render 'mypage/index'
+      render "users/#{current_user.id}/profile"
     end
   end
 
