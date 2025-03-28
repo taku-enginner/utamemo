@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe 'Mypageコントローラーのテスト', type: :request do
+RSpec.describe 'Profilesコントローラーのテスト', type: :request do
   let(:user) { create(:user) }
   describe 'ログイン済み' do
     before do
@@ -10,7 +10,7 @@ RSpec.describe 'Mypageコントローラーのテスト', type: :request do
     end
     context 'マイページが正しく表示される' do
       before do
-        get mypage_index_path
+        get user_profile_path(user.id)
       end
       it 'リクエストは200 OKとなること' do
         expect(response.status).to eq 200
@@ -24,7 +24,7 @@ RSpec.describe 'Mypageコントローラーのテスト', type: :request do
   describe '非ログイン' do
     context 'マイページへ遷移されない' do
       before do
-        get mypage_index_path
+        get user_profile_path(user.id)
       end
       it 'ログインページが表示されること' do
         # リクエストスペックではcurrent_pathは使えない。current_pathはcapybaraの機能。

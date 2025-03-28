@@ -1,0 +1,26 @@
+<% provide(:title, "マイページ | UTAMEMO")%>
+<div class="flex flex-col">
+  <!-- プロフィール -->
+  <div class="mb-5 text-white">
+    <div class="p-4 mb-2 text-3xl font-bold tracking-wide text-center">マイページ</div>
+    <!-- プロフィール画像とニックネーム -->
+    <div class="flex flex-row items-center justify-center space-x-2 p-4">
+      <% if @profile.image.attached? %>
+        <%= image_tag @profile.image, size: "100x100", class: "rounded-box"  %>
+      <% else %>
+        <%= image_tag "アイコン_デフォルト.png", size: "100x100", class: "rounded-box" %>
+      <% end %>
+      <div class="flex flex-col items-center justify-center">
+        <div>ニックネーム</div>
+        <div><%= current_user.nickname %></div>
+      </div>
+    </div>
+    <div class="text-center p-4">
+      <%= link_to "プロフィールを編集", edit_user_profile_path, class: "btn" %>
+    </div>
+    <div class="text-center p-4">
+      <%= link_to "マイメモ一覧", my_memos_user_profile_path(@profile.user_id), class: "btn" %>
+    </div>
+
+  </div>
+</div>

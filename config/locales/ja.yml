@@ -1,5 +1,7 @@
 ja:
   notices:
     memo_deleted: "メモを削除しました。"
+    profile_edit_success: 'プロフィールを更新しました'
   alerts:
     memo_delete_failed: "メモの削除に失敗しました。"
+    profile_edit_fail: "更新に失敗しました"
