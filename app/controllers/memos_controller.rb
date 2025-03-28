@@ -52,7 +52,7 @@ class MemosController < ApplicationController
   end
 
   def destroy
-    @memo = Memo.find(params[:id])
+    @memo = Memo.find_by(id: params[:id])
     if @memo.destroy
       flash[:notice] = t('notices.memo_deleted')
       redirect_to user_profile_path(current_user.id)
