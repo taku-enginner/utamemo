@@ -83,7 +83,9 @@
       <p>マイページから自分のメモリストを<br>確認できます！</p>
     </div>
     <div class="flex justify-center mb-4">
-      <%= link_to "マイページへ", user_profile_path(current_user.id), class: "text-white text-sm rounded-full bg-purple-500 px-4 py-3 w-auto inline-block shadow-md hover:bg-purple-600 transition" %>
+      <% if user_signed_in? %>
+        <%= link_to "マイページへ", user_profile_path(current_user.id), class: "text-white text-sm rounded-full bg-purple-500 px-4 py-3 w-auto inline-block shadow-md hover:bg-purple-600 transition" %>
+      <% end %>
     </div>
   </div>
 </div>
