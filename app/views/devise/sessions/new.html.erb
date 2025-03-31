@@ -19,5 +19,8 @@
     </div>
   <% end %>
 
+  <%= link_to "Googleでログイン", user_google_oauth2_omniauth_authorize_path, class: "btn btn-primary" %>
+
+
   <%= link_to "登録がまだの方はこちら", new_user_registration_path, class: "mt-4 text-white text-center"%>
 </div>

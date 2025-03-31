@@ -5,7 +5,10 @@ Rails.application.routes.draw do
     resource :settings, only: %i[edit update]
     resources :favorites, only: %i[create destroy]
   end
-  devise_for :users
+  devise_for :users, controllers: {
+    omniauth_callbacks: 'users/omniauth_callbacks'
+  }
+  
   get 'up' => 'rails/health#show', as: :rails_health_check
 
   get 'service-worker' => 'rails/pwa#service_worker', as: :pwa_service_worker
