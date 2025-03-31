@@ -8,7 +8,7 @@
             <div class="flex flex-row items-center">
               <div class="mx-4">
                 <% if memo.user.profile&.image&.attached? %>
-                  <%= image_tag memo.user.profile.image, size: "100x100", class: "rounded-box" %>
+                  <%= image_tag memo.user.profile.image, size: "50x50", class: "rounded-box" %>
                 <% else %>
                   <%= image_tag "アイコン_デフォルト.png", size: "50x50", class: "rounded-box" %>
                 <% end %>
