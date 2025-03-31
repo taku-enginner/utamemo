@@ -12,30 +12,32 @@
         <dialog id="my_modal_2" class="modal">
           <div class="modal-box text-center bg-slate-950 border-2 border-pink-600">
             <h3 class="text-lg font-bold text-white">歌詞を検索</h3>
-            <%= form_with url: musixmatch_search_path, method: :get do |form| %>
+            <%= form_with url: musixmatch_search_path, method: :get, data: { controller: "autocomplete" } do |form| %>
               <div class="flex flex-col space-y-4">
+                
                 <div>
-                  <%= form.text_field :artist_name,
-                      required: true,
-                      placeholder: "アーティスト名",
+                  <%= form.text_field :artist_name, required: true, placeholder: "アーティスト名",
+                      data: { autocomplete_target: "artistInput", action: "input->autocomplete#searchArtist" },
                       class: "text-lg p-2 mt-2 rounded-lg border-2 border-pink-600
                               bg-gray-300 text-purple-600 placeholder-purple-500
                               focus:outline-none focus:ring-2 focus:ring-purple-500" %>
+                  <div id="artistSuggestions" data-autocomplete-target="artistSuggestions"></div>
                 </div>
+
                 <div>
-                  <%= form.text_field :title,
-                      required: true,
-                      placeholder: "曲名",
+                  <%= form.text_field :title, required: true, placeholder: "曲名",
+                      data: { autocomplete_target: "songInput", action: "input->autocomplete#searchSong" },
                       class: "text-lg p-2 rounded-lg border-2 border-pink-600 bg-gray-300
                               text-purple-600 placeholder-purple-500 focus:outline-none
                               focus:ring-2 focus:ring-purple-500" %>
+                  <div id="songSuggestions" data-autocomplete-target="songSuggestions"></div>
                 </div>
-                
-                <%= form.submit "検索",
-                      class: "bg-pink-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-pink-700
-                              transition-shadow shadow-md hover:shadow-lg" %>
+
+                <%= form.submit "検索", class: "bg-pink-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-pink-700
+                                                transition-shadow shadow-md hover:shadow-lg" %>
               </div>
             <% end %>
+
           </div>
           <form method="dialog" class="modal-backdrop">
             <button>close</button>
@@ -91,3 +93,64 @@
     </ul>
   </div>
 </header>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+  const artistInput = document.querySelector("input[name='artist_name']");
+  const songInput = document.querySelector("input[name='title']");
+  const artistSuggestions = document.getElementById("artistSuggestions");
+  const songSuggestions = document.getElementById("songSuggestions");
+
+  function debounce(func, delay) {
+    let timer;
+    return function (...args) {
+      clearTimeout(timer);
+      timer = setTimeout(() => func.apply(this, args), delay);
+    };
+  }
+
+  function fetchSuggestions(query, type, suggestionsContainer) {
+    if (query.length < 2) {
+      suggestionsContainer.innerHTML = "";
+      return;
+    }
+
+    fetch(`/autocomplete/${type}?query=${encodeURIComponent(query)}`)
+      .then(response => response.json())
+      .then(data => {
+        console.log("APIレスポンス:", data); // デバッグ用
+
+        if (!Array.isArray(data.results)) {
+          console.error("エラー: data.results が配列ではない", data);
+          return;
+        }
+
+        suggestionsContainer.innerHTML = data.results
+          .map(item => 
+            `<div class="cursor-pointer px-2 py-1 hover:bg-gray-200 text-white text-lg" onclick="selectSuggestion('${type}', '${item.replace(/'/g, "\\'")}')">${item}</div>`
+          )
+          .join("");
+      })
+      .catch(error => console.error("APIエラー:", error));
+  }
+
+  window.selectSuggestion = function (type, name) {
+    if (type === "artists") {
+      artistInput.value = name;
+      artistSuggestions.innerHTML = "";
+    } else if (type === "songs") {
+      songInput.value = name;
+      songSuggestions.innerHTML = "";
+    }
+  };
+
+  artistInput.addEventListener("input", debounce(() => {
+    fetchSuggestions(artistInput.value, "artists", artistSuggestions);
+  }, 300));
+
+  songInput.addEventListener("input", debounce(() => {
+    fetchSuggestions(songInput.value, "songs", songSuggestions);
+  }, 300));
+});
+
+</script>
