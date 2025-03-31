@@ -12,6 +12,7 @@
           null,
           1,
           1,
+          1,
           null
         ]
       },
@@ -60,6 +61,14 @@
           null
         ]
       },
+      "/myapp/app/helpers/favorites_helper.rb": {
+        "lines": [
+          null,
+          null,
+          1,
+          null
+        ]
+      },
       "/myapp/app/helpers/memo_helper.rb": {
         "lines": [
           null,
@@ -96,6 +105,16 @@
         "lines": [
           null,
           null,
+          1,
+          null
+        ]
+      },
+      "/myapp/app/models/favorite.rb": {
+        "lines": [
+          null,
+          null,
+          1,
+          1,
           1,
           null
         ]
@@ -227,6 +246,11 @@
           1,
           1,
           1,
+          1,
+          null,
+          1,
+          0,
+          null,
           null
         ]
       },
@@ -319,6 +343,51 @@
       "/myapp/app/channels/application_cable/connection.rb": {
         "lines": [
           null,
+          null,
+          0,
+          0,
+          0,
+          0
+        ],
+        "branches": {}
+      },
+      "/myapp/app/controllers/favorites_controller.rb": {
+        "lines": [
+          null,
+          null,
+          0,
+          0,
+          0,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          null,
+          0,
           null,
           0,
           0,
@@ -499,6 +568,6 @@
         "branches": {}
       }
     },
-    "timestamp": 1743400330
+    "timestamp": 1743407971
   }
 }

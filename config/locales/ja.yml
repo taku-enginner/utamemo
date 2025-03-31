@@ -7,3 +7,5 @@ ja:
     memo_delete_failed: "メモの削除に失敗しました。"
     profile_edit_fail: "更新に失敗しました。"
     memo_setting_fail: "メモの設定更新に失敗しました。"
+    create_favorite: "いいねに失敗しました。"
+    destroy_favorite: "いいね解除に失敗しました。"
