@@ -84,6 +84,14 @@
           null
         ]
       },
+      "/myapp/app/helpers/settings_helper.rb": {
+        "lines": [
+          null,
+          null,
+          1,
+          null
+        ]
+      },
       "/myapp/app/helpers/top_helper.rb": {
         "lines": [
           null,
@@ -214,6 +222,7 @@
         "lines": [
           null,
           null,
+          1,
           1,
           1,
           1,
@@ -375,6 +384,40 @@
         ],
         "branches": {}
       },
+      "/myapp/app/controllers/settings_controller.rb": {
+        "lines": [
+          null,
+          null,
+          0,
+          0,
+          null,
+          0,
+          0,
+          0,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          null,
+          0,
+          null,
+          0,
+          0,
+          0,
+          null,
+          0,
+          0,
+          0,
+          0
+        ],
+        "branches": {}
+      },
       "/myapp/app/forms/user_profile_form.rb": {
         "lines": [
           null,
@@ -456,6 +499,6 @@
         "branches": {}
       }
     },
-    "timestamp": 1743162817
+    "timestamp": 1743396681
   }
 }

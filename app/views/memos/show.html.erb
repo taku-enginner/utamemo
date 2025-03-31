@@ -26,7 +26,10 @@
         <i class="fa-brands fa-square-x-twitter fa-2xl"></i>
       <% end %>
       <% if !!current_user && current_user.id == @memo.user_id %>
-        <div><i class="fa-solid fa-gear text-3xl"></i></div>
+        <%= link_to edit_memo_settings_path(@memo.id) do %>
+          <!-- 設定ページへ遷移して公開設定を保存 -->
+          <div><i class="fa-solid fa-gear text-3xl" id="menu-button"></i></div>
+        <% end %>
       <% end %>
     </div>
   </div>
