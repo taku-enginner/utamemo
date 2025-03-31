@@ -28,6 +28,10 @@
           <!-- 設定ページへ遷移して公開設定を保存 -->
           <div><i class="fa-solid fa-gear text-3xl" id="menu-button"></i></div>
         <% end %>
+      <% else %>
+        <div id="memo_<%= @memo.id %>_favorite", class="text-lg">
+          <%= render "memos/favorite", memo: @memo %>
+        </div>
       <% end %>
     </div>
   </div>

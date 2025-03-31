@@ -3,6 +3,7 @@
 Rails.application.routes.draw do
   resources :memos, only: %i[index show create update destroy] do
     resource :settings, only: %i[edit update]
+    resources :favorites, only: %i[create destroy]
   end
   devise_for :users
   get 'up' => 'rails/health#show', as: :rails_health_check
