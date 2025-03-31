@@ -27,7 +27,7 @@
       <div class="flex flex-col items-center justify-center p-2">
         <div class="text-white">現在のプロフィール画像</div>
         <% if @profile.image.attached? %>
-          <%= image_tag @profile.image.variant(resize_to_fit: [100, 100]).processed %>
+          <%= image_tag @profile.image, size: "100x100", class: "rounded-box"  %>
         <% else %>
           <%= image_tag "アイコン_デフォルト.png", size: "100x100"%>
         <% end %>
