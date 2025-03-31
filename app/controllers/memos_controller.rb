@@ -4,7 +4,7 @@ class MemosController < ApplicationController
   before_action :authenticate_user!, only: %i[create update destroy]
 
   def index
-    @memos = Memo.includes(:user).order(created_at: :desc)
+    @memos = Memo.includes(:user).where(publish: true).order(created_at: :desc)
   end
 
   def show

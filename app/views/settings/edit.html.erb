@@ -1,3 +1,4 @@
+<% provide(:title, "メモ設定 | UTAMEMO")%>
 <div class="flex flex-col items-center text-white bg-purple-500 p-2 text-center rounded-full mb-4">
   <div class="flex flex-row items-center font-bold space-x-2 text-lg">
     <div>
@@ -21,21 +22,21 @@
       <!-- ラジオボタンの初期値を分岐 -->
       <% if @memo.publish %>
         <div class="flex flex-row space-x-2 items-center">
-            <%= f.radio_button :publish, :true, checked: true %>
-            <%= f.label :publish_ok, "公開する" %>
+          <%= f.radio_button :publish, :true, checked: true %>
+          <%= f.label :publish_true, "公開する" %>
         </div>
         <div class="flex flex-row space-x-2 items-center">
           <%= f.radio_button :publish, :false  %>
-          <%= f.label :publish_ng, "公開しない" %>
+          <%= f.label :publish_false, "公開しない" %>
         </div>
       <% else %>
         <div class="flex flex-row space-x-2 items-center">
             <%= f.radio_button :publish, :true %>
-            <%= f.label :publish_ok, "公開する" %>
+            <%= f.label :publish_true, "公開する" %>
         </div>
         <div class="flex flex-row space-x-2 items-center">
           <%= f.radio_button :publish, :false , checked: true  %>
-          <%= f.label :publish_ng, "公開しない" %>
+          <%= f.label :publish_false, "公開しない" %>
         </div>
       <% end %>
       <div class="flex flex-col p-4">

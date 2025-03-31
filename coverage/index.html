@@ -13,7 +13,7 @@
       <img src="./assets/0.13.1/loading.gif" alt="loading"/>
     </div>
     <div id="wrapper" class="hide">
-      <div class="timestamp">Generated <abbr class="timeago" title="2025-03-31T13:51:21+09:00">2025-03-31T13:51:21+09:00</abbr></div>
+      <div class="timestamp">Generated <abbr class="timeago" title="2025-03-31T13:59:10+09:00">2025-03-31T13:59:10+09:00</abbr></div>
       <ul class="group_tabs"></ul>
 
       <div id="content">
@@ -1471,7 +1471,7 @@
 
             
 
-            <code class="ruby">    @memos = Memo.includes(:user).order(created_at: :desc)</code>
+            <code class="ruby">    @memos = Memo.includes(:user).where(publish: true).order(created_at: :desc)</code>
           </li>
         </div>
       
