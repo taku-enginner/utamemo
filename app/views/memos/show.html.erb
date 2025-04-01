@@ -10,18 +10,20 @@
   <div class="flex flex-col items-center">
     <div>created_by: <%= @memo.user[:nickname] %></div>
     <div class="mt-2 flex flex-row space-x-2 items-center">
-      <% twitter_share_url = 
-        "https://twitter.com/intent/tweet?url=#{URI.encode_www_form_component(memo_url(@memo))}
-        &text=#{@memo.user.nickname}さんのUTAMEMO！
-        &hashtags=#{remove_invalid_chars(@memo[:artist_name])},
-        #{remove_invalid_chars(@memo[:song_title])},
-        UTAMEMO"%>
-        
-      <%= link_to twitter_share_url,
-        target: "_blank",
-        data: {toggle: "tooltip", placement: "bottom"},
-        title: "Xでシェア" do %>
-        <i class="fa-brands fa-square-x-twitter fa-2xl"></i>
+      <% if @memo.publish %>
+        <% twitter_share_url = 
+          "https://twitter.com/intent/tweet?url=#{URI.encode_www_form_component(memo_url(@memo))}
+          &text=#{@memo.user.nickname}さんのUTAMEMO！
+          &hashtags=#{remove_invalid_chars(@memo[:artist_name])},
+          #{remove_invalid_chars(@memo[:song_title])},
+          UTAMEMO"%>
+          
+        <%= link_to twitter_share_url,
+          target: "_blank",
+          data: {toggle: "tooltip", placement: "bottom"},
+          title: "Xでシェア" do %>
+          <i class="fa-brands fa-square-x-twitter fa-2xl"></i>
+        <% end %>
       <% end %>
       <% if !!current_user && current_user.id == @memo.user_id %>
         <%= link_to edit_memo_settings_path(@memo.id) do %>

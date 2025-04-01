@@ -20,10 +20,14 @@
                   <div class="text-xs uppercase font-semibold opacity-60"><%= my_memo[:song_title] %> : <%= my_memo[:artist_name] %></div>
                   <div class="text-xs uppercase font-semibold opacity-60"><%= my_memo[:memo_title] %></div>
                   <div class="flex flex-row items-center justify-center space-x-1">
+                    <% if my_memo.publish %>
+                      <i class="fa-solid fa-lock-open"></i>
+                    <% else %>
+                      <i class="fa-solid fa-lock"></i>
+                    <% end %>
                     <div><i class="fa-solid fa-heart text-pink-500"></i></div>
                     <div><%= my_memo.favorites.count %></div>
                   </div>
-
                 </div>
               </div>
           <% end %>
