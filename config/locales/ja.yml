@@ -1,5 +1,12 @@
 ja:
   notices:
     memo_deleted: "メモを削除しました。"
+    memo_setting_success: "メモの設定を更新しました。"
+    profile_edit_success: 'プロフィールを更新しました。'
   alerts:
     memo_delete_failed: "メモの削除に失敗しました。"
+    memo_not_publish: "公開されていないメモにはアクセスできません。"
+    profile_edit_fail: "更新に失敗しました。"
+    memo_setting_fail: "メモの設定更新に失敗しました。"
+    create_favorite: "いいねに失敗しました。"
+    destroy_favorite: "いいね解除に失敗しました。"

@@ -269,67 +269,69 @@ export default function MyMemos({ memo }) {
         </div>
       </div>
       <div className="fixed w-full bottom-0 right-0 shadow-lg">
+      
         {/* フラッシュメッセージ */}
         <div id="flash-message" className="hidden p-2 w-full text-white"></div>
 
-        <div  className="bg-purple-500 p-2 mb-2 rounded-xl">
-        <div>
-          {/* ツールバー（テクニック） */}
-          <div className="flex flex-row justify-center space-x-2 hidden" id="technique">
-            <button onClick={() => addTechniqueComponent(1)} className="flex flex-col justify-center">
-              <img src="/technique/ビブラート.png" alt="ビブラート" style={{ width: "50px", height: "50px"}}/>
-              <div className="text-white text-sm">ビブラート</div>
-            </button>
-            <button onClick={() => addTechniqueComponent(2)} className="flex flex-col justify-center">
-              <img src="/technique/しゃくり.png" alt="しゃくり" style={{ width: "50px", height: "50px"}}/>
-              <div className="text-white text-sm">しゃくり</div>
-            </button>
-            <button onClick={() => addTechniqueComponent(3)} className="flex flex-col justify-center">
-              <img src="/technique/こぶし.png" alt="こぶし" style={{ width: "50px", height: "50px"}}/>
-              <div className="text-white text-sm">こぶし</div>
-            </button>
-            <button onClick={() => addTechniqueComponent(4)} className="flex flex-col justify-center">
-              <img src="/technique/フォール.png" alt="フォール" style={{ width: "50px", height: "50px"}}/>
-              <div className="text-white text-sm">フォール</div>
-            </button>
-            <button onClick={() => addTechniqueComponent(5)} className="flex flex-col justify-center">
-              <img src="/technique/ブレス.png" alt="ブレス" style={{ width: "50px", height: "50px"}}/>
-              <div className="text-white text-sm">ブレス</div>
-            </button>
+        <div className="bg-purple-500 p-2 mb-2 rounded-xl">
+          <div>
+            {/* ツールバー（テクニック） */}
+            <div className="flex flex-row justify-center space-x-2 hidden" id="technique">
+              <button onClick={() => addTechniqueComponent(1)} className="flex flex-col justify-center">
+                <img src="/technique/ビブラート.png" alt="ビブラート" style={{ width: "50px", height: "50px"}}/>
+                <div className="text-white text-sm">ビブラート</div>
+              </button>
+              <button onClick={() => addTechniqueComponent(2)} className="flex flex-col justify-center">
+                <img src="/technique/しゃくり.png" alt="しゃくり" style={{ width: "50px", height: "50px"}}/>
+                <div className="text-white text-sm">しゃくり</div>
+              </button>
+              <button onClick={() => addTechniqueComponent(3)} className="flex flex-col justify-center">
+                <img src="/technique/こぶし.png" alt="こぶし" style={{ width: "50px", height: "50px"}}/>
+                <div className="text-white text-sm">こぶし</div>
+              </button>
+              <button onClick={() => addTechniqueComponent(4)} className="flex flex-col justify-center">
+                <img src="/technique/フォール.png" alt="フォール" style={{ width: "50px", height: "50px"}}/>
+                <div className="text-white text-sm">フォール</div>
+              </button>
+              <button onClick={() => addTechniqueComponent(5)} className="flex flex-col justify-center">
+                <img src="/technique/ブレス.png" alt="ブレス" style={{ width: "50px", height: "50px"}}/>
+                <div className="text-white text-sm">ブレス</div>
+              </button>
+            </div>
+
+            {/* ツールバー（コメント） */}
+            <div className="flex flex-row justify-center space-x-2 hidden" id="comment">
+              <input 
+                className="w-[85%] border border-gray-400 rounded-lg p-1"
+                ref={commentButtonRef} 
+                id="comment_input"
+                placeholder="   コメントを入力"/>
+              <button onClick={addCommentComponent} className="btn">コメント<br/>追加</button>
+            </div>
           </div>
 
-          {/* ツールバー（コメント） */}
-          <div className="flex flex-row justify-center space-x-2 hidden" id="comment">
-            <input 
-              className="w-[85%] border border-gray-400 rounded-lg p-1"
-              ref={commentButtonRef} 
-              id="comment_input"
-              placeholder="   コメントを入力"/>
-            <button onClick={addCommentComponent} className="btn">コメント<br/>追加</button>
+          {/* ツールバー  */}
+          <div className="pt-1 flex flex-row justify-center space-x-2" >
+            <button
+              className="btn bg-gray-300"
+              ref={techniqueButtonRef} 
+              onClick={() => setInputType("technique")}
+              id = "technique_button"
+            >テクニック</button>
+            <button 
+              className="btn bg-gray-300"
+              onClick={() => setInputType("comment")
+              }
+              id = "comment_button"
+            >コメント</button>
+            <button 
+              className="btn bg-gray-300"
+              onClick={() => setInputType("preview")
+              }
+              id = "preview_button"
+            >プレビュー</button>
+            <button onClick={saveComponents} className="btn">メモ<br/>保存</button>
           </div>
-        </div>
-        {/* ツールバー  */}
-        <div className="pt-1 flex flex-row justify-center space-x-2" >
-          <button
-            className="btn bg-gray-300"
-            ref={techniqueButtonRef} 
-            onClick={() => setInputType("technique")}
-            id = "technique_button"
-          >テクニック</button>
-          <button 
-            className="btn bg-gray-300"
-            onClick={() => setInputType("comment")
-            }
-            id = "comment_button"
-          >コメント</button>
-          <button 
-            className="btn bg-gray-300"
-            onClick={() => setInputType("preview")
-            }
-            id = "preview_button"
-          >プレビュー</button>
-          <button onClick={saveComponents} className="btn">メモ<br/>保存</button>
-        </div>
         </div>
       </div>
     </div>
