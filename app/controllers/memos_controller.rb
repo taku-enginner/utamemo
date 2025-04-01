@@ -38,7 +38,8 @@ class MemosController < ApplicationController
     if @memo.save
       redirect_to memo_path(id: @memo.id)
     else
-      render 'musixmatch/search', alert: 'メモの開始に失敗しました。'
+      flash[:alert] = t('alerts.memo_save_fail')
+      redirect_to memos_path
     end
   end
 

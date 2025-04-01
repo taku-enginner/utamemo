@@ -41,6 +41,7 @@ gem 'image_processing', '~> 1.2'
 gem 'aws-sdk-s3'
 gem 'httparty'
 gem 'meta-tags', require: 'meta_tags'
+gem 'omniauth-google-oauth2'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
@@ -72,6 +73,8 @@ group :test do
 end
 
 gem 'devise', '~> 4.9'
+gem 'devise-i18n'
+gem 'rails-i18n'
 
 gem 'shakapacker', '= 8.1'
 
