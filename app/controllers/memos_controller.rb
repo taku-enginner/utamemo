@@ -10,18 +10,26 @@ class MemosController < ApplicationController
   def show
     request.format = :html # turboを無効化
     @memo = Memo.find(params[:id])
-    api_key = Rails.application.credentials[:musixmatch_api_key]
 
-    # turbo framesからのリクエストだったらパーシャルを返す
-    # パーシャルはid=lyricsのturbo-framesタグに入る
-    if turbo_frame_request?
-      render partial: 'memos/lyrics', locals: {
-        lyrics_result: fetch_lyrics(api_key, @memo[:song_title], @memo[:artist_name])
-      }
+    # メモが外部公開していれば表示。していなければ一覧に戻してフラッシュメッセージを表示。
+    if @memo.publish || current_user.id == @memo.user_id
+      api_key = Rails.application.credentials[:musixmatch_api_key]
+  
+      # turbo framesからのリクエストだったらパーシャルを返す
+      # パーシャルはid=lyricsのturbo-framesタグに入る
+      if turbo_frame_request?
+        render partial: 'memos/lyrics', locals: {
+          lyrics_result: fetch_lyrics(api_key, @memo[:song_title], @memo[:artist_name])
+        }
+      else
+        # turbo frames空のリクエストでなければ、通常のshowテンプレートを返す
+        render :show
+      end
     else
-      # turbo frames空のリクエストでなければ、通常のshowテンプレートを返す
-      render :show
+      flash[:alert] = t('alert.memo_not_publish')
+      render :index, status: :unprocessable_entity
     end
+
   end
 
   def create
@@ -55,7 +63,7 @@ class MemosController < ApplicationController
     @memo = Memo.find_by(id: params[:id])
     if @memo.destroy
       flash[:notice] = t('notices.memo_deleted')
-      redirect_to user_profile_path(current_user.id)
+      redirect_to my_memos_user_profile_path(current_user.id)
     else
       flash.now[:alert] = t('alerts.memo_delete_failed')
       # renderはビューを直接レンダリングするので、ビューのファイル名を使う

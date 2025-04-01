@@ -1,4 +1,4 @@
-<% if memo.favorited_by?(current_user) %>
+<% if current_user && memo.favorited_by?(current_user) %>
   <%= link_to memo_favorite_path(memo.id, memo.favorites.find_by(user_id: current_user.id).id), data: {turbo_method: :delete} do %>
     <i class="fa-solid fa-heart text-pink-500"></i>
     <%= memo.favorites.count %>
