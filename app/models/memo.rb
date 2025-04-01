@@ -5,7 +5,6 @@ class Memo < ApplicationRecord
   has_many :favorites, dependent: :destroy
   validates :artist_name, presence: true
   validates :song_title, presence: true
-  validates :memo_title, presence: true
 
   def favorited_by?(user)
     favorites.exists?(user_id: user.id)

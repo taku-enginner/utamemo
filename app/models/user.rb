@@ -11,7 +11,6 @@ class User < ApplicationRecord
   has_one :profile, dependent: :destroy
   has_many :favorites, dependent: :destroy
 
-
   def self.from_omniauth(auth)
     user = where(email: auth.info.email).first
 
@@ -24,7 +23,7 @@ class User < ApplicationRecord
         password: Devise.friendly_token[0, 20],
         provider: auth.provider,
         uid: auth.uid,
-        name: auth.info.name
+        nickname: auth.info.name
       )
     end
   end
