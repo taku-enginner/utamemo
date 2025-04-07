@@ -93,11 +93,13 @@ export default function MyMemos({ memo }) {
     if (techniqueButtonRef.current){
       const rect = techniqueButtonRef.current.getBoundingClientRect(); // ここで座標を取得
       const componentId = components.length + 1;
+      const componentWidth = 50;
+      const x = window.innerWidth / 2 - componentWidth / 2;
   
       setComponents([
         ...components, 
         { 
-          x: rect.left + window.scrollX + 143, 
+          x: rect.left + window.scrollX + x, 
           y: rect.top + window.scrollY - rect.height - 280, 
           id: componentId, 
           type: "technique", 
@@ -297,7 +299,7 @@ export default function MyMemos({ memo }) {
             {/* ツールバー（コメント） */}
             <div className="flex flex-row justify-center space-x-2 hidden" id="comment">
               <input 
-                className="w-[85%] border border-gray-400 rounded-lg p-1 md:text-xl"
+                className="w-[85%] border border-gray-400 rounded-lg p-1"
                 ref={commentButtonRef} 
                 id="comment_input"
                 placeholder="   コメントを入力"/>
