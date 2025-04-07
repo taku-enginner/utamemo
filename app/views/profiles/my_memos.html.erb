@@ -1,8 +1,8 @@
 <% provide(:title, "マイメモ一覧 | UTAMEMO")%>
 <!-- マイメモ一覧-->
-<div class="m-5">
-  <div class="p-4 mb-2 text-3xl text-white font-bold tracking-wide text-center">マイメモ一覧</div>
-  <div class="p-4 text-center flex flex-col items-center space-y-4">
+<div class="p-4 text-3xl text-white font-bold tracking-wide text-center">マイメモ一覧</div>
+<div class="md:px-20">
+  <div class="p-4 text-center flex flex-col items-center space-y-3">
     <% @my_memos.each do |my_memo| %>
       <div class="flex flex-row w-full items-center space-x-2">
         <div class="w-full">
@@ -10,23 +10,27 @@
                         { method: :get, class: "list block w-full bg-base-100 rounded-box shadow-md p-3" } do %>    
               <div class="flex flex-row items-center">
                 <div>
-                  <% if @profile.image.attached? %>
-                    <%= image_tag my_memo.user.profile.image, size: "50x50", class: "rounded-box" %>
+                  <% if my_memo.user.profile&.image&.attached? %>
+                    <%= image_tag my_memo.user.profile.image, size: "100x100", class: "rounded-box" %>
                   <% else %>
-                    <%= image_tag "アイコン_デフォルト.png", size: "50x50", class: "rounded-box" %>
+                    <%= image_tag "アイコン_デフォルト.png", size: "100x100", class: "rounded-box" %>
                   <% end %>
                 </div>
-                <div class="w-full">
-                  <div class="text-xs uppercase font-semibold opacity-60"><%= my_memo[:song_title] %> : <%= my_memo[:artist_name] %></div>
-                  <div class="text-xs uppercase font-semibold opacity-60"><%= my_memo[:memo_title] %></div>
-                  <div class="flex flex-row items-center justify-center space-x-1">
+                <div class="w-full md:flex md:flex-row">
+                  <div class="md:flex md:flex-row md:items-center md:justify-center md:space-x-10 w-full md:w-1/2">
+                    <div class="text-xl font-bold md:text-2xl"><%= my_memo.user.nickname %></div>
+                    <div class="uppercase font-semibold opacity-60 md:text-2xl"><%= my_memo[:artist_name] %> <br> <%= my_memo[:song_title] %></div>
+                  </div>
+                  <div class="flex flex-row items-center justify-center space-x-1 md:space-x-5">
                     <% if my_memo.publish %>
-                      <i class="fa-solid fa-lock-open"></i>
+                      <i class="fa-solid fa-lock-open md:text-3xl"></i>
                     <% else %>
-                      <i class="fa-solid fa-lock"></i>
+                      <i class="fa-solid fa-lock md:text-3xl"></i>
                     <% end %>
-                    <div><i class="fa-solid fa-heart text-pink-500"></i></div>
-                    <div><%= my_memo.favorites.count %></div>
+                    <div class="md:flex md:flex-row md:items-center md:space-x-2">
+                      <i class="fa-solid fa-heart text-pink-500 md:text-3xl"></i>
+                      <div class="md:text-3xl"><%= my_memo.favorites.count %></div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -37,16 +41,15 @@
             method: :delete,
             data: { confirm: "本当に削除しますか？", method: "delete" , turbo: false},
             class: "w-10 h-10 bg-red-700 text-white rounded-full flex items-center justify-center shadow-md inline-block" do %>
-            <i class="fas fa-trash text-2xl p-3"></i>
+            <i class="fas fa-trash text-2xl p-3 md:text-5xl"></i>
           <% end %>
         </div>
 
-      
       </div>           
     <% end %>
   </div>
-  <div class="text-center">
+  <div class="text-center md:text-2xl">
     <%= link_to "マイページに戻る", user_profile_path(@profile.id), class: "btn" %>
   </div>
-</div>
 
+</div>
