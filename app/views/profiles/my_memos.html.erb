@@ -11,14 +11,13 @@
               <div class="flex flex-row items-center">
                 <div>
                   <% if my_memo.user.profile&.image&.attached? %>
-                    <%= image_tag my_memo.user.profile.image, size: "100x100", class: "rounded-box" %>
+                    <%= image_tag my_memo.user.profile.image, class: "rounded-box w-18"  %>
                   <% else %>
-                    <%= image_tag "アイコン_デフォルト.png", size: "100x100", class: "rounded-box" %>
+                    <%= image_tag "アイコン_デフォルト.png", class: "rounded-box w-18" %>
                   <% end %>
                 </div>
                 <div class="w-full md:flex md:flex-row">
                   <div class="md:flex md:flex-row md:items-center md:justify-center md:space-x-10 w-full md:w-1/2">
-                    <div class="text-xl font-bold md:text-2xl"><%= my_memo.user.nickname %></div>
                     <div class="uppercase font-semibold opacity-60 md:text-2xl"><%= my_memo[:artist_name] %> <br> <%= my_memo[:song_title] %></div>
                   </div>
                   <div class="flex flex-row items-center justify-center space-x-1 md:space-x-5">
@@ -27,7 +26,7 @@
                     <% else %>
                       <i class="fa-solid fa-lock md:text-3xl"></i>
                     <% end %>
-                    <div class="md:flex md:flex-row md:items-center md:space-x-2">
+                    <div class="flex flex-row md:items-center md:space-x-2">
                       <i class="fa-solid fa-heart text-pink-500 md:text-3xl"></i>
                       <div class="md:text-3xl"><%= my_memo.favorites.count %></div>
                     </div>
