@@ -61,9 +61,9 @@ end
 
 group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
+  gem 'bullet' # N+1問題の検出
   gem 'rails_live_reload'
   gem 'web-console'
-  gem "bullet" # N+1問題の検出
 end
 
 group :test do
@@ -81,4 +81,4 @@ gem 'rails-i18n'
 gem 'shakapacker', '= 8.1'
 
 gem 'react-rails', '= 3.2'
-gem "tailwindcss-rails"
+gem 'tailwindcss-rails'
