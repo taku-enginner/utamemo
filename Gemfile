@@ -63,6 +63,7 @@ group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem 'rails_live_reload'
   gem 'web-console'
+  gem "bullet" # N+1問題の検出
 end
 
 group :test do
@@ -70,6 +71,7 @@ group :test do
   gem 'capybara'
   gem 'selenium-webdriver'
   gem 'simplecov', require: false
+  gem 'swimming_fish', '~> 0.1.2'
 end
 
 gem 'devise', '~> 4.9'
@@ -79,3 +81,4 @@ gem 'rails-i18n'
 gem 'shakapacker', '= 8.1'
 
 gem 'react-rails', '= 3.2'
+gem "tailwindcss-rails"

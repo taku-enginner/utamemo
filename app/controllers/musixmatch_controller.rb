@@ -6,7 +6,6 @@ require 'json'
 class MusixmatchController < ApplicationController
   def search
     api_key = Rails.application.credentials[:musixmatch_api_key]
-    Rails.logger.debug { "params: #{params}" }
     @title = search_params[:title]
     @artist_name = search_params[:artist_name]
 
