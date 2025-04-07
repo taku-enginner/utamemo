@@ -201,8 +201,7 @@ export default function MyMemos({ memo }) {
               bouds="parent"
             >
               <div>
-                <div className="component
-                max-w-xs w-fit whitespace-normal break-words flex items-center justify-center absolute flex flex-col"
+                <div className="component max-w-xs w-fit whitespace-normal break-words items-center justify-center absolute flex flex-col"
                      onClick={(e) => {
                       e.stopPropagation();
                       setSelectedComponent(component.id);
@@ -251,11 +250,7 @@ export default function MyMemos({ memo }) {
                           deleteComponent(component.id);
                         }}
                         className="
-                        text-2xl font-bold text-white 
-                        bg-red-600 w-12 h-12 
-                        rounded-full border-2 border-white 
-                        shadow-lg hover:bg-red-700 
-                        hover:scale-110 transition-transform duration-200"
+                        text-2xl font-bold text-white bg-red-600 w-12 h-12 rounded-full border-2 border-white shadow-lg hover:bg-red-700 hover:scale-110 transition-transform duration-200"
                     >
                         ✕
                       </button>
@@ -302,7 +297,7 @@ export default function MyMemos({ memo }) {
             {/* ツールバー（コメント） */}
             <div className="flex flex-row justify-center space-x-2 hidden" id="comment">
               <input 
-                className="w-[85%] border border-gray-400 rounded-lg p-1"
+                className="w-[85%] border border-gray-400 rounded-lg p-1 md:text-xl"
                 ref={commentButtonRef} 
                 id="comment_input"
                 placeholder="   コメントを入力"/>
