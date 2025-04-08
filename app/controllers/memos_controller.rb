@@ -44,6 +44,7 @@ class MemosController < ApplicationController
   end
 
   def update
+    Rails.logger.debug { "update時のパラメータ：#{JSON.pretty_generate(params[:memo_components])}" }
     # 空配列の場合は空配列で更新する
     if params[:memo_components].empty?
       @memo.update(memo_components: [])
