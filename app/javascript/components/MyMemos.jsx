@@ -93,14 +93,12 @@ export default function MyMemos({ memo }) {
     if (techniqueButtonRef.current){
       const rect = techniqueButtonRef.current.getBoundingClientRect(); // ここで座標を取得
       const componentId = components.length + 1;
-      const componentWidth = 50;
-      const x = window.innerWidth / 2 - componentWidth / 2;
   
       setComponents([
         ...components, 
         { 
-          x: rect.left + window.scrollX + x, 
-          y: rect.top + window.scrollY - rect.height - 280, 
+          x: rect.left + window.scrollX - 300,
+          y: rect.top + window.scrollY - rect.height - 350, 
           id: componentId, 
           type: "technique", 
           content: `${tech_id}`
