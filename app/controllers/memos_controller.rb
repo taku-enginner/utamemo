@@ -5,7 +5,7 @@ class MemosController < ApplicationController
   before_action :set_memo, only: %i[show update destroy]
 
   def index
-    @memos = Memo.includes(:user).where(publish: true).order(created_at: :desc)
+    @memos = Memo.includes(:user).where(publish: true).order(updated_at: :desc)
   end
 
   def show
