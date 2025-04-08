@@ -52,7 +52,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_04_01_061202) do
   create_table "memos", force: :cascade do |t|
     t.string "song_title"
     t.string "artist_name"
-    t.string "memo_title", default: ""
+    t.string "memo_title"
     t.jsonb "memo_components", default: [], array: true
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false

@@ -1,8 +1,9 @@
 module.exports = {
   content: [
     "./app/javascript/**/*.{js,jsx}", // すべてのJS、JSXファイルをスキャン
-    "./app/views/**/*.html.erb", // すべてのerbファイルをスキャン
-    "./app/helpers/**/*.rb", // すべてのrbファイルをスキャン
+    './public/*.html',
+    './app/helpers/**/*.rb',
+    './app/views/**/*',
   ],
   future: {
   },

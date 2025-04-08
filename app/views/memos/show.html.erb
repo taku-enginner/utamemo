@@ -1,11 +1,7 @@
+<% provide(:title, "#{@memo[:song_title]} | UTAMEMO")%>
 <div class="flex flex-col items-center text-white bg-purple-500 p-2 text-center rounded-full">
-  <div class="flex flex-row items-center font-bold space-x-2 text-lg">
-    <div>
-      <%= @memo[:artist_name] %>  /
-    </div>
-    <div>
-      <%= @memo[:song_title] %>
-    </div>
+  <div class="font-bold space-x-2 text-lg">
+    <%= @memo[:artist_name] %>  /  <%= @memo[:song_title] %>
   </div>
   <div class="flex flex-col items-center">
     <div>created_by: <%= @memo.user[:nickname] %></div>
@@ -39,21 +35,21 @@
   </div>
 </div>
 
-<div class="flex-1 overflow-auto pb-20">
-  <!-- 表示ユーザーによってツールバーの表示・非表示を分岐 -->
-  <% if !!current_user && current_user.id == @memo.user_id %>
-    <% provide(:title, "メモ作成 | UTAMEMO")%>
-    <%= react_component("MyMemos", {memo: @memo.as_json(only:[:id, :memo_components])}, data: { turbo: false })%>
-  <% else %>
-    <% provide(:title, "新着メモプレビュー | UTAMEMO")%>
-    <%= react_component("OtherMemos", {memo: @memo.as_json(only:[:id, :memo_components])}, data: { turbo: false })%>
-  <% end %>
-  
+<div class="flex justify-center items-center">
+  <div class="flex-1 overflow-auto pb-20 max-w-[335px] justify-center items-center border border-2 border-pink-600 my-5 rounded-xl">
+    <!-- 表示ユーザーによってツールバーの表示・非表示を分岐 -->
+    <% if !!current_user && current_user.id == @memo.user_id %>
+      <%= react_component("MyMemos", {memo: @memo.as_json(only:[:id, :memo_components])}, data: { turbo: false })%>
+    <% else %>
+      <%= react_component("OtherMemos", {memo: @memo.as_json(only:[:id, :memo_components])}, data: { turbo: false })%>
+    <% end %>
+    
 
-  <!-- 歌詞の取得と整形 -->
-  <%= turbo_frame_tag "lyrics", src: memo_path(@memo.id) do %>
-    <div class="text-center text-3xl text-white">
-      読み込み中...
-    </div>
-  <% end %>
+    <!-- 歌詞の取得と整形 -->
+    <%= turbo_frame_tag "lyrics", src: memo_path(@memo.id) do %>
+      <div class="text-center text-3xl text-white">
+        読み込み中...
+      </div>
+    <% end %>
+  </div>
 </div>
