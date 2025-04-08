@@ -97,7 +97,7 @@ export default function MyMemos({ memo }) {
       setComponents([
         ...components, 
         { 
-          x: rect.left + window.scrollX - 300,
+          x: rect.left + window.scrollX,
           y: rect.top + window.scrollY - rect.height - 350, 
           id: componentId, 
           type: "technique", 
