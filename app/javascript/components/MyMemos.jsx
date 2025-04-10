@@ -3,7 +3,6 @@ import Draggable from "react-draggable";
 import axios from "axios";
 
 export default function MyMemos({ memo }) {
-  console.log("memo", memo);
   const [components, setComponents] = useState(memo.memo_components);
   const [selectedComponent, setSelectedComponent] = useState(null);
   const [inputType, setInputType] = useState("technique");
@@ -93,12 +92,23 @@ export default function MyMemos({ memo }) {
     if (techniqueButtonRef.current){
       const rect = techniqueButtonRef.current.getBoundingClientRect(); // ここで座標を取得
       const componentId = components.length + 1;
+
+      // 今の画面サイズを識別
+      const nowScreenSize = window.outerWidth
+      console.log("今の画面幅:", nowScreenSize);
+      let addWitdh = 0
+      if (nowScreenSize >= 768) {
+        addWitdh = -350
+      } else {
+        addWitdh = 100
+      }      
+      console.log("addWidth:", addWitdh);
   
       setComponents([
         ...components, 
         { 
-          x: rect.left + window.scrollX + 143, 
-          y: rect.top + window.scrollY - rect.height - 280, 
+          x: rect.left + addWitdh, //ここをレスポンシブする。画面幅によって変数の値を変える。画面幅が変わったことをキャッチするようにJSを書く。
+          y: rect.top + window.scrollY - rect.height - 350, 
           id: componentId, 
           type: "technique", 
           content: `${tech_id}`
@@ -201,8 +211,7 @@ export default function MyMemos({ memo }) {
               bouds="parent"
             >
               <div>
-                <div className="component
-                max-w-xs w-fit whitespace-normal break-words flex items-center justify-center absolute flex flex-col"
+                <div className="component max-w-xs w-fit whitespace-normal break-words items-center justify-center absolute flex flex-col"
                      onClick={(e) => {
                       e.stopPropagation();
                       setSelectedComponent(component.id);
@@ -251,11 +260,7 @@ export default function MyMemos({ memo }) {
                           deleteComponent(component.id);
                         }}
                         className="
-                        text-2xl font-bold text-white 
-                        bg-red-600 w-12 h-12 
-                        rounded-full border-2 border-white 
-                        shadow-lg hover:bg-red-700 
-                        hover:scale-110 transition-transform duration-200"
+                        text-2xl font-bold text-white bg-red-600 w-12 h-12 rounded-full border-2 border-white shadow-lg hover:bg-red-700 hover:scale-110 transition-transform duration-200"
                     >
                         ✕
                       </button>

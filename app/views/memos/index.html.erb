@@ -1,28 +1,31 @@
 <% provide(:title, "新着メモ一覧 | UTAMEMO")%>
-<div class="p-4 pb-2 text-3xl text-white font-bold tracking-wide text-center">新着メモ一覧</div>
-<div class="p-4 text-center flex flex-col items-center space-y-4">
+<div class="p-4 text-3xl text-white font-bold text-center">新着メモ一覧</div>
+<div class="p-4 flex flex-col items-center space-y-2">
   <% @memos.each do |memo| %>
-    <div class="flex flex-row w-full space-x-2">
-      <div class="w-full">
-        <%= button_to memo_path(memo.id), { method: :get, class: "list block w-full bg-base-100 rounded-box shadow-md p-4 my-2" } do %>    
-          <div class="flex flex-row items-center">
-            <div class="mx-4">
+    <div class="items-center w-[330px] md:w-[800px] mx-auto">
+      <%= button_to memo_path(memo.id), { method: :get, class: "w-full mx-auto bg-base-100 rounded-box shadow-md p-4" } do %>    
+        <div class="flex flex-row items-center justify-between">
+          <div class="flex flex-row items-center md:space-x-10">
+            <div>
               <% if memo.user.profile&.image&.attached? %>
-                <%= image_tag memo.user.profile.image, size: "50x50", class: "rounded-box" %>
+                <%= image_tag memo.user.profile.image, size: "70x70", class: "rounded-box" %>
               <% else %>
-                <%= image_tag "アイコン_デフォルト.png", size: "50x50", class: "rounded-box" %>
+                <%= image_tag "アイコン_デフォルト.png", size: "70x70", class: "rounded-box" %>
               <% end %>
             </div>
-            <div class="w-full">
-              <div><%= memo.user.nickname %></div>
-              <div class="text-xs uppercase font-semibold opacity-60"><%= memo[:artist_name] %> : <%= memo[:song_title] %></div>
-            </div>
-            <div id="memo_<%= memo.id %>_favorite">
-              <%= render "memos/favorite", memo: memo %>
+            <div class="md:flex md:flex-row md:items-center">
+              <div class="text-xl font-bold md:text-2xl w-[250px] text-start"><%= memo.user.nickname %></div>
+              <div>
+                <div class="uppercase font-semibold opacity-60 md:text-2xl text-start"><%= memo[:artist_name] %></div>
+                <div class="uppercase font-semibold opacity-60 md:text-2xl text-start"><%= memo[:song_title] %></div>
+              </div>
             </div>
           </div>
-        <% end %>
-      </div>   
-    </div>           
+          <div id="memo_<%= memo.id %>_favorite" class="text-2xl">
+            <%= render "memos/favorite", memo: memo %>
+          </div>
+        </div>
+      <% end %>
+    </div>
   <% end %>
 </div>

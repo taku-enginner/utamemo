@@ -1,6 +1,6 @@
 <% provide(:title, "曲を探す | UTAMEMO")%>
 <%= turbo_frame_tag "track_search", src: musixmatch_search_path(artist_name: @artist_name, title: @title) do %>
-  <div class="text-center text-3xl text-white">
+  <div class="text-center text-3xl text-white p-10">
     読み込み中...
   </div>
 <% end %>

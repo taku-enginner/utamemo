@@ -5,7 +5,7 @@ class MemosController < ApplicationController
   before_action :set_memo, only: %i[show update destroy]
 
   def index
-    @memos = Memo.includes(:user).where(publish: true).order(created_at: :desc)
+    @memos = Memo.includes(:user).where(publish: true).order(updated_at: :desc)
   end
 
   def show
@@ -38,11 +38,13 @@ class MemosController < ApplicationController
     if @memo.save
       redirect_to memo_path(id: @memo.id)
     else
-      render 'musixmatch/search', alert: 'メモの開始に失敗しました。'
+      flash[:alert] = t('alerts.memo_save_fail')
+      redirect_to memos_path
     end
   end
 
   def update
+    Rails.logger.debug { "update時のパラメータ：#{JSON.pretty_generate(params[:memo_components])}" }
     # 空配列の場合は空配列で更新する
     if params[:memo_components].empty?
       @memo.update(memo_components: [])

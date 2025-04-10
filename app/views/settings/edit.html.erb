@@ -1,50 +1,41 @@
 <% provide(:title, "メモ設定 | UTAMEMO")%>
-<div class="flex flex-col items-center text-white bg-purple-500 p-2 text-center rounded-full mb-4">
-  <div class="flex flex-row items-center font-bold space-x-2 text-lg">
-    <div>
-      <%= @memo[:artist_name] %>  /
-    </div>
-    <div>
-      <%= @memo[:song_title] %>
-    </div>
+<div class="text-white bg-purple-500 p-2 md:py-10 text-center rounded-full mb-4">
+  <div class="items-center font-bold space-x-2 text-lg">
+    <%= @memo[:artist_name] %>/<%= @memo[:song_title] %>
   </div>
   <div class="flex flex-col items-center">
-    <div>
-      created_by: <%= @memo.user[:nickname] %>
-    </div>
+    created_by: <%= @memo.user[:nickname] %>
   </div>
 </div>
-<div class="text-center text-white p-2 m-4 w-80 border border-2 border-pink-600 bg-slate-950 rounded-md mx-auto">
+<div class="text-center text-white p-2 m-4 w-80 border border-2 border-pink-600 bg-slate-950 rounded-2xl mx-auto">
   <%= form_with url: memo_settings_path(@memo.id), method: :patch , data: {turbo: false} do |f| %>
     <div class="flex flex-col items-center justify-center space-y-2">
-    <div class="text-lg p-2">メモの公開設定</div>
+      <div class="p-2 md:p-4 text-xl text-3xl">メモの公開設定</div>
 
       <!-- ラジオボタンの初期値を分岐 -->
       <% if @memo.publish %>
         <div class="flex flex-row space-x-2 items-center">
           <%= f.radio_button :publish, :true, checked: true %>
-          <%= f.label :publish_true, "公開する" %>
+          <%= f.label :publish_true, "公開する", class: "text-xl md:text-2xl" %>
         </div>
         <div class="flex flex-row space-x-2 items-center">
           <%= f.radio_button :publish, :false  %>
-          <%= f.label :publish_false, "公開しない" %>
+          <%= f.label :publish_false, "公開しない", class: "text-xl md:text-2xl" %>
         </div>
       <% else %>
         <div class="flex flex-row space-x-2 items-center">
             <%= f.radio_button :publish, :true %>
-            <%= f.label :publish_true, "公開する" %>
+            <%= f.label :publish_true, "公開する", class: "text-xl md:text-2xl" %>
         </div>
         <div class="flex flex-row space-x-2 items-center">
           <%= f.radio_button :publish, :false , checked: true  %>
-          <%= f.label :publish_false, "公開しない" %>
+          <%= f.label :publish_false, "公開しない", class: "text-xl md:text-2xl" %>
         </div>
       <% end %>
       <div class="flex flex-col p-4">
-        <%= f.label :memo_title, "メモタイトル", class: "text-lg p-2"%>
+        <%= f.label :memo_title, "メモタイトル", class: "text-xl p-2 md:text-2xl"%>
         <%= f.text_field :memo_title,
-                          class: "text-lg p-2 mt-2 rounded-lg border-2 border-pink-600
-                                  bg-gray-300 text-purple-600 placeholder-purple-500
-                                  focus:outline-none focus:ring-2 focus:ring-purple-500",
+                          class: "text-xl md:text-2xl p-2 mt-2 rounded-lg border-2 border-pink-600 bg-gray-300 text-purple-600 placeholder-purple-500 focus:outline-none focus:ring-2 focus:ring-purple-500",
                           value: @memo.memo_title %>
       </div>
 
