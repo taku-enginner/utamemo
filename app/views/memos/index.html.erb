@@ -5,7 +5,7 @@
     <div class="items-center w-[330px] md:w-[800px] mx-auto">
       <%= button_to memo_path(memo.id), { method: :get, class: "w-full mx-auto bg-base-100 rounded-box shadow-md p-4" } do %>    
         <div class="flex flex-row items-center justify-between">
-          <div class="flex flex-row items-center md:space-x-10">
+          <div class="flex flex-row items-center space-x-2 md:space-x-10 w-[250px]">
             <div>
               <% if memo.user.profile&.image&.attached? %>
                 <%= image_tag memo.user.profile.image, size: "70x70", class: "rounded-box" %>
@@ -14,7 +14,7 @@
               <% end %>
             </div>
             <div class="md:flex md:flex-row md:items-center">
-              <div class="text-xl font-bold md:text-2xl w-[250px] text-start"><%= memo.user.nickname %></div>
+              <div class="text-xl font-bold md:text-2xl text-start"><%= memo.user.nickname %></div>
               <div>
                 <div class="uppercase font-semibold opacity-60 md:text-2xl text-start"><%= memo[:artist_name] %></div>
                 <div class="uppercase font-semibold opacity-60 md:text-2xl text-start"><%= memo[:song_title] %></div>
