@@ -4,21 +4,22 @@
 <div class="md:px-20">
   <div class="p-4 text-center flex flex-col items-center space-y-3">
     <% @my_memos.each do |my_memo| %>
-      <div class="flex flex-row w-full items-center space-x-2">
-        <div class="w-full">
+      <div class="flex flex-row w-full items-center justify-center space-x-2">
+        <div class="w-[280px] md:w-[800px]">
           <%= button_to memo_path(my_memo.id),
                         { method: :get, class: "list block w-full bg-base-100 rounded-box shadow-md p-3" } do %>    
-              <div class="flex flex-row items-center">
+              <div class="flex flex-row items-center md:space-x-20">
                 <div>
                   <% if my_memo.user.profile&.image&.attached? %>
-                    <%= image_tag my_memo.user.profile.image, class: "rounded-box w-18"  %>
+                    <%= image_tag my_memo.user.profile.image, class: "rounded-box", size: "70x70"  %>
                   <% else %>
-                    <%= image_tag "アイコン_デフォルト.png", class: "rounded-box w-18" %>
+                    <%= image_tag "アイコン_デフォルト.png", class: "rounded-box", size: "70x70" %>
                   <% end %>
                 </div>
-                <div class="w-full md:flex md:flex-row">
-                  <div class="md:flex md:flex-row md:items-center md:justify-center md:space-x-10 w-full md:w-1/2">
-                    <div class="uppercase font-semibold opacity-60 md:text-2xl"><%= my_memo[:artist_name] %> <br> <%= my_memo[:song_title] %></div>
+                <div class="w-full md:flex md:flex-row md:justify-between">
+                  <div class="">
+                    <div class="uppercase font-semibold opacity-60 md:text-2xl md:text-start md:ml-5"><%= my_memo[:artist_name] %></div>
+                    <div class="uppercase font-semibold opacity-60 md:text-2xl md:text-start md:ml-5"><%= my_memo[:song_title] %></div>
                   </div>
                   <div class="flex flex-row items-center justify-center space-x-1 md:space-x-5">
                     <% if my_memo.publish %>
@@ -40,7 +41,7 @@
             method: :delete,
             data: { confirm: "本当に削除しますか？", method: "delete" , turbo: false},
             class: "w-10 h-10 bg-red-700 text-white rounded-full flex items-center justify-center shadow-md inline-block" do %>
-            <i class="fas fa-trash text-2xl p-3 md:text-5xl"></i>
+            <i class="fas fa-trash text-2xl p-3 md:text-3xl"></i>
           <% end %>
         </div>
 
