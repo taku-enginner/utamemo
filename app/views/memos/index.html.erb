@@ -5,7 +5,7 @@
     <% @memos.each do |memo| %>
       <div class="items-center w-full mx-auto">
         <%= button_to memo_path(memo.id), { method: :get, class: "w-full mx-auto bg-base-100 rounded-box shadow-md p-4" } do %>    
-          <div class="flex flex-row items-center">
+          <div class="flex flex-row justify-center items-center">
             <div>
               <% if memo.user.profile&.image&.attached? %>
                 <%= image_tag memo.user.profile.image, size: "100x100", class: "rounded-box" %>
