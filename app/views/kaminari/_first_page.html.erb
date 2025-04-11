@@ -6,6 +6,6 @@
     per_page:      number of items to fetch per page
     remote:        data-remote
 -%>
-<span class="first border border-pink-500 border-2 bg-white rounded-2xl text-pink-500 font-bold p-1">
+<span class="first border border-pink-500 border-2 bg-white rounded-2xl text-pink-500 font-bold p-1 mx-1">
   <%= link_to_unless current_page.first?, t('views.pagination.first').html_safe, url, remote: remote, class: "text-center" %>
 </span>
