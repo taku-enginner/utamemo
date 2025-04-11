@@ -48,8 +48,11 @@
       </div>           
     <% end %>
   </div>
-  <div class="text-center md:text-2xl">
+  <!-- ページネーション -->
+  <div class="text-center m-4">
+    <%= paginate @my_memos %>
+  </div>
+  <div class="text-center md:text-2xl my-4">
     <%= link_to "マイページに戻る", user_profile_path(@profile.id), class: "btn" %>
   </div>
-
 </div>
