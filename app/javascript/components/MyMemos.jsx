@@ -278,45 +278,38 @@ export default function MyMemos({ memo }) {
         {/* フラッシュメッセージ */}
         <div id="flash-message" className="hidden p-2 w-full text-white"></div>
 
-        <div className="bg-purple-500 p-2 mb-2 rounded-xl">
-          <div>
+        <div className="bg-purple-500 p-2 flex flex-col justify-center items-center">
             {/* ツールバー（テクニック） */}
-            <div className="flex flex-row justify-center space-x-2 hidden" id="technique">
-              <button onClick={() => addTechniqueComponent(1)} className="flex flex-col justify-center">
+            <div className="flex flex-row justify-between hidden pb-2 w-[350px]" id="technique">
+              <button onClick={() => addTechniqueComponent(1)}>
                 <img src="/technique/ビブラート.png" alt="ビブラート" style={{ width: "50px", height: "50px"}}/>
-                <div className="text-white text-sm">ビブラート</div>
               </button>
-              <button onClick={() => addTechniqueComponent(2)} className="flex flex-col justify-center">
+              <button onClick={() => addTechniqueComponent(2)}>
                 <img src="/technique/しゃくり.png" alt="しゃくり" style={{ width: "50px", height: "50px"}}/>
-                <div className="text-white text-sm">しゃくり</div>
               </button>
-              <button onClick={() => addTechniqueComponent(3)} className="flex flex-col justify-center">
+              <button onClick={() => addTechniqueComponent(3)}>
                 <img src="/technique/こぶし.png" alt="こぶし" style={{ width: "50px", height: "50px"}}/>
-                <div className="text-white text-sm">こぶし</div>
               </button>
-              <button onClick={() => addTechniqueComponent(4)} className="flex flex-col justify-center">
+              <button onClick={() => addTechniqueComponent(4)}>
                 <img src="/technique/フォール.png" alt="フォール" style={{ width: "50px", height: "50px"}}/>
-                <div className="text-white text-sm">フォール</div>
               </button>
-              <button onClick={() => addTechniqueComponent(5)} className="flex flex-col justify-center">
+              <button onClick={() => addTechniqueComponent(5)}>
                 <img src="/technique/ブレス.png" alt="ブレス" style={{ width: "50px", height: "50px"}}/>
-                <div className="text-white text-sm">ブレス</div>
               </button>
             </div>
 
             {/* ツールバー（コメント） */}
-            <div className="flex flex-row justify-center space-x-2 hidden" id="comment">
+            <div className="flex flex-row justify-center space-x-2 hidden pb-2 w-[350px]" id="comment">
               <input 
-                className="w-[85%] border border-gray-400 rounded-lg p-1"
+                className="w-[85%] border bg-slate-950 border-2 rounded-lg p-1 text-white"
                 ref={commentButtonRef} 
                 id="comment_input"
                 placeholder="   コメントを入力"/>
-              <button onClick={addCommentComponent} className="btn">コメント<br/>追加</button>
+              <button onClick={addCommentComponent} className="btn">追加</button>
             </div>
-          </div>
 
           {/* ツールバー  */}
-          <div className="pt-1 flex flex-row justify-center space-x-2" >
+          <div className="flex flex-row justify-between space-x-2 w-[350px]" >
             <button
               className="btn bg-gray-300"
               ref={techniqueButtonRef} 
