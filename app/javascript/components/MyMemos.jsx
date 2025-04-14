@@ -301,7 +301,7 @@ export default function MyMemos({ memo }) {
             {/* ツールバー（コメント） */}
             <div className="flex flex-row justify-center space-x-2 hidden pb-2 w-[350px]" id="comment">
               <input 
-                className="w-[85%] border border-pink-600 bg-slate-950 border-2 rounded-lg p-1 text-white"
+                className="w-[85%] border bg-slate-950 border-2 rounded-lg p-1 text-white"
                 ref={commentButtonRef} 
                 id="comment_input"
                 placeholder="   コメントを入力"/>
