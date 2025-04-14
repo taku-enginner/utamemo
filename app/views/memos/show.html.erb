@@ -1,11 +1,10 @@
 <% provide(:title, "#{@memo[:song_title]} | UTAMEMO")%>
-<div class="flex flex-col items-center text-white bg-purple-500 p-2 text-center rounded-full">
-  <div class="font-bold space-x-2 text-lg">
-    <%= @memo[:artist_name] %>  /  <%= @memo[:song_title] %>
-  </div>
+<div class="flex flex-col items-center text-white bg-purple-500 p-2 text-center">
+  <div class="font-bold text-lg"><%= @memo[:artist_name] %></div>
+  <div class="font-bold text-lg"><%= @memo[:song_title] %></div>
   <div class="flex flex-col items-center">
     <div>created_by: <%= @memo.user[:nickname] %></div>
-    <div class="mt-2 flex flex-row space-x-2 items-center">
+    <div class="mt-2 flex flex-row space-x-10 items-center">
       <% if @memo.publish %>
         <% twitter_share_url = 
           "https://twitter.com/intent/tweet?url=#{URI.encode_www_form_component(memo_url(@memo))}&text=#{@memo.user.nickname}さんのUTAMEMO！&hashtags=#{remove_invalid_chars(@memo[:artist_name])},#{remove_invalid_chars(@memo[:song_title])},UTAMEMO" %>
