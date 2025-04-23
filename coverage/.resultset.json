@@ -176,10 +176,6 @@
           null,
           0,
           0,
-          null,
-          null,
-          null,
-          null,
           0,
           null,
           null,
@@ -517,15 +513,7 @@
           0,
           null,
           0,
-          0,
-          0,
-          0,
-          0,
           null,
-          0,
-          0,
-          0,
-          0,
           0,
           null,
           0,
@@ -692,6 +680,8 @@
       },
       "/myapp/app/services/lyrics_fetcher.rb": {
         "lines": [
+          null,
+          null,
           0,
           null,
           0,
@@ -710,6 +700,8 @@
       },
       "/myapp/app/services/track_fetcher.rb": {
         "lines": [
+          null,
+          null,
           0,
           null,
           0,
@@ -726,6 +718,6 @@
         "branches": {}
       }
     },
-    "timestamp": 1745326163
+    "timestamp": 1745372631
   }
 }
