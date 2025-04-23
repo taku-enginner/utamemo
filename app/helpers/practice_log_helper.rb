@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 module PracticeLogHelper
+  # rubocop:disable Style/HashLikeCase
   def mood_to_ja(str)
     case str
     when 'good'
@@ -12,3 +13,4 @@ module PracticeLogHelper
     end
   end
 end
+# rubocop:enable Style/HashLikeCase

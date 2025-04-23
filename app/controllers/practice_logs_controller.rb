@@ -26,7 +26,6 @@ class PracticeLogsController < ApplicationController
       flash[:alert] = t('alerts.practice_log_failed')
       render :new, status: :unprocessable_entity
     end
-    Rails.logger.debug { "full_message: #{@practice_log.errors.full_messages}" }
   end
 
   def update; end
