@@ -1,0 +1,49 @@
+<div class="flex justify-center p-6">
+  <div class="bg-[#111827] text-white rounded-xl border border-pink-500 p-8 w-full max-w-2xl shadow-lg">
+    <h2 class="text-2xl font-bold mb-4 text-pink-400 text-center">🎵 練習記録</h2>
+
+    <div class="space-y-4">
+      <div>
+        <p class="text-sm text-gray-400">曲名</p>
+        <p class="text-lg font-semibold"><%= @practice_log.song.presence || "（未入力）" %></p>
+      </div>
+
+      <div>
+        <p class="text-sm text-gray-400">練習メモ</p>
+        <p class="text-base text-gray-200 whitespace-pre-wrap"><%= @practice_log.placeholder_memo.presence || "（未入力）" %></p>
+      </div>
+
+      <div class="flex gap-6">
+        <div>
+          <p class="text-sm text-gray-400">練習量</p>
+          <p class="text-base"><%= "#{@practice_log.practice_amount} 分" || "未設定" %></p>
+        </div>
+        <div>
+          <p class="text-sm text-gray-400">気分</p>
+          <p class="text-base"><%= mood_to_ja(@practice_log.mood) || "未設定" %></p>
+        </div>
+      </div>
+
+      <div>
+        <p class="text-sm text-gray-400">コメント</p>
+        <p class="text-base text-gray-200 whitespace-pre-wrap"><%= @practice_log.comment.presence || "（未入力）" %></p>
+      </div>
+
+      <div class="text-right text-sm text-gray-400 mt-4">
+        記録日：<%= @practice_log.created_at.strftime("%Y年%m月%d日 %H:%M") %>
+      </div>
+    </div>
+  </div>
+
+</div>
+<!-- カードの下に並ぶボタン -->
+<div class="flex justify-end gap-4 max-w-2xl mx-auto px-6 mt-6">
+  <%= button_to "🗑️ 記録を削除", user_practice_log_path(current_user.id, @practice_log.id),
+      method: :delete,
+      data: { confirm: "本当に削除しますか？", turbo: false },
+      class: "bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded shadow text-sm" %>
+
+  <%= link_to "← 戻る", user_practice_logs_path(@practice_log.user_id),
+      class: "bg-pink-500 hover:bg-pink-600 text-white font-bold py-2 px-4 rounded shadow text-sm" %>
+</div>
+

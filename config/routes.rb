@@ -1,11 +1,6 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  get "practice_log/index"
-  get "practice_log/new"
-  get "practice_log/create"
-  get "practice_log/update"
-  get "practice_log/destroy"
   resources :memos, only: %i[index show create update destroy] do
     resource :settings, only: %i[edit update]
     resources :favorites, only: %i[create destroy]

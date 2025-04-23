@@ -1,0 +1,33 @@
+<div class="px-4 py-8 max-w-3xl mx-auto">
+  <!-- タイトルとボタン -->
+  <div class="flex items-center justify-between mb-6">
+    <h1 class="text-2xl font-bold text-pink-400">🎤 練習ログ一覧</h1>
+    <%= link_to "＋ 新しい練習ログを作成", new_user_practice_log_path,
+        class: "bg-pink-500 hover:bg-pink-600 text-white font-bold py-2 px-4 rounded shadow text-sm" %>
+  </div>
+
+  <!-- 練習ログ一覧 -->
+  <% if @practice_logs.any? %>
+    <div class="space-y-4">
+      <% @practice_logs.each do |log| %>
+        <%= link_to user_practice_log_path(current_user.id, log.id),
+              class: "block bg-white hover:bg-gray-50 transition rounded-lg shadow-md p-4" do %>
+          <div>
+            <p class="text-lg font-bold text-gray-800">
+              <%= log.song.presence || "無題の練習ログ" %>
+            </p>
+            <p class="text-sm text-gray-500">
+              <%= log.created_at.strftime("%Y年%m月%d日 %H:%M") %>
+            </p>
+            <p class="mt-2 text-gray-700 whitespace-pre-wrap">
+              <%= truncate(log.comment, length: 60) %>
+            </p>
+          </div>
+        <% end %>
+
+      <% end %>
+    </div>
+  <% else %>
+    <p class="text-gray-400 text-center mt-10">練習ログがまだありません。</p>
+  <% end %>
+</div>

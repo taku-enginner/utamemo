@@ -1,0 +1,54 @@
+<% provide(:title, "練習ログ作成 | UTAMEMO") %>
+
+<div class="flex justify-center items-start pt-10 px-4">
+  <div class="w-full max-w-xl bg-slate-900 border border-pink-600 rounded-2xl p-8 shadow-lg mb-8">
+
+    <h2 class="text-2xl font-bold text-center text-pink-400 mb-8">🎤 練習ログを記録する</h2>
+
+    <%= form_with model: @user_practice_log, url: user_practice_logs_path, local: true do |f| %>
+
+      <div class="space-y-6">
+
+        <!-- 共通のform-group -->
+        <% form_group = "w-full" %>
+        <% input_class = "w-full text-base p-3 rounded-lg border border-gray-400 bg-white text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-pink-400" %>
+
+        <!-- 練習した曲 -->
+        <div class="<%= form_group %>">
+          <%= f.label :song, "練習した曲", class: "block text-white font-semibold mb-1" %>
+          <%= f.text_field :song, placeholder: "曲名を入力", class: input_class %>
+        </div>
+
+        <!-- 今日の練習メモ -->
+        <div class="<%= form_group %>">
+          <%= f.label :placeholder_memo, "今日の練習メモ", class: "block text-white font-semibold mb-1" %>
+          <%= f.text_area :placeholder_memo, rows: 4, placeholder: "どんな練習をしたか書いてみましょう", class: input_class %>
+        </div>
+
+        <!-- 練習時間 -->
+        <div class="<%= form_group %>">
+          <%= f.label :practice_amount, "練習時間（分）", class: "block text-white font-semibold mb-1" %>
+          <%= f.number_field :practice_amount, min: 0, placeholder: "例: 30", class: input_class %>
+        </div>
+
+        <!-- 今日の気分 -->
+        <div class="<%= form_group %>">
+          <%= f.label :mood, "今日の気分", class: "block text-white font-semibold mb-1" %>
+          <%= f.select :mood, [["よかった", "good"], ["ふつう", "normal"], ["いまいちだった", "not_great"]], {}, class: input_class %>
+        </div>
+
+        <!-- コメント -->
+        <div class="<%= form_group %>">
+          <%= f.label :comment, "振り返りコメント", class: "block text-white font-semibold mb-1" %>
+          <%= f.text_area :comment, rows: 4, placeholder: "気づいたこと・反省などを自由に書いてみてください", class: input_class %>
+        </div>
+
+        <!-- 送信ボタン -->
+        <div class="pt-4 w-full bg-pink-500 hover:bg-pink-600 text-white text-lg font-bold py-3 rounded-lg transition">
+          <%= f.submit "保存する", class: "w-full bg-pink-500 hover:bg-pink-600 text-white text-lg font-bold py-3 rounded-lg transition" %>
+        </div>
+      </div>
+
+    <% end %>
+  </div>
+</div>
