@@ -104,6 +104,24 @@
           null
         ]
       },
+      "/myapp/app/helpers/practice_log_helper.rb": {
+        "lines": [
+          null,
+          null,
+          1,
+          1,
+          0,
+          null,
+          0,
+          null,
+          0,
+          null,
+          0,
+          null,
+          null,
+          null
+        ]
+      },
       "/myapp/app/helpers/profile_helper.rb": {
         "lines": [
           null,
@@ -134,6 +152,18 @@
           null,
           1,
           1,
+          1,
+          null
+        ]
+      },
+      "/myapp/app/models/practice_log.rb": {
+        "lines": [
+          null,
+          null,
+          1,
+          1,
+          1,
+          null,
           1,
           null
         ]
@@ -267,6 +297,7 @@
         "lines": [
           null,
           null,
+          1,
           1,
           1,
           1,
@@ -535,6 +566,62 @@
         ],
         "branches": {}
       },
+      "/myapp/app/controllers/practice_logs_controller.rb": {
+        "lines": [
+          null,
+          null,
+          0,
+          0,
+          null,
+          0,
+          0,
+          0,
+          null,
+          0,
+          null,
+          0,
+          0,
+          null,
+          0,
+          0,
+          0,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          null,
+          0,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          null,
+          0,
+          0,
+          0,
+          null,
+          0,
+          null,
+          0,
+          0,
+          0,
+          0
+        ],
+        "branches": {}
+      },
       "/myapp/app/controllers/settings_controller.rb": {
         "lines": [
           null,
@@ -718,6 +805,6 @@
         "branches": {}
       }
     },
-    "timestamp": 1745373201
+    "timestamp": 1745387357
   }
 }

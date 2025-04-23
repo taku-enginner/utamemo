@@ -3,8 +3,13 @@ ja:
     memo_deleted: "メモを削除しました。"
     memo_setting_success: "メモの設定を更新しました。"
     profile_edit_success: 'プロフィールを更新しました。'
+    practice_log_created: "練習ログを作成しました。"
+    practice_log_deleted: "練習ログを削除しました。"
   alerts:
     memo_delete_failed: "メモの削除に失敗しました。"
+    practice_log_failed: "練習ログの作成に失敗しました。"
+    practice_log_delete_failed: "練習ログの削除に失敗しました。"
+
     memo_not_publish: "公開されていないメモにはアクセスできません。"
     memo_save_fail: 'メモの開始に失敗しました。'
     memo_setting_fail: "メモの設定更新に失敗しました。"

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_04_01_061202) do
+ActiveRecord::Schema[7.2].define(version: 2025_04_23_024303) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -61,6 +61,20 @@ ActiveRecord::Schema[7.2].define(version: 2025_04_01_061202) do
     t.index ["user_id"], name: "index_memos_on_user_id"
   end
 
+  create_table "practice_logs", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "memo_id"
+    t.string "song"
+    t.text "placeholder_memo"
+    t.integer "practice_amount"
+    t.integer "mood"
+    t.text "comment"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["memo_id"], name: "index_practice_logs_on_memo_id"
+    t.index ["user_id"], name: "index_practice_logs_on_user_id"
+  end
+
   create_table "profiles", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
@@ -86,5 +100,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_04_01_061202) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "memos", "users"
+  add_foreign_key "practice_logs", "memos"
+  add_foreign_key "practice_logs", "users"
   add_foreign_key "profiles", "users"
 end
