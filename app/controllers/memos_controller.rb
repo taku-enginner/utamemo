@@ -88,7 +88,8 @@ class MemosController < ApplicationController
 
   def access_denied?
     return false if @memo.publish # 公開されていればfalse
-    current_user.nil? || current_user.id != @memo.user_id 
+
+    current_user.nil? || current_user.id != @memo.user_id
     # 公開されていないかつユーザーがログインしていなければtrue、もしくはログインユーザidとmemoユーザーidが一致しなければtrue、つまりアクセスできない。
   end
 end
