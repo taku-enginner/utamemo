@@ -16,6 +16,7 @@ class MemosController < ApplicationController
     if access_denied?
       flash[:alert] = t('alerts.memo_not_publish')
       redirect_to memos_path
+      return
     end
 
     # メモが外部公開していれば表示。していなければ所有者のメモなら表示、違うなら一覧に戻してフラッシュメッセージを表示。
@@ -86,8 +87,9 @@ class MemosController < ApplicationController
   end
 
   def access_denied?
-    return true if (!@memo.publish && current_user.id != @memo.user_id) || (current_user.nil? && !@memo.publish)
+    return false if @memo.publish # 公開されていればfalse
 
-    false
+    current_user.nil? || current_user.id != @memo.user_id
+    # 公開されていないかつユーザーがログインしていなければtrue、もしくはログインユーザidとmemoユーザーidが一致しなければtrue、つまりアクセスできない。
   end
 end
