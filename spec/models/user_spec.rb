@@ -1,24 +1,24 @@
 # frozen_string_literal: true
 
-# require "rails_helper"
+require 'rails_helper'
 
-# RSpec.describe User do
-#   context "バリデーション" do
-#     it "emailの正規表現が正しいこと" do
-#       user = build(:user, email: "info@to-ko-s.com")
-#       expect(user).to be_valid
-#     end
+RSpec.describe User do
+  context '未登録の状態' do
+    it 'ログインに失敗する' do
+    end
 
-#     it "emailの正規表現が誤っていること" do
-#       user = build(:user)
-#       user.email = "info@to-ko-s"
-#       expect(user).to be_valid
-#     end
+    it '登録に成功する' do
+    end
 
-#     it "emailの正規表現が誤っていること" do
-#       user = build(:user)
-#       user.email = "info.to-ko-s.com"
-#       expect(user).to be_invalid
-#     end
-#   end
-# end
+    it '登録に失敗する' do
+    end
+  end
+
+  context '登録済みの状態' do
+    it 'ログインに成功する' do
+    end
+
+    it '登録されていないデータなら、ログインに失敗する' do
+    end
+  end
+end
