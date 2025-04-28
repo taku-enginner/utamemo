@@ -158,6 +158,23 @@
           null
         ]
       },
+      "/myapp/app/models/memo.rb": {
+        "lines": [
+          null,
+          null,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          null,
+          1,
+          0,
+          null,
+          null
+        ]
+      },
       "/myapp/app/models/practice_log.rb": {
         "lines": [
           null,
@@ -297,23 +314,6 @@
           null
         ]
       },
-      "/myapp/app/models/memo.rb": {
-        "lines": [
-          null,
-          null,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          null,
-          1,
-          0,
-          null,
-          null
-        ]
-      },
       "/myapp/app/controllers/profiles_controller.rb": {
         "lines": [
           null,
@@ -393,10 +393,10 @@
         "lines": [
           null,
           null,
-          0,
-          0,
-          0,
-          0
+          null,
+          null,
+          null,
+          null
         ],
         "branches": {}
       },
@@ -404,10 +404,10 @@
         "lines": [
           null,
           null,
-          0,
-          0,
-          0,
-          0
+          null,
+          null,
+          null,
+          null
         ],
         "branches": {}
       },
@@ -747,13 +747,13 @@
         "lines": [
           null,
           null,
-          0,
           null,
           null,
           null,
           null,
           null,
-          0
+          null,
+          null
         ],
         "branches": {}
       },
@@ -808,6 +808,6 @@
         "branches": {}
       }
     },
-    "timestamp": 1745733595
+    "timestamp": 1745850713
   }
 }
