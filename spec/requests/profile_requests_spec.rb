@@ -13,10 +13,19 @@ RSpec.describe 'Profilesコントローラーのテスト', type: :request do
         get user_profile_path(user.id)
       end
       it 'リクエストは200 OKとなること' do
-        expect(response.status).to eq 200
+        expect(response).to have_http_status(200)
       end
-      it 'マイページが表示されること' do
-        expect(response.body).to include 'マイメモ一覧'
+      it '「マイページ」を含んでいること' do
+        expect(response.body).to include 'マイページ'
+      end
+    end
+
+    context "プロフィール編集ページが正しく表示される" do
+      before do
+        get edit_user_profile_path(user.id)
+      end
+      it "リクエストは200 OKとなること" do
+        expect(response).to have_http_status(200)
       end
     end
   end

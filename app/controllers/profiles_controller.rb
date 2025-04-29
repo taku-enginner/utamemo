@@ -8,12 +8,7 @@ class ProfilesController < ApplicationController
 
   def show
     @profile = Profile.find_by(user_id: current_user.id)
-
-    if @profile
-      render :show
-    else
-      @profile = Profile.create!(user_id: current_user.id)
-    end
+    @profile = Profile.create!(user_id: current_user.id) if @profile.nil?
   end
 
   def edit
@@ -22,7 +17,6 @@ class ProfilesController < ApplicationController
                else
                  current_user.profile
                end
-    render :edit
   end
 
   def update
