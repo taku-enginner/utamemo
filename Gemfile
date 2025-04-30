@@ -72,6 +72,7 @@ group :test do
   gem 'selenium-webdriver'
   gem 'simplecov', require: false
   gem 'swimming_fish', '~> 0.2.2'
+  gem "webdrivers"
 end
 
 gem 'devise', '~> 4.9'
