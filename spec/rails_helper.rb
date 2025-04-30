@@ -37,7 +37,7 @@ rescue ActiveRecord::PendingMigrationError => e
 end
 
 # システムスペックで活用するcapybaraの準備
-Dir[Rails.root.join('spec', 'support', '**', '*.rb')].sort.each { |f| require f }
+Rails.root.glob('spec/support/**/*.rb').each { |f| require f }
 
 RSpec.configure do |config|
   config.include FactoryBot::Syntax::Methods
