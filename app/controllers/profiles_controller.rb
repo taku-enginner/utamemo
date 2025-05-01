@@ -31,6 +31,7 @@ class ProfilesController < ApplicationController
 
   def my_memos
     @profile = Profile.find_by(user_id: current_user.id)
+    @profile = Profile.create!(user_id: current_user.id) if @profile.nil?
     @my_memos = current_user.memos.order(created_at: :desc).page(params[:page]).per(5)
   end
 

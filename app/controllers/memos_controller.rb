@@ -57,6 +57,8 @@ class MemosController < ApplicationController
     if @memo.update(memo_components: update_component_params)
       render json: { message: 'update successfully' }, status: :ok
     else
+      $stdout.puts "メモ保存時のエラー：#{@memo.errors.full_messages}"
+      # Rails.logger.debug("メモ更新時のエラーログ：#{@memo.errors.full_messages}")
       render json: { message: 'update failed' }, status: :unprocessable_entity
     end
   end
