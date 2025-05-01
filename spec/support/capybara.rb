@@ -14,3 +14,8 @@ Capybara.register_driver :remote_chrome do |app|
     capabilities: options
   )
 end
+
+Capybara.server_host = '0.0.0.0'
+Capybara.server_port = ENV.fetch('CAPYBARA_PORT', 3002).to_i
+Capybara.app_host = "http://#{Capybara.server_host}:#{Capybara.server_port}"
+Capybara.javascript_driver = :remote_chrome

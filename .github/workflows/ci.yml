@@ -102,4 +102,5 @@ jobs:
         env:
           RAILS_ENV: test
           SELENIUM_DRIVER_URL: http://localhost:4444/wd/hub
+          CAPYBARA_PORT: 3002
         run: bundle exec rspec # 全テストを実行
