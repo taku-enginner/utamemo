@@ -328,7 +328,7 @@ export default function MyMemos({ memo }) {
               }
               id = "preview_button"
             >プレビュー</button>
-            <button onClick={saveComponents} className="btn">メモ<br/>保存</button>
+            <button onClick={saveComponents} className="btn">保存</button>
           </div>
         </div>
       </div>

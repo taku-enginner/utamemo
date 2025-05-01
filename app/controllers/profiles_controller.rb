@@ -1,19 +1,14 @@
 # frozen_string_literal: true
 
 class ProfilesController < ApplicationController
-  before_action :authenticate_user!, only: %i[show edit update]
+  before_action :authenticate_user!, only: %i[show edit update my_memos]
   before_action :set_user
   before_action :set_profile
   before_action :set_user_profile_form, only: %i[edit update]
 
   def show
     @profile = Profile.find_by(user_id: current_user.id)
-
-    if @profile
-      render :show
-    else
-      @profile = Profile.create!(user_id: current_user.id)
-    end
+    @profile = Profile.create!(user_id: current_user.id) if @profile.nil?
   end
 
   def edit
@@ -22,7 +17,6 @@ class ProfilesController < ApplicationController
                else
                  current_user.profile
                end
-    render :edit
   end
 
   def update
@@ -37,8 +31,8 @@ class ProfilesController < ApplicationController
 
   def my_memos
     @profile = Profile.find_by(user_id: current_user.id)
+    @profile = Profile.create!(user_id: current_user.id) if @profile.nil?
     @my_memos = current_user.memos.order(created_at: :desc).page(params[:page]).per(5)
-    render :my_memos
   end
 
   private
@@ -52,7 +46,7 @@ class ProfilesController < ApplicationController
   end
 
   def set_user
-    @user = User.find(current_user.id)
+    @user = User.find_by(id: current_user.id)
   end
 
   def set_profile
