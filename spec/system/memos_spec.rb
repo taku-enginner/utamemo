@@ -12,11 +12,25 @@ RSpec.describe 'Memos', type: :system, js: true do
   # end
 
   describe 'アクセス確認' do
+    before do
+      # 歌詞取得のエンドポイントに対するテストレスポンス
+      mock_lyrics_fetcher = "どこまでも続くような青の季節は\n四つ並ぶ眼の前を遮るものは何もない\nアスファルト、蝉時雨を反射して\nきみという沈黙が聞こえなくなる\n\nこの日々が色褪せる\n僕と違うきみの匂いを知ってしまっても\n置き忘れてきた永遠の底に\n\n今でも青が棲んでいる\n今でも青は澄んでいる\nどんな祈りも言葉も\n近づけるのに、届かなかった\n\nまるで、静かな恋のような\n...\n\n******* This Lyrics is NOT for Commercial use *******\n(1409625476042)" # rubocop:disable Layout/LineLength
+
+      # callメソッドをモックする
+      allow(LyricsFetcher).to receive(:call).and_return(mock_lyrics_fetcher)
+
+      # 曲のメタデータに対するテストレスポンス
+      mock_track_fetcher = '{"track_name"=>"青のすみか", "artist_name"=>"キタニタツヤ"}'
+
+      # callメソッドをモックする
+      allow(TrackFetcher).to receive(:call).and_return(mock_track_fetcher)
+    end
+
     context '未ログインの状態' do
       it '新着メモ一覧へのアクセスが成功する' do
         # url直打ち
         visit memos_path
-        expect(page).to have_content('新着メモ一覧')
+        expect(page).to have_content('新着メモ一覧', wait: 5)
 
         # UI上の画面遷移
         visit root_path
