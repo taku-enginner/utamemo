@@ -13,5 +13,4 @@ Capybara.register_driver :remote_chrome do |app|
     url: ENV.fetch('SELENIUM_DRIVER_URL', 'http://selenium:4444/wd/hub'),
     capabilities: options
   )
-
 end
