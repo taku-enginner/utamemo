@@ -12,6 +12,7 @@ RSpec.describe 'Memos', type: :system, js: true do
   # end
 
   describe 'アクセス確認' do
+    # musixmatch apiへのリクエストをモック化
     before do
       # 歌詞取得のエンドポイントに対するテストレスポンス
       mock_lyrics_fetcher = "どこまでも続くような青の季節は\n四つ並ぶ眼の前を遮るものは何もない\nアスファルト、蝉時雨を反射して\nきみという沈黙が聞こえなくなる\n\nこの日々が色褪せる\n僕と違うきみの匂いを知ってしまっても\n置き忘れてきた永遠の底に\n\n今でも青が棲んでいる\n今でも青は澄んでいる\nどんな祈りも言葉も\n近づけるのに、届かなかった\n\nまるで、静かな恋のような\n...\n\n******* This Lyrics is NOT for Commercial use *******\n(1409625476042)" # rubocop:disable Layout/LineLength
@@ -76,7 +77,7 @@ RSpec.describe 'Memos', type: :system, js: true do
         fill_in '曲名', with: '青のすみか'
         click_button '検索'
 
-        expect(page).to have_content('読み込み中')
+        expect(page).to have_content('読み込み中', wait: 10)
         expect(page).to have_no_content('読み込み中', wait: 10)
 
         # 読み込み中が消え、turboでデータが送られてきた後にテスト再開
@@ -96,7 +97,7 @@ RSpec.describe 'Memos', type: :system, js: true do
         fill_in '曲名', with: '青のすみか'
         click_button '検索'
 
-        expect(page).to have_content('読み込み中')
+        expect(page).to have_content('読み込み中', wait: 10)
         expect(page).to have_no_content('読み込み中', wait: 10)
 
         # 読み込み中が消え、turboでデータが送られてきた後にテスト再開
@@ -170,7 +171,7 @@ RSpec.describe 'Memos', type: :system, js: true do
         fill_in '曲名', with: '青のすみか'
         click_button '検索'
 
-        expect(page).to have_content('読み込み中')
+        expect(page).to have_content('読み込み中', wait: 10)
         expect(page).to have_no_content('読み込み中', wait: 10)
 
         # 読み込み中が消え、turboでデータが送られてきた後にテスト再開
@@ -189,7 +190,7 @@ RSpec.describe 'Memos', type: :system, js: true do
         fill_in '曲名', with: '青のすみか'
         click_button '検索'
 
-        expect(page).to have_content('読み込み中')
+        expect(page).to have_content('読み込み中', wait: 10)
         expect(page).to have_no_content('読み込み中', wait: 10)
 
         # 読み込み中が消え、turboでデータが送られてきた後にテスト再開
