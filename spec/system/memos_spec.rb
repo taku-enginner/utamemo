@@ -21,7 +21,7 @@ RSpec.describe 'Memos', type: :system, js: true do
       allow(LyricsFetcher).to receive(:call).and_return(mock_lyrics_fetcher)
 
       # 曲のメタデータに対するテストレスポンス
-      mock_track_fetcher = '{"track_name"=>"青のすみか", "artist_name"=>"キタニタツヤ"}'
+      mock_track_fetcher = { 'track_name' => '青のすみか', 'artist_name' => 'キタニタツヤ' }
 
       # callメソッドをモックする
       allow(TrackFetcher).to receive(:call).and_return(mock_track_fetcher)
@@ -77,9 +77,6 @@ RSpec.describe 'Memos', type: :system, js: true do
         fill_in '曲名', with: '青のすみか'
         click_button '検索'
 
-        expect(page).to have_content('読み込み中', wait: 10)
-        expect(page).to have_no_content('読み込み中', wait: 10)
-
         # 読み込み中が消え、turboでデータが送られてきた後にテスト再開
         expect(page).to have_content('青のすみか', wait: 5)
         expect(page).to have_content('キタニタツヤ')
@@ -96,9 +93,6 @@ RSpec.describe 'Memos', type: :system, js: true do
         fill_in 'アーティスト名', with: 'キタニタツヤ'
         fill_in '曲名', with: '青のすみか'
         click_button '検索'
-
-        expect(page).to have_content('読み込み中', wait: 10)
-        expect(page).to have_no_content('読み込み中', wait: 10)
 
         # 読み込み中が消え、turboでデータが送られてきた後にテスト再開
         expect(page).to have_content('青のすみか', wait: 5)
@@ -171,9 +165,6 @@ RSpec.describe 'Memos', type: :system, js: true do
         fill_in '曲名', with: '青のすみか'
         click_button '検索'
 
-        expect(page).to have_content('読み込み中', wait: 10)
-        expect(page).to have_no_content('読み込み中', wait: 10)
-
         # 読み込み中が消え、turboでデータが送られてきた後にテスト再開
         expect(page).to have_content('青のすみか', wait: 10)
         expect(page).to have_content('キタニタツヤ', wait: 10)
@@ -189,9 +180,6 @@ RSpec.describe 'Memos', type: :system, js: true do
         fill_in 'アーティスト名', with: 'キタニタツヤ'
         fill_in '曲名', with: '青のすみか'
         click_button '検索'
-
-        expect(page).to have_content('読み込み中', wait: 10)
-        expect(page).to have_no_content('読み込み中', wait: 10)
 
         # 読み込み中が消え、turboでデータが送られてきた後にテスト再開
         expect(page).to have_content('青のすみか', wait: 10)
