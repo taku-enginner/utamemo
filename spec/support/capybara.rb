@@ -7,6 +7,11 @@ Capybara.register_driver :remote_chrome do |app|
   options.add_argument('disable-gpu')
   options.add_argument('window-size=1680,1050')
   options.add_argument('--disable-dev-shm-usage') # メモリ不足対策
-  Capybara::Selenium::Driver.new(app, browser: :remote, url: 'http://selenium:4444/wd/hub',
-                                      capabilities: options)
+  Capybara::Selenium::Driver.new(
+    app,
+    browser: :remote,
+    url: ENV.fetch('SELENIUM_DRIVER_URL', 'http://selenium:4444/wd/hub'),
+    capabilities: options
+  )
+
 end
