@@ -5,7 +5,7 @@
 
     <h2 class="text-2xl font-bold text-center text-pink-400 mb-8">🎤 練習ログを記録する</h2>
 
-    <%= form_with model: @user_practice_log, url: user_practice_logs_path, local: true do |f| %>
+    <%= form_with model: @user_practice_log, url: user_practice_logs_path, local: true, data:{turbo: false} do |f| %>
 
       <div class="space-y-6">
 
@@ -45,7 +45,7 @@
 
         <!-- 送信ボタン -->
         <div class="pt-4 w-full bg-pink-500 hover:bg-pink-600 text-white text-lg font-bold py-3 rounded-lg transition">
-          <%= f.submit "保存する", class: "w-full bg-pink-500 hover:bg-pink-600 text-white text-lg font-bold py-3 rounded-lg transition" %>
+          <%= f.submit "保存する", class: "w-full bg-pink-500 hover:bg-pink-600 text-white text-lg font-bold py-3 rounded-lg transition"%>
         </div>
       </div>
 

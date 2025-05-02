@@ -1,10 +1,11 @@
-<% if notice %>
-  <div role="alert" class="alert alert-success">
-    <span><%= notice %></span>
-  </div>
-<% end %>
-<% if alert %>
-  <div role="alert" class="alert alert-error">
-    <span><%= alert %></span>
+<% flash.each do |type, message| %>
+  <% css_class = case type.to_sym
+    when :notice then "alert-success"
+    when :alert  then "alert-error"
+    else "alert-info"
+  end %>
+
+  <div role="alert" class="alert <%= css_class %>">
+    <span><%= message %></span>
   </div>
 <% end %>

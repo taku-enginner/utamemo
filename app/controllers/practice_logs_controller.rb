@@ -21,7 +21,7 @@ class PracticeLogsController < ApplicationController
     @practice_log.user_id = current_user.id
     if @practice_log.save
       flash[:notice] = t('notices.practice_log_created')
-      redirect_to user_practice_logs_path(current_user.id)
+      redirect_to user_practice_log_path(current_user.id, @practice_log.id), status: :see_other # フルリロードを強制するレスポンス
     else
       flash[:alert] = t('alerts.practice_log_failed')
       render :new, status: :unprocessable_entity
