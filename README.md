@@ -108,7 +108,7 @@ Railsの通常モードで構築し、メモ作成機能でのパーツのドラ
 | 外部API       | Musixmatch API（歌詞取得）                     |
 | インフラ       | Render（アプリケーション）     |
 | 開発環境       | Docker（ローカル開発環境構築済）              |
-| テスト         | RSpec, FactoryBot, SimpleCov                  |
+| テスト         | RSpec, FactoryBot, SimpleCov(カバレッジ計測)     |
 | CI/CD        | GitHub Actions（Lint + RSpec 自動実行）       |
 
 
@@ -166,7 +166,7 @@ RUNTEQ内のLT会で発表した登壇資料です。
 # ■ テスト・CI/CDについて
 - RSpecを用いたモデル・コントローラテストを実装しました。
 - FactoryBotやletを活用し、メンテしやすい構成にしました。
-- SimpleCovでテストカバレッジを可視化しています。（目標：20％以上）
+- SimpleCovでテストカバレッジを可視化しています。（目標：20％以上、実績：64%（2025/5/2時点））
 - GiHub Actionsでプルリクエスト作成とリモートリポジトリへのプッシュをトリガーに、LintチェックとRSpecを自動実行しています。
 
 # ■ テスト設計
