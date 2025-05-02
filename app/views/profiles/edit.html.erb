@@ -18,7 +18,7 @@
   <div class="md:mx-auto md:w-2/3 ">
     <div class="flex flex-col items-center justify-center p-4 mx-4 md:my-4 md:mx-30 border border-pink-600 border-2 rounded-3xl bg-slate-950">
       <div class="flex flex-col p-4">
-        <%= f.label("ニックネーム", class: "text-white md:text-2xl") %>
+        <%= f.label(:nickname, "ニックネーム", class: "text-white md:text-2xl") %>
         <%= f.text_field :nickname,
           class: "text-lg p-2 rounded-lg border-2 border-pink-600 bg-gray-300 text-purple-600 placeholder-purple-500 focus:outline-none focus:ring-2 focus:ring-purple-500 w-full" %>
       </div>
@@ -34,7 +34,7 @@
         </div>
 
         <div class="flex flex-col items-center justify-center p-4">
-          <%= f.label("変更後のプロフィール画像", class: "text-white md:text-2xl") %>
+          <%= f.label(:image, "変更後のプロフィール画像", class: "text-white md:text-2xl") %>
           <%= f.file_field :image , class: "text-white md:text-2xl" %>
         </div>
       </div>
