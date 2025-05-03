@@ -27,6 +27,9 @@ RSpec.describe 'Memos', type: :system, js: true do
       allow(TrackFetcher).to receive(:call).and_return(mock_track_fetcher)
     end
 
+    let!(:user) { FactoryBot.create(:user) }
+    let!(:memo) { FactoryBot.create(:memo, user_id: user.id) }
+
     context '未ログインの状態' do
       it '新着メモ一覧へのアクセスが成功する' do
         # url直打ち
@@ -43,9 +46,6 @@ RSpec.describe 'Memos', type: :system, js: true do
       end
 
       it '新着メモプレビューへのアクセスが成功する' do
-        user = FactoryBot.create(:user)
-        memo = FactoryBot.create(:memo, user_id: user.id)
-
         # url直打ち
         visit memo_path(memo.id)
         expect(page).to have_content("created_by: #{user.nickname}")
@@ -59,7 +59,6 @@ RSpec.describe 'Memos', type: :system, js: true do
 
       it 'マイメモ一覧へのアクセスが失敗する' do
         # URL直打ち
-        user = FactoryBot.create(:user)
         visit my_memos_user_profile_path(user.id)
         expect(page).to have_content('ログインもしくはアカウント登録してください') # フラッシュメッセージ
         expect(page).to have_content('ようこそ、UTAMEMOへ')
@@ -107,8 +106,6 @@ RSpec.describe 'Memos', type: :system, js: true do
     end
 
     context 'ログイン済' do
-      let!(:user) { FactoryBot.create(:user) }
-      let!(:memo) { FactoryBot.create(:memo, user_id: user.id) }
       before do
         sign_in user
         visit root_path
@@ -244,7 +241,7 @@ RSpec.describe 'Memos', type: :system, js: true do
       it 'メモの削除ができる' do
         visit my_memos_user_profile_path(user.id)
         find('.delete-button').click
-        expect(page).to have_no_css('.delete-button')
+        expect(page).to have_no_content(memo.song_title)
         expect(page).to have_content('メモを削除しました。')
       end
     end
