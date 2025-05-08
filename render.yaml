@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: utamemo-blueprint
+    env: ruby
+    plan: free
+    buildCommand: "./bin/render-build.sh"
+    startCommand: "bundle exec rails server"
+    envVars:
+      - key: RAILS_ENV
+        value: production
+      - key: DATABASE_URL
+        fromEnvVar: DATABASE_URL
+      - key: RAILS_MASTER_KEY
+        fromEnvVar: RAILS_MASTER_KEY
+      - key: WEB_CONCURRENCY
+        fromEnvVar: WEB_CONCURRENCY
