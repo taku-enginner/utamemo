@@ -15,4 +15,4 @@ services:
       - key: WEB_CONCURRENCY
         fromEnvVar: WEB_CONCURRENCY
     envVarGroups:
-    - utamemo-preview-envs
+      - utamemo-preview-envs
