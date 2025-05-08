@@ -23,13 +23,28 @@ Rails.logger.debug 'seedファイルの実行がスタートしました'
   end
 end
 
+# # アーティストデータ
+# 3.times do |n|
+#   Artist.find_or_create_by(id: n+1) do |a|
+#     a.name = "BE:FIRST"
+#   end
+# end
+
+# # 曲データ
+# 3.times do |n|
+#   Song.find_or_create_by(id: n+1) do |s|
+#     s.title = "Boom Boom Back"
+#     s.artist_id = n
+#   end
+# end
+
 # メモデータ
 User.find_each do |user|
   3.times do |n|
     Memo.find_or_create_by(
       song_title: 'Boom Boom Back',
       artist_name: 'BE:FIRST',
-      memo_title: "メモタイトル#{n + 1}",
+      title: "タイトル#{n + 1}",
       memo_components: [
         {
           id: 1,
@@ -46,7 +61,9 @@ User.find_each do |user|
           y: 500
         }
       ],
-      user_id: user.id
+      user_id: user.id,
+      artist_id: n+1,
+      song_id: n+1
     )
   end
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_04_23_024303) do
+ActiveRecord::Schema[7.2].define(version: 2025_05_08_075904) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -42,6 +42,12 @@ ActiveRecord::Schema[7.2].define(version: 2025_04_23_024303) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "artists", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "favorites", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "memo_id"
@@ -52,12 +58,16 @@ ActiveRecord::Schema[7.2].define(version: 2025_04_23_024303) do
   create_table "memos", force: :cascade do |t|
     t.string "song_title"
     t.string "artist_name"
-    t.string "memo_title"
+    t.string "title", default: ""
     t.jsonb "memo_components", default: [], array: true
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "publish", default: true, null: false
+    t.bigint "artist_id", default: 0, null: false
+    t.bigint "song_id", default: 0, null: false
+    t.index ["artist_id"], name: "index_memos_on_artist_id"
+    t.index ["song_id"], name: "index_memos_on_song_id"
     t.index ["user_id"], name: "index_memos_on_user_id"
   end
 
@@ -82,6 +92,14 @@ ActiveRecord::Schema[7.2].define(version: 2025_04_23_024303) do
     t.index ["user_id"], name: "index_profiles_on_user_id"
   end
 
+  create_table "songs", force: :cascade do |t|
+    t.bigint "artist_id", null: false
+    t.string "title"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["artist_id"], name: "index_songs_on_artist_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "nickname", default: "", null: false
@@ -99,8 +117,11 @@ ActiveRecord::Schema[7.2].define(version: 2025_04_23_024303) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "memos", "artists"
+  add_foreign_key "memos", "songs"
   add_foreign_key "memos", "users"
   add_foreign_key "practice_logs", "memos"
   add_foreign_key "practice_logs", "users"
   add_foreign_key "profiles", "users"
+  add_foreign_key "songs", "artists"
 end
