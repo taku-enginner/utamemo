@@ -9,4 +9,4 @@ services:
       - key: RAILS_ENV
         value: production
 envVarGroups:
-  - utamemo-preview-envs
+  - name: utamemo-preview-envs
