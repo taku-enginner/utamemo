@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: utamemo-blueprint
+    env: ruby
+    region: singapore
+    plan: free
+    buildCommand: "./bin/render-build.sh"
+    startCommand: "bundle exec rails server"
+    envVars:
+      - key: RAILS_ENV
+        value: production
