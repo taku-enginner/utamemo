@@ -8,11 +8,5 @@ services:
     envVars:
       - key: RAILS_ENV
         value: production
-      - key: DATABASE_URL
-        fromEnvVar: DATABASE_URL
-      - key: RAILS_MASTER_KEY
-        fromEnvVar: RAILS_MASTER_KEY
-      - key: WEB_CONCURRENCY
-        fromEnvVar: WEB_CONCURRENCY
-envVarGroups:
-  - name: utamemo-preview-envs
+    envVarGroups:
+      - utamemo-preview-envs
