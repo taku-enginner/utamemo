@@ -2,7 +2,7 @@ services:
   - type: web
     name: utamemo-blueprint
     env: ruby
-    region: singapole
+    region: singapore
     plan: free
     buildCommand: "./bin/render-build.sh"
     startCommand: "bundle exec rails server"
