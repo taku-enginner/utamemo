@@ -8,5 +8,5 @@ services:
     envVars:
       - key: RAILS_ENV
         value: production
-    envVarGroups:
-      - utamemo-preview-envs
+envVarGroups:
+  - utamemo-preview-envs
