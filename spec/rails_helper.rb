@@ -35,6 +35,10 @@ begin
 rescue ActiveRecord::PendingMigrationError => e
   abort e.to_s.strip
 end
+
+# システムスペックで活用するcapybaraの準備
+Rails.root.glob('spec/support/**/*.rb').each { |f| require f }
+
 RSpec.configure do |config|
   config.include FactoryBot::Syntax::Methods
 
@@ -74,5 +78,13 @@ RSpec.configure do |config|
   # config.filter_gems_from_backtrace("gem name")
 
   # sign_inメソッドを使えるようにする
-  config.include Devise::Test::IntegrationHelpers, type: :request
+  config.include Devise::Test::IntegrationHelpers, type: :system
+
+  config.before(:each, type: :system) do
+    driven_by :remote_chrome
+    Capybara.server_host = IPSocket.getaddress(Socket.gethostname)
+    Capybara.server_port = 3002
+    Capybara.app_host = "http://#{Capybara.server_host}:#{Capybara.server_port}"
+    Capybara.ignore_hidden_elements = false
+  end
 end

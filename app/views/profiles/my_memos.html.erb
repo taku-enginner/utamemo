@@ -20,12 +20,13 @@
                   <div class="">
                     <div class="uppercase font-semibold opacity-60 md:text-2xl md:text-start md:ml-5"><%= my_memo[:artist_name] %></div>
                     <div class="uppercase font-semibold opacity-60 md:text-2xl md:text-start md:ml-5"><%= my_memo[:song_title] %></div>
+                    <div class="uppercase text-black font-bold opacity-60 md:text-2xl md:text-start md:ml-5"><%= my_memo[:memo_title] %></div>
                   </div>
                   <div class="flex flex-row items-center justify-center space-x-1 md:space-x-5">
                     <% if my_memo.publish %>
-                      <i class="fa-solid fa-lock-open md:text-3xl"></i>
+                      <i class="fa-solid fa-lock-open md:text-3xl published"></i>
                     <% else %>
-                      <i class="fa-solid fa-lock md:text-3xl md:pr-2"></i>
+                      <i class="fa-solid fa-lock md:text-3xl md:pr-2 not-published"></i>
                     <% end %>
                     <div class="flex flex-row items-center md:space-x-2">
                       <i class="fa-solid fa-heart text-pink-500 md:text-3xl pr-1"></i>
@@ -40,7 +41,7 @@
           <%= button_to memo_path(my_memo.id),
             method: :delete,
             data: { confirm: "本当に削除しますか？", method: "delete" , turbo: false},
-            class: "w-10 h-10 bg-red-700 text-white rounded-full flex items-center justify-center shadow-md inline-block" do %>
+            class: "w-10 h-10 bg-red-700 text-white rounded-full flex items-center justify-center shadow-md inline-block delete-button" do %>
             <i class="fas fa-trash text-2xl p-3 md:text-3xl"></i>
           <% end %>
         </div>

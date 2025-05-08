@@ -25,6 +25,7 @@ Rails.application.routes.draw do
         get 'my_memos'
       end
     end
+    resources :practice_logs, only: %i[index show new create update destroy]
   end
 
   root 'top#index'

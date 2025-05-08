@@ -33,6 +33,11 @@ services:
     depends_on:
       db:
         condition: service_healthy
+  selenium:
+    image: selenium/standalone-chrome
+    shm_size: "2gb"
+    ports:
+      - "4444:4444"
 volumes:
   bundle_data:
   postgresql_data:

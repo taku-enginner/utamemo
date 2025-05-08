@@ -2,8 +2,7 @@
   <% if lyrics_result && !!lyrics_result.split(/\*{7,}/).first %>
     <% lyrics_result = (lyrics_result.split(/\*{7,}/).first.strip) %>
     <div class="flex">
-      <div class="mx-5 mt-10 mb-10 pt-10 text-white text-2xl">
-
+      <div class="mx-5 mt-10 mb-10 pt-10 text-white text-2xl max-w-[335px]">
         <%= simple_format(h(lyrics_result.gsub(/\n/,'<br><br><br><br><br>').html_safe)) %>
       </div>
     </div>
@@ -12,9 +11,8 @@
       ライセンスの関係で、歌詞の取得がここまでしかできません。
     </div>
   <% else %>
-    <div class="p-4 text-white">
-      歌詞取得エラーが発生しました。
-      管理者までお問い合わせをお願いします。
+    <div class="p-4 text-white text-center">
+      アクセスできませんでした。
     </div>
   <% end %>
 </turbo-frame>

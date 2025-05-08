@@ -16,6 +16,7 @@ class MemosController < ApplicationController
     if access_denied?
       flash[:alert] = t('alerts.memo_not_publish')
       redirect_to memos_path
+      return
     end
 
     # メモが外部公開していれば表示。していなければ所有者のメモなら表示、違うなら一覧に戻してフラッシュメッセージを表示。
@@ -23,8 +24,9 @@ class MemosController < ApplicationController
 
     # turbo framesからのリクエストだったらパーシャルを返す。パーシャルはid=lyricsのturbo-framesタグに入る
     if turbo_frame_request?
+      lyrics_result = LyricsFetcher.call(api_key: api_key, q_track: @memo[:song_title], q_artist: @memo[:artist_name])
       render partial: 'memos/lyrics', locals: {
-        lyrics_result: fetch_lyrics(api_key, @memo[:song_title], @memo[:artist_name])
+        lyrics_result: lyrics_result
       }
     else
       # turbo frames空のリクエストでなければ、通常のshowテンプレートを返す
@@ -55,6 +57,8 @@ class MemosController < ApplicationController
     if @memo.update(memo_components: update_component_params)
       render json: { message: 'update successfully' }, status: :ok
     else
+      $stdout.puts "メモ保存時のエラー：#{@memo.errors.full_messages}"
+      # Rails.logger.debug("メモ更新時のエラーログ：#{@memo.errors.full_messages}")
       render json: { message: 'update failed' }, status: :unprocessable_entity
     end
   end
@@ -80,24 +84,14 @@ class MemosController < ApplicationController
     params.require(:memo_components)
   end
 
-  def fetch_lyrics(api_key, q_track, q_artist)
-    lyrics_encoded_uri = URI::DEFAULT_PARSER.escape("https://api.musixmatch.com/ws/1.1/matcher.lyrics.get?apikey=#{api_key}&q_track=#{q_track}&q_artist=#{q_artist}")
-    lyrics_response = HTTParty.get(lyrics_encoded_uri)
-    lyrics_response_code_check = JSON.parse(lyrics_response)
-    Rails.logger.debug { "lyrics_response: #{JSON.pretty_generate(lyrics_response_code_check)}" }
-    return nil if lyrics_response_code_check['message']['header']['status_code'] == 404
-
-    parsed_json_lyrics_response = JSON.parse(lyrics_response)
-    parsed_json_lyrics_response['message']['body']['lyrics']['lyrics_body']
-  end
-
   def set_memo
     @memo = Memo.find_by(id: params[:id])
   end
 
   def access_denied?
-    return true if (!@memo.publish && current_user.id != @memo.user_id) || (current_user.nil? && !@memo.publish)
+    return false if @memo.publish # 公開されていればfalse
 
-    false
+    current_user.nil? || current_user.id != @memo.user_id
+    # 公開されていないかつユーザーがログインしていなければtrue、もしくはログインユーザidとmemoユーザーidが一致しなければtrue、つまりアクセスできない。
   end
 end
