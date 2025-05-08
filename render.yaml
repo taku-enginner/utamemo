@@ -14,3 +14,5 @@ services:
         fromEnvVar: RAILS_MASTER_KEY
       - key: WEB_CONCURRENCY
         fromEnvVar: WEB_CONCURRENCY
+    envVarGroups:
+    - utamemo-preview-envs
