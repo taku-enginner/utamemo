@@ -85,3 +85,10 @@ production:
   database: Rails.application.credentials[:Neon][:DB_NAME]
   username: Rails.application.credentials[:Neon][:DB_USERNAME]
   password: Rails.application.credentials[:Neon][:DB_PASSWORD]
+
+staging:
+  <<: *default
+  host:     Rails.application.credentials[:NeonStaging][:DB_HOST]
+  database: Rails.application.credentials[:NeonStaging][:DB_NAME]
+  username: Rails.application.credentials[:NeonStaging][:DB_USERNAME]
+  password: Rails.application.credentials[:NeonStaging][:DB_PASSWORD]
