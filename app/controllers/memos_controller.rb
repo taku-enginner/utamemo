@@ -3,12 +3,9 @@
 class MemosController < ApplicationController
   before_action :authenticate_user!, only: %i[create update destroy]
   before_action :set_memo, only: %i[show update destroy]
-  before_action :set_artist, only: %i[show update destroy]
-  before_action :set_song, only: %i[show update destroy]
 
   def index
-    @memos = Memo.includes(:user, :artist,
-                           :song).where(publish: true).order(updated_at: :desc).page(params[:page]).per(5)
+    @memos = Memo.includes(:user).where(publish: true).order(updated_at: :desc).page(params[:page]).per(5)
   end
 
   def show
@@ -27,7 +24,7 @@ class MemosController < ApplicationController
 
     # turbo framesからのリクエストだったらパーシャルを返す。パーシャルはid=lyricsのturbo-framesタグに入る
     if turbo_frame_request?
-      lyrics_result = LyricsFetcher.call(api_key: api_key, q_track: @song, q_artist: @artist)
+      lyrics_result = LyricsFetcher.call(api_key: api_key, q_track: @memo[:song_title], q_artist: @memo[:artist_name])
       render partial: 'memos/lyrics', locals: {
         lyrics_result: lyrics_result
       }
@@ -38,14 +35,8 @@ class MemosController < ApplicationController
   end
 
   def create
-    artist = Artist.find_or_create_by(name: memo_params[:artist_name])
-    song = Song.find_or_create_by(title: memo_params[:song_title], artist_id: artist.id)
-
-    @memo = Memo.new
+    @memo = Memo.new(memo_params)
     @memo.user_id = current_user.id
-    @memo.artist_id = artist.id
-    @memo.song_id = song.id
-
     if @memo.save
       redirect_to memo_path(id: @memo.id)
     else
@@ -95,14 +86,6 @@ class MemosController < ApplicationController
 
   def set_memo
     @memo = Memo.find_by(id: params[:id])
-  end
-
-  def set_artist
-    @artist = @memo.artist.name
-  end
-
-  def set_song
-    @song = @memo.song.title
   end
 
   def access_denied?

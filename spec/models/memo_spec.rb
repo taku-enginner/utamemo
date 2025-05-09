@@ -4,16 +4,27 @@ require 'rails_helper'
 
 RSpec.describe Memo do
   describe 'バリデーションチェック' do
-    let(:user) { FactoryBot.create(:user) }
-
+    let(:user) { create(:user) }
     context '正常系' do
       it '設定したすべてのバリデーションが機能している' do
-        artist = FactoryBot.create(:artist)
-        song = FactoryBot.create(:song, artist_id: artist.id)
-
-        memo = FactoryBot.build(:memo, artist_id: artist.id, song_id: song.id, user_id: user.id)
+        memo = FactoryBot.build(:memo)
+        memo.user_id = user.id
         expect(memo).to be_valid
         expect(memo.errors).to be_empty
+      end
+    end
+
+    context '異常系' do
+      it '曲名が空欄' do
+        memo = FactoryBot.build(:memo, song_title: nil)
+        memo.user_id = user.id
+        expect(memo).to be_invalid
+      end
+
+      it 'アーティスト名が空欄' do
+        memo = FactoryBot.build(:memo, artist_name: nil)
+        memo.user_id = user.id
+        expect(memo).to be_invalid
       end
     end
   end

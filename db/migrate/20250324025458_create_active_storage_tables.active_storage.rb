@@ -1,4 +1,4 @@
-# rubocop:disable Metrics/MethodLength
+# rubocop:disable Metrics/AbcSize, Metrics/MethodLength
 
 # frozen_string_literal: true
 
@@ -62,4 +62,4 @@ class CreateActiveStorageTables < ActiveRecord::Migration[7.0]
   end
 end
 
-# rubocop:enable Metrics/MethodLength
+# rubocop:enable Metrics/AbcSize, Metrics/MethodLength

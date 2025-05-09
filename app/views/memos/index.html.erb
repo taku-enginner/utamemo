@@ -8,16 +8,16 @@
           <div class="flex flex-row items-center space-x-2 md:space-x-10 w-[250px] md:w-full">
             <div>
               <% if memo.user.profile&.image&.attached? %>
-                <%= image_tag memo.user.profile.image, size: "70x70", class: "rounded-full" %>
+                <%= image_tag memo.user.profile.image, size: "70x70", class: "rounded-box" %>
               <% else %>
-                <%= image_tag "アイコン_デフォルト.png", size: "70x70", class: "rounded-full" %>
+                <%= image_tag "アイコン_デフォルト.png", size: "70x70", class: "rounded-box" %>
               <% end %>
             </div>
             <div class="md:flex md:flex-row md:items-center">
               <div class="text-xl font-bold md:text-2xl text-start md:w-[250px]"><%= memo.user.nickname %></div>
               <div>
-                <div class="uppercase font-semibold opacity-60 md:text-2xl text-start"><%= memo.artist.name %></div>
-                <div class="uppercase font-semibold opacity-60 md:text-2xl text-start"><%= memo.song.title %></div>
+                <div class="uppercase font-semibold opacity-60 md:text-2xl text-start"><%= memo[:artist_name] %></div>
+                <div class="uppercase font-semibold opacity-60 md:text-2xl text-start"><%= memo[:song_title] %></div>
               </div>
             </div>
           </div>

@@ -44,9 +44,7 @@ RSpec.describe 'Memos', type: :system, js: true do
 
       it '新着メモプレビューへのアクセスが成功する' do
         user = FactoryBot.create(:user)
-        artist = FactoryBot.create(:artist)
-        song = FactoryBot.create(:song, artist_id: artist.id)
-        memo = FactoryBot.create(:memo, artist_id: artist.id, song_id: song.id, user_id: user.id)
+        memo = FactoryBot.create(:memo, user_id: user.id)
 
         # url直打ち
         visit memo_path(memo.id)
@@ -54,7 +52,7 @@ RSpec.describe 'Memos', type: :system, js: true do
 
         # UI上の画面遷移
         visit memos_path
-        click_on memo.song.title
+        click_on memo.song_title
         expect(page).to have_content("created_by: #{user.nickname}")
         expect(page).to have_no_content('保存')
       end
@@ -110,9 +108,7 @@ RSpec.describe 'Memos', type: :system, js: true do
 
     context 'ログイン済' do
       let!(:user) { FactoryBot.create(:user) }
-      let!(:artist) { FactoryBot.create(:artist) }
-      let!(:song) { FactoryBot.create(:song, artist_id: artist.id) }
-      let!(:memo) { FactoryBot.create(:memo, user_id: user.id, artist_id: artist.id, song_id: song.id) }
+      let!(:memo) { FactoryBot.create(:memo, user_id: user.id) }
       before do
         sign_in user
         visit root_path
@@ -141,7 +137,7 @@ RSpec.describe 'Memos', type: :system, js: true do
 
         # UI上の画面遷移
         visit memos_path
-        click_on song.title
+        click_on memo.song_title
         expect(page).to have_content('保存')
       end
 
@@ -210,7 +206,7 @@ RSpec.describe 'Memos', type: :system, js: true do
         expect(page).to have_css('.published')
 
         # 非公開に設定
-        click_on song.title
+        click_on memo.song_title
         find_by_id('setting-button').click
         choose '公開しない'
         fill_in 'メモタイトル', with: 'テストで非公開にしました。'
@@ -222,7 +218,7 @@ RSpec.describe 'Memos', type: :system, js: true do
         expect(page).to have_content('テストで非公開にしました。')
 
         # 公開に再設定
-        click_on song.title
+        click_on memo.song_title
         find_by_id('setting-button').click
         choose '公開する'
         fill_in 'メモタイトル', with: 'テストで公開に再設定しました。'

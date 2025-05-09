@@ -27,20 +27,20 @@
         <div class="flex flex-col items-center justify-center p-2">
           <div class="text-white md:text-2xl">現在のプロフィール画像</div>
           <% if @profile.image.attached? %>
-            <%= image_tag @profile.image, size: "100x100", class: "rounded-full"  %>
+            <%= image_tag @profile.image, size: "100x100", class: "rounded-box"  %>
           <% else %>
-            <%= image_tag "アイコン_デフォルト.png", size: "100x100", class: "rounded-full" %>
+            <%= image_tag "アイコン_デフォルト.png", size: "100x100"%>
           <% end %>
         </div>
 
         <div class="flex flex-col items-center justify-center p-4">
           <%= f.label(:image, "変更後のプロフィール画像", class: "text-white md:text-2xl") %>
-          <%= f.file_field :image , class: "text-white md:text-2xl bg-pink-500 rounded-xl p-2" %>
+          <%= f.file_field :image , class: "text-white md:text-2xl" %>
         </div>
       </div>
 
       <div class="p-4 flex flex-row space-x-2">
-        <%= link_to "マイページに戻る", user_profile_path(@profile.id), class: "btn" %>
+        <%= link_to "戻る", user_profile_path(@profile.id), class: "btn" %>
         <%= f.submit "保存" ,class: "btn mb-2 md:text-2xl" %>
       </div>
     </div>

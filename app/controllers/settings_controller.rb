@@ -4,11 +4,11 @@ class SettingsController < ApplicationController
   before_action :set_memo
 
   def edit
-    @memo = Memo.includes(:artist, :song).find_by(id: params[:memo_id])
+    @memo = Memo.find_by(id: params[:memo_id])
   end
 
   def update
-    if @memo.update(publish: update_params[:publish], title: update_params[:memo_title])
+    if @memo.update(update_params)
       flash[:notice] = t('notices.memo_setting_success')
       redirect_to edit_memo_settings_path(@memo.id)
     else

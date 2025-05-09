@@ -81,7 +81,6 @@ test:
 #
 production:
   <<: *default
-  schema_search_path: public
   host:     Rails.application.credentials[:Neon][:DB_HOST]
   database: Rails.application.credentials[:Neon][:DB_NAME]
   username: Rails.application.credentials[:Neon][:DB_USERNAME]
@@ -89,7 +88,6 @@ production:
 
 staging:
   <<: *default
-  schema_search_path: public
   host:     Rails.application.credentials[:NeonStaging][:DB_HOST]
   database: Rails.application.credentials[:NeonStaging][:DB_NAME]
   username: Rails.application.credentials[:NeonStaging][:DB_USERNAME]
