@@ -111,7 +111,7 @@ RSpec.describe 'Memos', type: :system, js: true do
     context 'ログイン済' do
       let!(:user) { FactoryBot.create(:user) }
       let!(:artist) { FactoryBot.create(:artist) }
-      let!(:song) {FactoryBot.create(:song, artist_id: artist.id) }
+      let!(:song) { FactoryBot.create(:song, artist_id: artist.id) }
       let!(:memo) { FactoryBot.create(:memo, user_id: user.id, artist_id: artist.id, song_id: song.id) }
       before do
         sign_in user
