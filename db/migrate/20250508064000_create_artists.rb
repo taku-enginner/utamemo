@@ -8,4 +8,11 @@ class CreateArtists < ActiveRecord::Migration[7.2]
       t.timestamps
     end
   end
+
+  reversible do |dir|
+    dir.up do
+      Artist.reset_column_information
+      Artist.create!(name: 'Unknown')
+    end
+  end
 end

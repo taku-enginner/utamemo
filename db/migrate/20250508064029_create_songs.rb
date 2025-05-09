@@ -9,4 +9,11 @@ class CreateSongs < ActiveRecord::Migration[7.2]
       t.timestamps
     end
   end
+
+  reversible do |dir|
+    dir.up do
+      Song.reset_column_information
+      Song.create!(title: 'Unknown')
+    end
+  end
 end
