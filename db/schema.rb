@@ -64,8 +64,8 @@ ActiveRecord::Schema[7.2].define(version: 2025_05_08_075904) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "publish", default: true, null: false
-    t.bigint "artist_id", default: 0, null: false
-    t.bigint "song_id", default: 0, null: false
+    t.bigint "artist_id", default: 1, null: false
+    t.bigint "song_id", default: 1, null: false
     t.index ["artist_id"], name: "index_memos_on_artist_id"
     t.index ["song_id"], name: "index_memos_on_song_id"
     t.index ["user_id"], name: "index_memos_on_user_id"

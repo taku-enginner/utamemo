@@ -23,12 +23,17 @@ Rails.logger.debug 'seedファイルの実行がスタートしました'
   end
 end
 
-# # アーティストデータ
+# # アーティストデータ（初期データ）
 # 3.times do |n|
 #   Artist.find_or_create_by(id: n+1) do |a|
 #     a.name = "BE:FIRST"
 #   end
 # end
+
+# アーティストデータ（Unknown）
+Artist.find_or_create_by(name: "Unknown") do |a|
+  a.name = "Unknown"
+end
 
 # # 曲データ
 # 3.times do |n|
@@ -37,6 +42,12 @@ end
 #     s.artist_id = n
 #   end
 # end
+
+# 曲データ（Unknown）
+Song.find_or_create_by(title: "Unknown") do |s|
+  s.title = "Unknown"
+  s.artist_id = 1
+end
 
 # メモデータ
 User.find_each do |user|
@@ -62,8 +73,8 @@ User.find_each do |user|
         }
       ],
       user_id: user.id,
-      artist_id: n+1,
-      song_id: n+1
+      artist_id: 1,
+      song_id: 1
     )
   end
 end
