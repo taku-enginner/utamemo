@@ -11,16 +11,16 @@
               <div class="flex flex-row items-center md:space-x-20">
                 <div>
                   <% if my_memo.user.profile&.image&.attached? %>
-                    <%= image_tag my_memo.user.profile.image, class: "rounded-box", size: "70x70"  %>
+                    <%= image_tag my_memo.user.profile.image, class: "rounded-full", size: "70x70"  %>
                   <% else %>
-                    <%= image_tag "アイコン_デフォルト.png", class: "rounded-box", size: "70x70" %>
+                    <%= image_tag "アイコン_デフォルト.png", class: "rounded-full", size: "70x70" %>
                   <% end %>
                 </div>
                 <div class="w-full md:flex md:flex-row md:justify-between">
                   <div class="">
-                    <div class="uppercase font-semibold opacity-60 md:text-2xl md:text-start md:ml-5"><%= my_memo[:artist_name] %></div>
-                    <div class="uppercase font-semibold opacity-60 md:text-2xl md:text-start md:ml-5"><%= my_memo[:song_title] %></div>
-                    <div class="uppercase text-black font-bold opacity-60 md:text-2xl md:text-start md:ml-5"><%= my_memo[:memo_title] %></div>
+                    <div class="uppercase font-semibold opacity-60 md:text-2xl md:text-start md:ml-5"><%= my_memo.artist.name %></div>
+                    <div class="uppercase font-semibold opacity-60 md:text-2xl md:text-start md:ml-5"><%= my_memo.song.title %></div>
+                    <div class="uppercase text-black font-bold opacity-60 md:text-xl md:text-start md:ml-5">メモタイトル：<%= !!my_memo[:title] && my_memo[:title].size > 0 ? my_memo[:title] : "なし" %></div>
                   </div>
                   <div class="flex flex-row items-center justify-center space-x-1 md:space-x-5">
                     <% if my_memo.publish %>

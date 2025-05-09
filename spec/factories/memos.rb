@@ -2,7 +2,8 @@
 
 FactoryBot.define do
   factory :memo do
-    artist_name { 'BE:FIRST' }
-    song_title { 'Boom Boom Back' }
+    title { '本日のメモ' }
+    publish { true }
+    memo_components { [] }
   end
 end
