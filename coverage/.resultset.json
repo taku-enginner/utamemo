@@ -148,6 +148,17 @@
           null
         ]
       },
+      "/myapp/app/models/artist.rb": {
+        "lines": [
+          null,
+          null,
+          1,
+          1,
+          1,
+          1,
+          null
+        ]
+      },
       "/myapp/app/models/favorite.rb": {
         "lines": [
           null,
@@ -168,6 +179,9 @@
           1,
           1,
           1,
+          null,
+          null,
+          null,
           null,
           1,
           4,
@@ -199,7 +213,7 @@
           null
         ]
       },
-      "/myapp/app/controllers/memos_controller.rb": {
+      "/myapp/app/models/song.rb": {
         "lines": [
           null,
           null,
@@ -208,7 +222,22 @@
           1,
           null,
           1,
+          null
+        ]
+      },
+      "/myapp/app/controllers/memos_controller.rb": {
+        "lines": [
+          null,
+          null,
+          1,
+          1,
+          1,
+          1,
+          1,
+          null,
+          1,
           9,
+          null,
           null,
           null,
           1,
@@ -240,6 +269,12 @@
           1,
           1,
           1,
+          null,
+          1,
+          1,
+          1,
+          1,
+          null,
           1,
           1,
           null,
@@ -280,11 +315,19 @@
           1,
           null,
           1,
-          1,
+          2,
           null,
           null,
           1,
           0,
+          null,
+          null,
+          1,
+          21,
+          null,
+          null,
+          1,
+          21,
           null,
           null,
           1,
@@ -564,7 +607,7 @@
           null,
           null,
           1,
-          2,
+          4,
           null,
           null
         ]
@@ -799,6 +842,6 @@
         "branches": {}
       }
     },
-    "timestamp": 1746158666
+    "timestamp": 1746753221
   }
 }
