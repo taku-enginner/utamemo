@@ -2,8 +2,8 @@
 
 FactoryBot.define do
   factory :memo do
-    title { "本日のメモ" }
+    title { '本日のメモ' }
     publish { true }
-    memo_components {[]}
+    memo_components { [] }
   end
 end

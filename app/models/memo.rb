@@ -9,8 +9,6 @@ class Memo < ApplicationRecord
 
   # validates :artist_name, presence: true
   # validates :song_title, presence: true
-  validates :artist_id, presence: true
-  validates :song_id, presence: true
 
   def favorited_by?(user)
     favorites.exists?(user_id: user.id)

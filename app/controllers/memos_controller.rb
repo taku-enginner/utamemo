@@ -7,7 +7,8 @@ class MemosController < ApplicationController
   before_action :set_song, only: %i[show update destroy]
 
   def index
-    @memos = Memo.includes(:user, :artist, :song).where(publish: true).order(updated_at: :desc).page(params[:page]).per(5)
+    @memos = Memo.includes(:user, :artist,
+                           :song).where(publish: true).order(updated_at: :desc).page(params[:page]).per(5)
   end
 
   def show
@@ -40,7 +41,7 @@ class MemosController < ApplicationController
     artist = Artist.find_or_create_by(name: memo_params[:artist_name])
     song = Song.find_or_create_by(title: memo_params[:song_title], artist_id: artist.id)
 
-    @memo = Memo.new(memo_params)
+    @memo = Memo.new
     @memo.user_id = current_user.id
     @memo.artist_id = artist.id
     @memo.song_id = song.id

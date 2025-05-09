@@ -5,7 +5,7 @@ require 'rails_helper'
 RSpec.describe Memo do
   describe 'バリデーションチェック' do
     let(:user) { FactoryBot.create(:user) }
-    
+
     context '正常系' do
       it '設定したすべてのバリデーションが機能している' do
         artist = FactoryBot.create(:artist)
@@ -16,6 +16,5 @@ RSpec.describe Memo do
         expect(memo.errors).to be_empty
       end
     end
-
   end
 end

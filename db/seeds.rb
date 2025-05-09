@@ -31,8 +31,8 @@ end
 # end
 
 # アーティストデータ（Unknown）
-Artist.find_or_create_by(name: "Unknown") do |a|
-  a.name = "Unknown"
+Artist.find_or_create_by(name: 'Unknown') do |a|
+  a.name = 'Unknown'
 end
 
 # # 曲データ
@@ -44,8 +44,8 @@ end
 # end
 
 # 曲データ（Unknown）
-Song.find_or_create_by(title: "Unknown") do |s|
-  s.title = "Unknown"
+Song.find_or_create_by(title: 'Unknown') do |s|
+  s.title = 'Unknown'
   s.artist_id = 1
 end
 

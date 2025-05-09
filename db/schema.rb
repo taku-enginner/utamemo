@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_05_08_075904) do
+ActiveRecord::Schema[7.2].define(version: 2025_05_09_010840) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -56,8 +56,6 @@ ActiveRecord::Schema[7.2].define(version: 2025_05_08_075904) do
   end
 
   create_table "memos", force: :cascade do |t|
-    t.string "song_title"
-    t.string "artist_name"
     t.string "title", default: ""
     t.jsonb "memo_components", default: [], array: true
     t.bigint "user_id", null: false
