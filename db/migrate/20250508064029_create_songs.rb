@@ -11,9 +11,8 @@ class CreateSongs < ActiveRecord::Migration[7.2]
     reversible do |dir|
       dir.up do
         Song.reset_column_information
-        Song.create!(title: 'Unknown')
+        Song.create!(title: 'Unknown', artist_id: 1)
       end
     end
   end
-
 end
