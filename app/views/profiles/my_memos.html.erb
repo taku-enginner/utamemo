@@ -11,9 +11,9 @@
               <div class="flex flex-row items-center md:space-x-20">
                 <div>
                   <% if my_memo.user.profile&.image&.attached? %>
-                    <%= image_tag my_memo.user.profile.image, class: "rounded-full", size: "70x70"  %>
+                    <%= image_tag my_memo.user.profile.image, class: "rounded-box", size: "70x70"  %>
                   <% else %>
-                    <%= image_tag "アイコン_デフォルト.png", class: "rounded-full", size: "70x70" %>
+                    <%= image_tag "アイコン_デフォルト.png", class: "rounded-box", size: "70x70" %>
                   <% end %>
                 </div>
                 <div class="w-full md:flex md:flex-row md:justify-between">
