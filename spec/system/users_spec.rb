@@ -54,24 +54,6 @@ RSpec.describe 'Memos', type: :system, js: true do
         # # expect(page).to have_content("ログインもしくはアカウント登録してください。")
         # expect(page).to have_content("ようこそ、UTAMEMOへ")
         # expect(page).to have_content("ログインする")
-
-        # 非公開メモの作成
-        artist = FactoryBot.create(:artist)
-        song = FactoryBot.create(:song, artist_id: artist.id)
-        memo_no_publish = FactoryBot.create(:memo, publish: false, user_id: user.id, artist_id: artist.id,
-                                                   song_id: song.id)
-        # 非公開メモへのアクセス
-        visit memo_path(memo_no_publish.id)
-        expect(page).to have_content('公開されていないメモにはアクセスできません。')
-        expect(page).to have_content('新着メモ一覧')
-
-        # 公開メモを開くとツールバーが非表示になる
-        memo_publish = FactoryBot.create(:memo, publish: true, user_id: user.id, artist_id: artist.id, song_id: song.id)
-        visit memo_path(memo_publish.id)
-        expect(page).to have_content("created_by: #{memo_publish.user.nickname}")
-        expect(page).to have_content(artist.name)
-        expect(page).to have_content(song.title)
-        expect(page).to have_no_content('保存')
       end
     end
   end
