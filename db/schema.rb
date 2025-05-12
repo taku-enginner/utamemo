@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_05_09_054134) do
+ActiveRecord::Schema[7.2].define(version: 2025_05_12_061854) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -43,7 +43,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_05_09_054134) do
   end
 
   create_table "artists", force: :cascade do |t|
-    t.string "name"
+    t.string "name", limit: 60
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -56,7 +56,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_05_09_054134) do
   end
 
   create_table "memos", force: :cascade do |t|
-    t.string "title", default: ""
+    t.string "title", limit: 60, default: ""
     t.jsonb "memo_components", default: [], array: true
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
@@ -73,10 +73,10 @@ ActiveRecord::Schema[7.2].define(version: 2025_05_09_054134) do
     t.bigint "user_id", null: false
     t.bigint "memo_id"
     t.string "song"
-    t.text "placeholder_memo"
+    t.string "placeholder_memo", limit: 500
     t.integer "practice_amount"
     t.integer "mood"
-    t.text "comment"
+    t.string "comment", limit: 500
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["memo_id"], name: "index_practice_logs_on_memo_id"
@@ -92,15 +92,15 @@ ActiveRecord::Schema[7.2].define(version: 2025_05_09_054134) do
 
   create_table "songs", force: :cascade do |t|
     t.bigint "artist_id", null: false
-    t.string "title"
+    t.string "title", limit: 60
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["artist_id"], name: "index_songs_on_artist_id"
   end
 
   create_table "users", force: :cascade do |t|
-    t.string "email", default: "", null: false
-    t.string "nickname", default: "", null: false
+    t.string "email", limit: 254, default: "", null: false
+    t.string "nickname", limit: 60, default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
