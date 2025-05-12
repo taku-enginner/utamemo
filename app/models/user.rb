@@ -11,6 +11,9 @@ class User < ApplicationRecord
   has_one :profile, dependent: :destroy
   has_many :favorites, dependent: :destroy
 
+  validates :nickname, presence: true, length: { maximum: 60 }
+  validates :email, presence: true, length: { maximum: 254 }
+
   def self.from_omniauth(auth)
     user = where(email: auth.info.email).first
 

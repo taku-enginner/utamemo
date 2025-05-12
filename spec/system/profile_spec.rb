@@ -1,5 +1,4 @@
 # TODO: ファイル行数が多いので分割する。（現状rubocopの警告は無視してる）
-# rubocop:disable Metrics/BlockLength
 
 # frozen_string_literal: true
 

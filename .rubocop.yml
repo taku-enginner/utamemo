@@ -36,3 +36,13 @@ Metrics/MethodLength:
 
 Metrics/AbcSize:
   Max: 30
+
+
+Rails/ReversibleMigration:
+  Enabled: false
+
+Rails/BulkChangeTable:
+  Enabled: false
+
+Metrics/BlockLength:
+  Enabled: false

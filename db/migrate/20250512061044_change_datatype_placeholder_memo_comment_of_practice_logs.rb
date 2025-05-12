@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ChangeDatatypePlaceholderMemoCommentOfPracticeLogs < ActiveRecord::Migration[7.2]
   def change
     change_column :practice_logs, :placeholder_memo, :string, limit: 500

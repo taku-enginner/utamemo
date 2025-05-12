@@ -13,9 +13,19 @@ RSpec.describe User do
     end
 
     context '異常系' do
+      it 'nicknameが61文字以上' do
+        longname_user = FactoryBot.build(:user, :longname)
+        expect(longname_user).to be_invalid
+      end
+
       it 'emailが空欄' do
         user = FactoryBot.build(:user, email: '')
         expect(user).to be_invalid
+      end
+
+      it 'emailが255文字以上' do
+        longemail_user = FactoryBot.build(:user, :longemail)
+        expect(longemail_user).to be_invalid
       end
 
       it 'パスワードが空欄' do

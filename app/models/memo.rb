@@ -7,8 +7,7 @@ class Memo < ApplicationRecord
   belongs_to :song
   belongs_to :artist
 
-  # validates :artist_name, presence: true
-  # validates :song_title, presence: true
+  validates :title, length: { maximum: 60 }
 
   def favorited_by?(user)
     favorites.exists?(user_id: user.id)
