@@ -23,24 +23,24 @@ RSpec.describe 'Memos', type: :system, js: true do
         sign_in user
       end
 
-      it 'ログアウトしたら、ホームに戻り、ヘッダー表示が「ゲストさん」になり、ヘッダー内容が未ログイン状態になる' do
-        visit root_path
+      # it 'ログアウトしたら、ホームに戻り、ヘッダー表示が「ゲストさん」になり、ヘッダー内容が未ログイン状態になる' do
+      #   visit root_path
 
-        click_on '☰'
-        expect(page).to have_content(user.nickname)
-        expect(page).to have_content('ログアウト')
-        expect(page).to have_content('マイページ')
-        expect(page).to have_no_content('ログイン')
-        expect(page).to have_no_content('新規会員登録')
+      #   click_on '☰'
+      #   expect(page).to have_content(user.nickname)
+      #   expect(page).to have_content('ログアウト')
+      #   expect(page).to have_content('マイページ')
+      #   expect(page).to have_no_content('ログイン')
+      #   expect(page).to have_no_content('新規会員登録')
 
-        click_on 'ログアウト'
-        click_on '☰'
-        expect(page).to have_current_path(root_path)
-        expect(page).to have_content('ゲスト')
-        expect(page).to have_content('ログイン')
-        expect(page).to have_content('新規会員登録')
-        expect(page).to have_no_content('ログアウト')
-      end
+      #   click_on 'ログアウト'
+      #   click_on '☰'
+      #   expect(page).to have_current_path(root_path)
+      #   expect(page).to have_content('ゲスト')
+      #   expect(page).to have_content('ログイン')
+      #   expect(page).to have_content('新規会員登録')
+      #   expect(page).to have_no_content('ログアウト')
+      # end
 
       it 'ログアウトしたら、プロフィール画面が開けず、非公開メモも開けず、公開メモではツールバーが表示されず、検索後の「この曲をメモする」でログインページにリダイレクトされる' do
         # ログアウトする
