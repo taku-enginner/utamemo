@@ -7,4 +7,6 @@ class PracticeLog < ApplicationRecord
   enum :mood, { good: 1, normal: 2, not_great: 3 }
 
   validates :song, presence: true
+  validates :placeholder_memo, length: { maximum: 500 }
+  validates :comment, length: { maximum: 500 }
 end
