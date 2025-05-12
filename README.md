@@ -147,7 +147,8 @@ Railsの通常モードで構築し、メモ作成機能でのパーツのドラ
   - https://www.figma.com/design/oCOgnShi7RnwKI5QWKWYUH/%EF%BC%88MVP%EF%BC%89UtaMemo?node-id=0-1&m=dev&t=2y0Cj2CdV9fiddXL-1
 
 # ■ ER図
-![image](https://github.com/user-attachments/assets/9f0ab27f-3008-4774-ae54-b9c8c993fe86)
+![image](https://github.com/user-attachments/assets/f979ba3e-67ba-4776-bc0c-bd4c8d61925f)
+
 
 # ■ 認可処理の設計（自作認可）
 - ユーザーのメモだけ編集可能にするために、自作の認可処理を実装しました。
