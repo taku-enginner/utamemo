@@ -11,13 +11,13 @@ gem 'pg', '~> 1.1'
 # Use the Puma web server [https://github.com/puma/puma]
 gem 'puma', '>= 5.0'
 # Bundle and transpile JavaScript [https://github.com/rails/jsbundling-rails]
-gem 'jsbundling-rails'
+# gem 'jsbundling-rails'
 # Hotwire's SPA-like page accelerator [https://turbo.hotwired.dev]
 gem 'turbo-rails'
 # Hotwire's modest JavaScript framework [https://stimulus.hotwired.dev]
 gem 'stimulus-rails'
 # Bundle and process CSS [https://github.com/rails/cssbundling-rails]
-gem 'cssbundling-rails'
+# gem 'cssbundling-rails'
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 gem 'jbuilder'
 # Use Redis adapter to run Action Cable in production
@@ -79,7 +79,7 @@ gem 'devise', '~> 4.9'
 gem 'devise-i18n'
 gem 'rails-i18n'
 
-gem 'shakapacker', '= 8.1'
+gem 'shakapacker', '= 8.3.0'
 
 gem 'react-rails', '= 3.2'
 gem 'tailwindcss-rails'

@@ -2,6 +2,7 @@
   "name": "app",
   "private": "true",
   "packageManager": "yarn@1.22.22",
+  "version": "0.1.0",
   "dependencies": {
     "@babel/core": "7",
     "@babel/plugin-transform-runtime": "7",
@@ -24,17 +25,16 @@
     "css-loader": "^7.1.2",
     "css-minimizer-webpack-plugin": "^7.0.0",
     "daisyui": "^4.4.19",
-    "esbuild": "^0.19.8",
     "lucide-react": "^0.476.0",
     "mini-css-extract-plugin": "^2.9.2",
     "postcss": "^8.4.32",
     "prop-types": "^15.8.1",
     "react": "18",
-    "react_ujs": "^3.2.1",
     "react-dom": "18",
     "react-draggable": "^4.4.6",
     "react-hook-form": "^7.49.3",
-    "shakapacker": "8.1.0",
+    "react_ujs": "^3.2.1",
+    "shakapacker": "8.3.0",
     "style-loader": "^4.0.0",
     "tailwindcss": "^3.4.17",
     "terser-webpack-plugin": "5",
@@ -45,7 +45,7 @@
     "webpack-merge": "5"
   },
   "scripts": {
-    "build": "esbuild app/javascript/*.* --bundle --sourcemap --outdir=app/assets/builds --public-path=assets",
+    "build": "bin/shakapacker",
     "build:css": "tailwindcss -i ./app/assets/stylesheets/application.tailwind.css -o ./app/assets/builds/application.css --minify",
     "lint": "eslint app/javascript/**/*"
   },
@@ -61,9 +61,10 @@
     "prettier": "^2.2.1",
     "prettier-plugin-erb": "^0.4.0",
     "prettier-plugin-tailwindcss": "^0.3.0",
+    "sass": "^1.89.0",
+    "sass-loader": "^16.0.5",
     "webpack-dev-server": "4"
   },
-  "version": "0.1.0",
   "babel": {
     "presets": [
       "./node_modules/shakapacker/package/babel/preset.js",

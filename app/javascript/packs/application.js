@@ -2,3 +2,5 @@
 var componentRequireContext = require.context("components", true);
 var ReactRailsUJS = require("react_ujs");
 ReactRailsUJS.useContext(componentRequireContext);
+import "../stylesheets/application.css"
+import "@hotwired/turbo-rails";
