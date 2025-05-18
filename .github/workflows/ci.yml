@@ -84,6 +84,9 @@ jobs:
       - name: Install dependencies
         run: bundle install
 
+      - name: Install dependencies
+        run: yarn install --check-files
+
       - name: Setup Database
         env:
           RAILS_ENV: test
