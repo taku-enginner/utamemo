@@ -92,17 +92,6 @@ export default function MyMemos({ memo }) {
     if (techniqueButtonRef.current){
       const rect = techniqueButtonRef.current.getBoundingClientRect(); // ここで座標を取得
       const componentId = components.length + 1;
-
-      // 今の画面サイズを識別
-      const nowScreenSize = window.outerWidth
-      console.log("今の画面幅:", nowScreenSize);
-      let addWitdh = 0
-      if (nowScreenSize >= 768) {
-        addWitdh = -350
-      } else {
-        addWitdh = 100
-      }      
-      console.log("addWidth:", addWitdh);
   
       setComponents([
         ...components, 

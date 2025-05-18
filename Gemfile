@@ -79,7 +79,7 @@ gem 'devise', '~> 4.9'
 gem 'devise-i18n'
 gem 'rails-i18n'
 
-gem 'shakapacker', '= 8.1'
+gem 'shakapacker', '= 8.3.0'
 
 gem 'react-rails', '= 3.2'
 gem 'tailwindcss-rails'
